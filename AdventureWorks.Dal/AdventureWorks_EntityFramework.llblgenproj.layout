@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LayoutInfo>
+  <ModelViews>
+    <ModelView Name="Inheritance">
+      <EntityDefinitions>
+        <Entity Name="Sales:Store" X="0.468658447" Y="263.551483" />
+        <Entity Name="Sales:Customer" X="0.468658447" Y="5.551575" />
+        <Entity Name="Sales:CustomerAddress" X="346.46875" Y="0.427734852" />
+        <Entity Name="Sales:CustomerHomeAddress" X="315.500122" Y="356.68866" />
+        <Entity Name="Sales:CustomerBillingAddress" X="571.5003" Y="38.54402" />
+      </EntityDefinitions>
+    </ModelView>
+  </ModelViews>
+</LayoutInfo>

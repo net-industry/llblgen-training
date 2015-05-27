@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3dParty", "3dParty", "{A5C63593-F1D4-48E4-9F4D-E44CCFD23252}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{B79845B5-924F-45E5-8DE7-DD603177D47D}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureWorks.Dal", "AdventureWorks.Dal\AdventureWorks.Dal.csproj", "{BCF9BB7D-5463-49D5-A43B-765F4EEFE87E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventureWorks.Web.Tests", "AdventureWorks.Web.Tests\AdventureWorks.Web.Tests.csproj", "{E0ACA588-BD15-4E92-B68E-ACAA814B5A5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetIndustry.Library.LLBLGen", "NetIndustry.Library.LLBLGen\NetIndustry.Library.LLBLGen.csproj", "{CD8E71F9-EE92-4C7F-8BED-06697B08C47C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AdventureWorks.Mvc", "AdventureWorks.Mvc\AdventureWorks.Mvc.xproj", "{F5B6F04C-A307-4CB4-9461-5E493B173A75}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCF9BB7D-5463-49D5-A43B-765F4EEFE87E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF9BB7D-5463-49D5-A43B-765F4EEFE87E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF9BB7D-5463-49D5-A43B-765F4EEFE87E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCF9BB7D-5463-49D5-A43B-765F4EEFE87E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0ACA588-BD15-4E92-B68E-ACAA814B5A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0ACA588-BD15-4E92-B68E-ACAA814B5A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0ACA588-BD15-4E92-B68E-ACAA814B5A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0ACA588-BD15-4E92-B68E-ACAA814B5A5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD8E71F9-EE92-4C7F-8BED-06697B08C47C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD8E71F9-EE92-4C7F-8BED-06697B08C47C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD8E71F9-EE92-4C7F-8BED-06697B08C47C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD8E71F9-EE92-4C7F-8BED-06697B08C47C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5B6F04C-A307-4CB4-9461-5E493B173A75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5B6F04C-A307-4CB4-9461-5E493B173A75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5B6F04C-A307-4CB4-9461-5E493B173A75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5B6F04C-A307-4CB4-9461-5E493B173A75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CD8E71F9-EE92-4C7F-8BED-06697B08C47C} = {A5C63593-F1D4-48E4-9F4D-E44CCFD23252}
+	EndGlobalSection
+EndGlobal
