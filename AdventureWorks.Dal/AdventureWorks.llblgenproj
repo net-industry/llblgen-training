@@ -234,6 +234,31 @@
           <Field Name="Rowguid" Type="guid" />
         </Fields>
       </EntityDefinition>
+      <EntityDefinition Name="BusinessEntity" GroupName="Person" ObjectID="2387ca88-eddc-4458-a420-162db1bf3b9a">
+        <Fields>
+          <Field Name="BusinessEntityId" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="ModifiedDate" Type="datetime" />
+          <Field Name="Rowguid" Type="guid" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="BusinessEntityAddress" GroupName="Person" ObjectID="f49d47a2-c16c-4e56-854e-5925fcded802">
+        <Fields>
+          <Field Name="AddressId" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="AddressTypeId" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="BusinessEntityId" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="ModifiedDate" Type="datetime" />
+          <Field Name="Rowguid" Type="guid" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="BusinessEntityContact" GroupName="Person" ObjectID="585263a6-f2db-46d2-b015-528a7ba2dedc">
+        <Fields>
+          <Field Name="BusinessEntityId" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="ContactTypeId" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="ModifiedDate" Type="datetime" />
+          <Field Name="PersonId" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="Rowguid" Type="guid" />
+        </Fields>
+      </EntityDefinition>
       <EntityDefinition Name="ContactType" GroupName="Person" ObjectID="2426c972-3069-46f1-9997-2dcae94fb6b7">
         <Fields>
           <Field Name="ContactTypeId" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
@@ -246,6 +271,56 @@
           <Field Name="CountryRegionCode" Type="string" MaxLength="3" IsPrimaryKey="true" />
           <Field Name="ModifiedDate" Type="datetime" />
           <Field Name="Name" Type="string" MaxLength="50" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="EmailAddress" GroupName="Person" ObjectID="a1a61a91-a9a3-4124-b342-77a10553e5dd">
+        <Fields>
+          <Field Name="BusinessEntityId" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="EmailAddress" Type="string" IsOptional="true" MaxLength="50" />
+          <Field Name="EmailAddressId" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="ModifiedDate" Type="datetime" />
+          <Field Name="Rowguid" Type="guid" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="Password" GroupName="Person" ObjectID="5e91af4b-f8f1-43aa-9383-fba675622fba">
+        <Fields>
+          <Field Name="BusinessEntityId" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="ModifiedDate" Type="datetime" />
+          <Field Name="PasswordHash" Type="string" MaxLength="128" />
+          <Field Name="PasswordSalt" Type="string" MaxLength="10" />
+          <Field Name="Rowguid" Type="guid" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="Person" GroupName="Person" ObjectID="4166ebd6-6783-429c-89c4-b122e12447b4">
+        <Fields>
+          <Field Name="AdditionalContactInfo" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="BusinessEntityId" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="Demographics" Type="string" IsOptional="true" MaxLength="2147483647" />
+          <Field Name="EmailPromotion" Type="int" Precision="10" />
+          <Field Name="FirstName" Type="string" MaxLength="50" />
+          <Field Name="LastName" Type="string" MaxLength="50" />
+          <Field Name="MiddleName" Type="string" IsOptional="true" MaxLength="50" />
+          <Field Name="ModifiedDate" Type="datetime" />
+          <Field Name="NameStyle" Type="bool" />
+          <Field Name="PersonType" Type="string" MaxLength="2" />
+          <Field Name="Rowguid" Type="guid" />
+          <Field Name="Suffix" Type="string" IsOptional="true" MaxLength="10" />
+          <Field Name="Title" Type="string" IsOptional="true" MaxLength="8" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="PersonPhone" GroupName="Person" ObjectID="5a82a2a2-4c44-4445-8d40-2586ef5ae740">
+        <Fields>
+          <Field Name="BusinessEntityId" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="ModifiedDate" Type="datetime" />
+          <Field Name="PhoneNumber" Type="string" MaxLength="25" IsPrimaryKey="true" />
+          <Field Name="PhoneNumberTypeId" Type="int" Precision="10" IsPrimaryKey="true" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="PhoneNumberType" GroupName="Person" ObjectID="699ee464-751e-4372-96c0-79c0746b5aad">
+        <Fields>
+          <Field Name="ModifiedDate" Type="datetime" />
+          <Field Name="Name" Type="string" MaxLength="50" />
+          <Field Name="PhoneNumberTypeId" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
         </Fields>
       </EntityDefinition>
       <EntityDefinition Name="StateProvince" GroupName="Person" ObjectID="ba4baedb-9931-472a-b573-ecf4c357651e">
@@ -649,6 +724,13 @@
           <Field Name="TerritoryId" Type="int" IsOptional="true" Precision="10" />
         </Fields>
       </EntityDefinition>
+      <EntityDefinition Name="PersonCreditCard" GroupName="Sales" ObjectID="075b3234-f200-4e8b-8adf-a21337231671">
+        <Fields>
+          <Field Name="BusinessEntityId" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="CreditCardId" Type="int" Precision="10" IsPrimaryKey="true" />
+          <Field Name="ModifiedDate" Type="datetime" />
+        </Fields>
+      </EntityDefinition>
       <EntityDefinition Name="SalesOrderDetail" GroupName="Sales" ObjectID="ad2a1412-eb60-49a3-aa53-2b776252bf55">
         <Fields>
           <Field Name="CarrierTrackingNumber" Type="string" IsOptional="true" MaxLength="25" />
@@ -811,6 +893,11 @@
       </EntityDefinition>
     </EntityDefinitions>
     <Relationships>
+      <NormalRelationship Name="HumanResources.Employee.Person-Person.Person.Employee" Start="HumanResources:Employee" End="Person:Person" StartNavigator="Person" EndNavigator="Employee" Type="1" StartIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="BusinessEntityId" PkField="BusinessEntityId" />
+        </FieldRelationships>
+      </NormalRelationship>
       <NormalRelationship Name="HumanResources.EmployeeDepartmentHistory.Department-HumanResources.Department.EmployeeDepartmentHistories" Start="HumanResources:EmployeeDepartmentHistory" End="HumanResources:Department" StartNavigator="Department" EndNavigator="EmployeeDepartmentHistories" Type="4">
         <FieldRelationships>
           <FieldFieldRelationship FkField="DepartmentId" PkField="DepartmentId" />
@@ -839,6 +926,61 @@
       <NormalRelationship Name="Person.Address.StateProvince-Person.StateProvince.Addresses" Start="Person:Address" End="Person:StateProvince" StartNavigator="StateProvince" EndNavigator="Addresses" Type="4">
         <FieldRelationships>
           <FieldFieldRelationship FkField="StateProvinceId" PkField="StateProvinceId" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="Person.BusinessEntityAddress.Address-Person.Address.BusinessEntityAddresses" Start="Person:BusinessEntityAddress" End="Person:Address" StartNavigator="Address" EndNavigator="BusinessEntityAddresses" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="AddressId" PkField="AddressId" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="Person.BusinessEntityAddress.AddressType-Person.AddressType.BusinessEntityAddresses" Start="Person:BusinessEntityAddress" End="Person:AddressType" StartNavigator="AddressType" EndNavigator="BusinessEntityAddresses" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="AddressTypeId" PkField="AddressTypeId" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="Person.BusinessEntityAddress.BusinessEntity-Person.BusinessEntity.BusinessEntityAddresses" Start="Person:BusinessEntityAddress" End="Person:BusinessEntity" StartNavigator="BusinessEntity" EndNavigator="BusinessEntityAddresses" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="BusinessEntityId" PkField="BusinessEntityId" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="Person.BusinessEntityContact.BusinessEntity-Person.BusinessEntity.BusinessEntityContacts" Start="Person:BusinessEntityContact" End="Person:BusinessEntity" StartNavigator="BusinessEntity" EndNavigator="BusinessEntityContacts" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="BusinessEntityId" PkField="BusinessEntityId" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="Person.BusinessEntityContact.ContactType-Person.ContactType.BusinessEntityContacts" Start="Person:BusinessEntityContact" End="Person:ContactType" StartNavigator="ContactType" EndNavigator="BusinessEntityContacts" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="ContactTypeId" PkField="ContactTypeId" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="Person.BusinessEntityContact.Person-Person.Person.BusinessEntityContacts" Start="Person:BusinessEntityContact" End="Person:Person" StartNavigator="Person" EndNavigator="BusinessEntityContacts" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="PersonId" PkField="BusinessEntityId" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="Person.EmailAddress.Person-Person.Person.EmailAddresses" Start="Person:EmailAddress" End="Person:Person" StartNavigator="Person" EndNavigator="EmailAddresses" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="BusinessEntityId" PkField="BusinessEntityId" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="Person.Password.Person-Person.Person.Password" Start="Person:Password" End="Person:Person" StartNavigator="Person" EndNavigator="Password" Type="1" StartIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="BusinessEntityId" PkField="BusinessEntityId" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="Person.Person.BusinessEntity-Person.BusinessEntity.Person" Start="Person:Person" End="Person:BusinessEntity" StartNavigator="BusinessEntity" EndNavigator="Person" Type="1" StartIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="BusinessEntityId" PkField="BusinessEntityId" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="Person.PersonPhone.Person-Person.Person.PersonPhones" Start="Person:PersonPhone" End="Person:Person" StartNavigator="Person" EndNavigator="PersonPhones" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="BusinessEntityId" PkField="BusinessEntityId" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="Person.PersonPhone.PhoneNumberType-Person.PhoneNumberType.PersonPhones" Start="Person:PersonPhone" End="Person:PhoneNumberType" StartNavigator="PhoneNumberType" EndNavigator="PersonPhones" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="PhoneNumberTypeId" PkField="PhoneNumberTypeId" />
         </FieldRelationships>
       </NormalRelationship>
       <NormalRelationship Name="Person.StateProvince.CountryRegion-Person.CountryRegion.StateProvinces" Start="Person:StateProvince" End="Person:CountryRegion" StartNavigator="CountryRegion" EndNavigator="StateProvinces" Type="4">
@@ -1031,6 +1173,11 @@
           <FieldFieldRelationship FkField="VendorId" PkField="BusinessEntityId" />
         </FieldRelationships>
       </NormalRelationship>
+      <NormalRelationship Name="Purchasing.Vendor.BusinessEntity-Person.BusinessEntity.Vendor" Start="Purchasing:Vendor" End="Person:BusinessEntity" StartNavigator="BusinessEntity" EndNavigator="Vendor" Type="1" StartIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="BusinessEntityId" PkField="BusinessEntityId" />
+        </FieldRelationships>
+      </NormalRelationship>
       <NormalRelationship Name="Sales.CountryRegionCurrency.CountryRegion-Person.CountryRegion.CountryRegionCurrencies" Start="Sales:CountryRegionCurrency" End="Person:CountryRegion" StartNavigator="CountryRegion" EndNavigator="CountryRegionCurrencies" Type="4">
         <FieldRelationships>
           <FieldFieldRelationship FkField="CountryRegionCode" PkField="CountryRegionCode" />
@@ -1051,6 +1198,11 @@
           <FieldFieldRelationship FkField="ToCurrencyCode" PkField="CurrencyCode" />
         </FieldRelationships>
       </NormalRelationship>
+      <NormalRelationship Name="Sales.Customer.Person-Person.Person.Customers" Start="Sales:Customer" End="Person:Person" StartNavigator="Person" EndNavigator="Customers" Type="4" EndIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="PersonId" PkField="BusinessEntityId" />
+        </FieldRelationships>
+      </NormalRelationship>
       <NormalRelationship Name="Sales.Customer.SalesTerritory-Sales.SalesTerritory.Customers" Start="Sales:Customer" End="Sales:SalesTerritory" StartNavigator="SalesTerritory" EndNavigator="Customers" Type="4" EndIsOptional="true">
         <FieldRelationships>
           <FieldFieldRelationship FkField="TerritoryId" PkField="TerritoryId" />
@@ -1059,6 +1211,16 @@
       <NormalRelationship Name="Sales.Customer.Store-Sales.Store.Customers" Start="Sales:Customer" End="Sales:Store" StartNavigator="Store" EndNavigator="Customers" Type="4" EndIsOptional="true">
         <FieldRelationships>
           <FieldFieldRelationship FkField="StoreId" PkField="BusinessEntityId" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="Sales.PersonCreditCard.CreditCard-Sales.CreditCard.PersonCreditCards" Start="Sales:PersonCreditCard" End="Sales:CreditCard" StartNavigator="CreditCard" EndNavigator="PersonCreditCards" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="CreditCardId" PkField="CreditCardId" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="Sales.PersonCreditCard.Person-Person.Person.PersonCreditCards" Start="Sales:PersonCreditCard" End="Person:Person" StartNavigator="Person" EndNavigator="PersonCreditCards" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="BusinessEntityId" PkField="BusinessEntityId" />
         </FieldRelationships>
       </NormalRelationship>
       <NormalRelationship Name="Sales.SalesOrderDetail.SalesOrderHeader-Sales.SalesOrderHeader.SalesOrderDetails" Start="Sales:SalesOrderDetail" End="Sales:SalesOrderHeader" StartNavigator="SalesOrderHeader" EndNavigator="SalesOrderDetails" Type="4" DeleteRuleAction="1">
@@ -1172,6 +1334,11 @@
           <FieldFieldRelationship FkField="SpecialOfferId" PkField="SpecialOfferId" />
         </FieldRelationships>
       </NormalRelationship>
+      <NormalRelationship Name="Sales.Store.BusinessEntity-Person.BusinessEntity.Store" Start="Sales:Store" End="Person:BusinessEntity" StartNavigator="BusinessEntity" EndNavigator="Store" Type="1" StartIsOptional="true">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="BusinessEntityId" PkField="BusinessEntityId" />
+        </FieldRelationships>
+      </NormalRelationship>
       <NormalRelationship Name="Sales.Store.SalesPerson-Sales.SalesPerson.Stores" Start="Sales:Store" End="Sales:SalesPerson" StartNavigator="SalesPerson" EndNavigator="Stores" Type="4" EndIsOptional="true">
         <FieldRelationships>
           <FieldFieldRelationship FkField="SalesPersonId" PkField="BusinessEntityId" />
@@ -1183,6 +1350,7 @@
       <IndirectRelationship Start="HumanResources:Employee" End="Purchasing:ShipMethod" StartNavigator="ShipMethodCollectionViaPurchaseOrderHeader" EndNavigator="EmployeeCollectionViaPurchaseOrderHeader" Relationship1="Purchasing.PurchaseOrderHeader.Employee-HumanResources.Employee.PurchaseOrderHeaders" Relationship2="Purchasing.PurchaseOrderHeader.ShipMethod-Purchasing.ShipMethod.PurchaseOrderHeaders" />
       <IndirectRelationship Start="HumanResources:Employee" End="Purchasing:Vendor" StartNavigator="VendorCollectionViaPurchaseOrderHeader" EndNavigator="EmployeeCollectionViaPurchaseOrderHeader" Relationship1="Purchasing.PurchaseOrderHeader.Employee-HumanResources.Employee.PurchaseOrderHeaders" Relationship2="Purchasing.PurchaseOrderHeader.Vendor-Purchasing.Vendor.PurchaseOrderHeaders" />
       <IndirectRelationship Start="Person:Address" End="Person:Address" StartNavigator="AddressCollectionViaSalesOrderHeader" EndNavigator="AddressCollectionViaSalesOrderHeader_" Relationship1="Sales.SalesOrderHeader.Address-Person.Address.SalesOrderHeaders" Relationship2="Sales.SalesOrderHeader.Address1-Person.Address.SalesOrderHeaders1" />
+      <IndirectRelationship Start="Person:Address" End="Person:AddressType" StartNavigator="AddressTypeCollectionViaBusinessEntityAddress" EndNavigator="AddressCollectionViaBusinessEntityAddress" Relationship1="Person.BusinessEntityAddress.Address-Person.Address.BusinessEntityAddresses" Relationship2="Person.BusinessEntityAddress.AddressType-Person.AddressType.BusinessEntityAddresses" />
       <IndirectRelationship Start="Person:Address" End="Sales:CreditCard" StartNavigator="CreditCardCollectionViaSalesOrderHeader" EndNavigator="AddressCollectionViaSalesOrderHeader" Relationship1="Sales.SalesOrderHeader.Address-Person.Address.SalesOrderHeaders" Relationship2="Sales.SalesOrderHeader.CreditCard-Sales.CreditCard.SalesOrderHeaders" />
       <IndirectRelationship Start="Person:Address" End="Sales:CreditCard" StartNavigator="CreditCardCollectionViaSalesOrderHeader1" EndNavigator="AddressCollectionViaSalesOrderHeader1" Relationship1="Sales.SalesOrderHeader.Address1-Person.Address.SalesOrderHeaders1" Relationship2="Sales.SalesOrderHeader.CreditCard-Sales.CreditCard.SalesOrderHeaders" />
       <IndirectRelationship Start="Person:Address" End="Sales:CurrencyRate" StartNavigator="CurrencyRateCollectionViaSalesOrderHeader" EndNavigator="AddressCollectionViaSalesOrderHeader" Relationship1="Sales.SalesOrderHeader.Address-Person.Address.SalesOrderHeaders" Relationship2="Sales.SalesOrderHeader.CurrencyRate-Sales.CurrencyRate.SalesOrderHeaders" />
@@ -1193,8 +1361,15 @@
       <IndirectRelationship Start="Person:Address" End="Sales:SalesTerritory" StartNavigator="SalesTerritoryCollectionViaSalesOrderHeader1" EndNavigator="AddressCollectionViaSalesOrderHeader1" Relationship1="Sales.SalesOrderHeader.Address1-Person.Address.SalesOrderHeaders1" Relationship2="Sales.SalesOrderHeader.SalesTerritory-Sales.SalesTerritory.SalesOrderHeaders" />
       <IndirectRelationship Start="Person:Address" End="Purchasing:ShipMethod" StartNavigator="ShipMethodCollectionViaSalesOrderHeader" EndNavigator="AddressCollectionViaSalesOrderHeader" Relationship1="Sales.SalesOrderHeader.Address-Person.Address.SalesOrderHeaders" Relationship2="Sales.SalesOrderHeader.ShipMethod-Purchasing.ShipMethod.SalesOrderHeaders" />
       <IndirectRelationship Start="Person:Address" End="Purchasing:ShipMethod" StartNavigator="ShipMethodCollectionViaSalesOrderHeader1" EndNavigator="AddressCollectionViaSalesOrderHeader1" Relationship1="Sales.SalesOrderHeader.Address1-Person.Address.SalesOrderHeaders1" Relationship2="Sales.SalesOrderHeader.ShipMethod-Purchasing.ShipMethod.SalesOrderHeaders" />
+      <IndirectRelationship Start="Person:BusinessEntity" End="Person:Address" StartNavigator="AddressCollectionViaBusinessEntityAddress" EndNavigator="BusinessEntityCollectionViaBusinessEntityAddress" Relationship1="Person.BusinessEntityAddress.BusinessEntity-Person.BusinessEntity.BusinessEntityAddresses" Relationship2="Person.BusinessEntityAddress.Address-Person.Address.BusinessEntityAddresses" />
+      <IndirectRelationship Start="Person:BusinessEntity" End="Person:AddressType" StartNavigator="AddressTypeCollectionViaBusinessEntityAddress" EndNavigator="BusinessEntityCollectionViaBusinessEntityAddress" Relationship1="Person.BusinessEntityAddress.BusinessEntity-Person.BusinessEntity.BusinessEntityAddresses" Relationship2="Person.BusinessEntityAddress.AddressType-Person.AddressType.BusinessEntityAddresses" />
+      <IndirectRelationship Start="Person:BusinessEntity" End="Person:ContactType" StartNavigator="ContactTypeCollectionViaBusinessEntityContact" EndNavigator="BusinessEntityCollectionViaBusinessEntityContact" Relationship1="Person.BusinessEntityContact.BusinessEntity-Person.BusinessEntity.BusinessEntityContacts" Relationship2="Person.BusinessEntityContact.ContactType-Person.ContactType.BusinessEntityContacts" />
       <IndirectRelationship Start="Person:CountryRegion" End="Sales:Currency" StartNavigator="CurrencyCollectionViaCountryRegionCurrency" EndNavigator="CountryRegionCollectionViaCountryRegionCurrency" Relationship1="Sales.CountryRegionCurrency.CountryRegion-Person.CountryRegion.CountryRegionCurrencies" Relationship2="Sales.CountryRegionCurrency.Currency-Sales.Currency.CountryRegionCurrencies" />
       <IndirectRelationship Start="Person:CountryRegion" End="Sales:SalesTerritory" StartNavigator="SalesTerritoryCollectionViaStateProvince" EndNavigator="CountryRegionCollectionViaStateProvince" Relationship1="Person.StateProvince.CountryRegion-Person.CountryRegion.StateProvinces" Relationship2="Person.StateProvince.SalesTerritory-Sales.SalesTerritory.StateProvinces" />
+      <IndirectRelationship Start="Person:Person" End="Person:BusinessEntity" StartNavigator="BusinessEntityCollectionViaBusinessEntityContact" EndNavigator="PersonCollectionViaBusinessEntityContact" Relationship1="Person.BusinessEntityContact.Person-Person.Person.BusinessEntityContacts" Relationship2="Person.BusinessEntityContact.BusinessEntity-Person.BusinessEntity.BusinessEntityContacts" />
+      <IndirectRelationship Start="Person:Person" End="Person:ContactType" StartNavigator="ContactTypeCollectionViaBusinessEntityContact" EndNavigator="PersonCollectionViaBusinessEntityContact" Relationship1="Person.BusinessEntityContact.Person-Person.Person.BusinessEntityContacts" Relationship2="Person.BusinessEntityContact.ContactType-Person.ContactType.BusinessEntityContacts" />
+      <IndirectRelationship Start="Person:Person" End="Sales:CreditCard" StartNavigator="CreditCardCollectionViaPersonCreditCard" EndNavigator="PersonCollectionViaPersonCreditCard" Relationship1="Sales.PersonCreditCard.Person-Person.Person.PersonCreditCards" Relationship2="Sales.PersonCreditCard.CreditCard-Sales.CreditCard.PersonCreditCards" />
+      <IndirectRelationship Start="Person:Person" End="Person:PhoneNumberType" StartNavigator="PhoneNumberTypeCollectionViaPersonPhone" EndNavigator="PersonCollectionViaPersonPhone" Relationship1="Person.PersonPhone.Person-Person.Person.PersonPhones" Relationship2="Person.PersonPhone.PhoneNumberType-Person.PhoneNumberType.PersonPhones" />
       <IndirectRelationship Start="Production:Culture" End="Production:ProductDescription" StartNavigator="ProductDescriptionCollectionViaProductModelProductDescriptionCulture" EndNavigator="CultureCollectionViaProductModelProductDescriptionCulture" Relationship1="Production.ProductModelProductDescriptionCulture.Culture-Production.Culture.ProductModelProductDescriptionCultures" Relationship2="Production.ProductModelProductDescriptionCulture.ProductDescription-Production.ProductDescription.ProductModelProductDescriptionCultures" />
       <IndirectRelationship Start="Production:Document" End="Production:Product" StartNavigator="ProductCollectionViaProductDocument" EndNavigator="DocumentCollectionViaProductDocument" Relationship1="Production.ProductDocument.Document-Production.Document.ProductDocuments" Relationship2="Production.ProductDocument.Product-Production.Product.ProductDocuments" />
       <IndirectRelationship Start="Production:Product" End="Production:Location" StartNavigator="LocationCollectionViaProductInventory" EndNavigator="ProductCollectionViaProductInventory" Relationship1="Production.ProductInventory.Product-Production.Product.ProductInventories" Relationship2="Production.ProductInventory.Location-Production.Location.ProductInventories" />
@@ -1239,8 +1414,10 @@
       <IndirectRelationship Start="Sales:SalesTerritory" End="Sales:CreditCard" StartNavigator="CreditCardCollectionViaSalesOrderHeader" EndNavigator="SalesTerritoryCollectionViaSalesOrderHeader" Relationship1="Sales.SalesOrderHeader.SalesTerritory-Sales.SalesTerritory.SalesOrderHeaders" Relationship2="Sales.SalesOrderHeader.CreditCard-Sales.CreditCard.SalesOrderHeaders" />
       <IndirectRelationship Start="Sales:SalesTerritory" End="Sales:CurrencyRate" StartNavigator="CurrencyRateCollectionViaSalesOrderHeader" EndNavigator="SalesTerritoryCollectionViaSalesOrderHeader" Relationship1="Sales.SalesOrderHeader.SalesTerritory-Sales.SalesTerritory.SalesOrderHeaders" Relationship2="Sales.SalesOrderHeader.CurrencyRate-Sales.CurrencyRate.SalesOrderHeaders" />
       <IndirectRelationship Start="Sales:SalesTerritory" End="Sales:Customer" StartNavigator="CustomerCollectionViaSalesOrderHeader" EndNavigator="SalesTerritoryCollectionViaSalesOrderHeader" Relationship1="Sales.SalesOrderHeader.SalesTerritory-Sales.SalesTerritory.SalesOrderHeaders" Relationship2="Sales.SalesOrderHeader.Customer-Sales.Customer.SalesOrderHeaders" />
+      <IndirectRelationship Start="Sales:SalesTerritory" End="Person:Person" StartNavigator="PersonCollectionViaCustomer" EndNavigator="SalesTerritoryCollectionViaCustomer" Relationship1="Sales.Customer.SalesTerritory-Sales.SalesTerritory.Customers" Relationship2="Sales.Customer.Person-Person.Person.Customers" />
       <IndirectRelationship Start="Sales:SalesTerritory" End="Purchasing:ShipMethod" StartNavigator="ShipMethodCollectionViaSalesOrderHeader" EndNavigator="SalesTerritoryCollectionViaSalesOrderHeader" Relationship1="Sales.SalesOrderHeader.SalesTerritory-Sales.SalesTerritory.SalesOrderHeaders" Relationship2="Sales.SalesOrderHeader.ShipMethod-Purchasing.ShipMethod.SalesOrderHeaders" />
       <IndirectRelationship Start="Sales:SalesTerritory" End="Sales:Store" StartNavigator="StoreCollectionViaCustomer" EndNavigator="SalesTerritoryCollectionViaCustomer" Relationship1="Sales.Customer.SalesTerritory-Sales.SalesTerritory.Customers" Relationship2="Sales.Customer.Store-Sales.Store.Customers" />
+      <IndirectRelationship Start="Sales:Store" End="Person:Person" StartNavigator="PersonCollectionViaCustomer" EndNavigator="StoreCollectionViaCustomer" Relationship1="Sales.Customer.Store-Sales.Store.Customers" Relationship2="Sales.Customer.Person-Person.Person.Customers" />
     </Relationships>
     <InheritanceHierarchies />
   </EntityModel>
@@ -1266,7 +1443,7 @@
         <Sequence Name="@@IDENTITY" />
       </SystemSequences>
       <Catalogs>
-        <Catalog Name="AdventureWorks2014">
+        <Catalog Name="AdventureWorks2012">
           <Schemas>
             <Schema Name="dbo">
               <Tables>
@@ -1295,7 +1472,7 @@
                     </Field>
                   </Fields>
                   <CustomProperties>
-                    <CustomProperty Name="MS_Description" Value="Current version number of the AdventureWorks 2014 sample database. " />
+                    <CustomProperty Name="MS_Description" Value="Current version number of the AdventureWorks 2012 sample database. " />
                   </CustomProperties>
                 </Table>
                 <Table Name="DatabaseLog">
@@ -1597,7 +1774,7 @@
                     </Field>
                     <Field Name="BirthDate" Ordinal="7" DbType="28">
                       <CustomProperties>
-                        <CustomProperty Name="MS_Description" Value="Date of birth." />
+                        <CustomProperty Name="MS_Description" Value="Unique nonclustered index. Used to support replication samples." />
                       </CustomProperties>
                     </Field>
                     <Field Name="MaritalStatus" Ordinal="8" DbType="10" Length="1">
@@ -2103,6 +2280,95 @@
                     <CustomProperty Name="MS_Description" Value="Types of addresses stored in the Address table. " />
                   </CustomProperties>
                 </Table>
+                <Table Name="BusinessEntity">
+                  <PkConstraintName Name="PK_BusinessEntity_BusinessEntityID" />
+                  <Fields>
+                    <Field Name="BusinessEntityID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Clustered index created by a primary key constraint." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="rowguid" Ordinal="2" IsRowGUID="true" HasDefaultValue="true" DefaultValue="newid()" DbType="25">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="ModifiedDate" Ordinal="3" HasDefaultValue="true" DefaultValue="getdate()" DbType="4">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Date and time the record was last updated." />
+                      </CustomProperties>
+                    </Field>
+                  </Fields>
+                  <CustomProperties>
+                    <CustomProperty Name="MS_Description" Value="Source of the ID that connects vendors, customers, and employees with address and contact information." />
+                  </CustomProperties>
+                </Table>
+                <Table Name="BusinessEntityAddress">
+                  <PkConstraintName Name="PK_BusinessEntityAddress_BusinessEntityID_AddressID_AddressTypeID" />
+                  <Fields>
+                    <Field Name="BusinessEntityID" Ordinal="1" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Clustered index created by a primary key constraint." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="AddressID" Ordinal="2" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Primary key. Foreign key to Address.AddressID." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="AddressTypeID" Ordinal="3" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Nonclustered index." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="rowguid" Ordinal="4" IsRowGUID="true" HasDefaultValue="true" DefaultValue="newid()" DbType="25">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="ModifiedDate" Ordinal="5" HasDefaultValue="true" DefaultValue="getdate()" DbType="4">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Date and time the record was last updated." />
+                      </CustomProperties>
+                    </Field>
+                  </Fields>
+                  <CustomProperties>
+                    <CustomProperty Name="MS_Description" Value="Cross-reference table mapping customers, vendors, and employees to their addresses." />
+                  </CustomProperties>
+                </Table>
+                <Table Name="BusinessEntityContact">
+                  <PkConstraintName Name="PK_BusinessEntityContact_BusinessEntityID_PersonID_ContactTypeID" />
+                  <Fields>
+                    <Field Name="BusinessEntityID" Ordinal="1" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Clustered index created by a primary key constraint." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="PersonID" Ordinal="2" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Primary key. Foreign key to Person.BusinessEntityID." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="ContactTypeID" Ordinal="3" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Nonclustered index." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="rowguid" Ordinal="4" IsRowGUID="true" HasDefaultValue="true" DefaultValue="newid()" DbType="25">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="ModifiedDate" Ordinal="5" HasDefaultValue="true" DefaultValue="getdate()" DbType="4">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Date and time the record was last updated." />
+                      </CustomProperties>
+                    </Field>
+                  </Fields>
+                  <CustomProperties>
+                    <CustomProperty Name="MS_Description" Value="Cross-reference table mapping stores, vendors, and employees to people" />
+                  </CustomProperties>
+                </Table>
                 <Table Name="ContactType">
                   <PkConstraintName Name="PK_ContactType_ContactTypeID" />
                   <Fields>
@@ -2147,6 +2413,196 @@
                   </Fields>
                   <CustomProperties>
                     <CustomProperty Name="MS_Description" Value="Lookup table containing the ISO standard codes for countries and regions." />
+                  </CustomProperties>
+                </Table>
+                <Table Name="EmailAddress">
+                  <PkConstraintName Name="PK_EmailAddress_BusinessEntityID_EmailAddressID" />
+                  <Fields>
+                    <Field Name="BusinessEntityID" Ordinal="1" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Clustered index created by a primary key constraint." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="EmailAddressID" Ordinal="2" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Primary key. ID of this email address." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="EmailAddress" Ordinal="3" IsOptional="true" DbType="12" Length="50">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="E-mail address for the person." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="rowguid" Ordinal="4" IsRowGUID="true" HasDefaultValue="true" DefaultValue="newid()" DbType="25">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="ModifiedDate" Ordinal="5" HasDefaultValue="true" DefaultValue="getdate()" DbType="4">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Date and time the record was last updated." />
+                      </CustomProperties>
+                    </Field>
+                  </Fields>
+                  <CustomProperties>
+                    <CustomProperty Name="MS_Description" Value="Where to send a person email." />
+                  </CustomProperties>
+                </Table>
+                <Table Name="Password">
+                  <PkConstraintName Name="PK_Password_BusinessEntityID" />
+                  <Fields>
+                    <Field Name="BusinessEntityID" Ordinal="1" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Clustered index created by a primary key constraint." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="PasswordHash" Ordinal="2" DbType="24" Length="128">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Password for the e-mail account." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="PasswordSalt" Ordinal="3" DbType="24" Length="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Random value concatenated with the password string before the password is hashed." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="rowguid" Ordinal="4" IsRowGUID="true" HasDefaultValue="true" DefaultValue="newid()" DbType="25">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="ModifiedDate" Ordinal="5" HasDefaultValue="true" DefaultValue="getdate()" DbType="4">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Date and time the record was last updated." />
+                      </CustomProperties>
+                    </Field>
+                  </Fields>
+                  <CustomProperties>
+                    <CustomProperty Name="MS_Description" Value="One way hashed authentication information" />
+                  </CustomProperties>
+                </Table>
+                <Table Name="Person">
+                  <PkConstraintName Name="PK_Person_BusinessEntityID" />
+                  <Fields>
+                    <Field Name="BusinessEntityID" Ordinal="1" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Primary key for Person records." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="PersonType" Ordinal="2" DbType="10" Length="2">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Primary type of person: SC = Store Contact, IN = Individual (retail) customer, SP = Sales person, EM = Employee (non-sales), VC = Vendor contact, GC = General contact" />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="NameStyle" Ordinal="3" HasDefaultValue="true" DefaultValue="(0)" DbType="2">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Unique nonclustered index. Used to support replication samples." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="Title" Ordinal="4" IsOptional="true" DbType="12" Length="8">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="A courtesy title. For example, Mr. or Ms." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="FirstName" Ordinal="5" DbType="12" Length="50">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="First name of the person." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="MiddleName" Ordinal="6" IsOptional="true" DbType="12" Length="50">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Middle name or middle initial of the person." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="LastName" Ordinal="7" DbType="12" Length="50">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Last name of the person." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="Suffix" Ordinal="8" IsOptional="true" DbType="12" Length="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Surname suffix. For example, Sr. or Jr." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="EmailPromotion" Ordinal="9" HasDefaultValue="true" DefaultValue="(0)" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="0 = Contact does not wish to receive e-mail promotions, 1 = Contact does wish to receive e-mail promotions from AdventureWorks, 2 = Contact does wish to receive e-mail promotions from AdventureWorks and selected partners. " />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="AdditionalContactInfo" Ordinal="10" IsOptional="true" DbType="26" Length="2147483647">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Additional contact information about the person stored in xml format. " />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="Demographics" Ordinal="11" IsOptional="true" DbType="26" Length="2147483647">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Personal information such as hobbies, and income collected from online shoppers. Used for sales analysis." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="rowguid" Ordinal="12" IsRowGUID="true" HasDefaultValue="true" DefaultValue="newid()" DbType="25">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="ROWGUIDCOL number uniquely identifying the record. Used to support a merge replication sample." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="ModifiedDate" Ordinal="13" HasDefaultValue="true" DefaultValue="getdate()" DbType="4">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Date and time the record was last updated." />
+                      </CustomProperties>
+                    </Field>
+                  </Fields>
+                  <CustomProperties>
+                    <CustomProperty Name="MS_Description" Value="Secondary XML index for value." />
+                  </CustomProperties>
+                </Table>
+                <Table Name="PersonPhone">
+                  <PkConstraintName Name="PK_PersonPhone_BusinessEntityID_PhoneNumber_PhoneNumberTypeID" />
+                  <Fields>
+                    <Field Name="BusinessEntityID" Ordinal="1" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Clustered index created by a primary key constraint." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="PhoneNumber" Ordinal="2" IsPrimaryKey="true" DbType="12" Length="25">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Telephone number identification number." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="PhoneNumberTypeID" Ordinal="3" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Kind of phone number. Foreign key to PhoneNumberType.PhoneNumberTypeID." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="ModifiedDate" Ordinal="4" HasDefaultValue="true" DefaultValue="getdate()" DbType="4">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Date and time the record was last updated." />
+                      </CustomProperties>
+                    </Field>
+                  </Fields>
+                  <CustomProperties>
+                    <CustomProperty Name="MS_Description" Value="Telephone number and type of a person." />
+                  </CustomProperties>
+                </Table>
+                <Table Name="PhoneNumberType">
+                  <PkConstraintName Name="PK_PhoneNumberType_PhoneNumberTypeID" />
+                  <Fields>
+                    <Field Name="PhoneNumberTypeID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Clustered index created by a primary key constraint." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="Name" Ordinal="2" DbType="12" Length="50">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Name of the telephone number type" />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="ModifiedDate" Ordinal="3" HasDefaultValue="true" DefaultValue="getdate()" DbType="4">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Date and time the record was last updated." />
+                      </CustomProperties>
+                    </Field>
+                  </Fields>
+                  <CustomProperties>
+                    <CustomProperty Name="MS_Description" Value="Type of phone number of a person." />
                   </CustomProperties>
                 </Table>
                 <Table Name="StateProvince">
@@ -2346,7 +2802,7 @@
                     </Field>
                     <Field Name="FolderFlag" Ordinal="5" HasDefaultValue="true" DefaultValue="(0)" DbType="2">
                       <CustomProperties>
-                        <CustomProperty Name="MS_Description" Value="Unique nonclustered index." />
+                        <CustomProperty Name="MS_Description" Value="Unique nonclustered index. Used to support FileStream." />
                       </CustomProperties>
                     </Field>
                     <Field Name="FileName" Ordinal="6" DbType="12" Length="400">
@@ -2396,7 +2852,7 @@
                     </Field>
                   </Fields>
                   <UniqueConstraints>
-                    <UniqueConstraint Name="UQ__Document__F73921F763026E5E">
+                    <UniqueConstraint Name="UQ__Document__F73921F793071A63">
                       <Field Name="rowguid" />
                     </UniqueConstraint>
                   </UniqueConstraints>
@@ -3808,7 +4264,7 @@
                     </Field>
                     <Field Name="AccountNumber" Ordinal="5" IsComputed="true" DbType="24" Length="10">
                       <CustomProperties>
-                        <CustomProperty Name="MS_Description" Value="Unique number identifying the customer assigned by the accounting system." />
+                        <CustomProperty Name="MS_Description" Value="Nonclustered index." />
                       </CustomProperties>
                     </Field>
                     <Field Name="rowguid" Ordinal="6" IsRowGUID="true" HasDefaultValue="true" DefaultValue="newid()" DbType="25">
@@ -3824,6 +4280,29 @@
                   </Fields>
                   <CustomProperties>
                     <CustomProperty Name="MS_Description" Value="Current customer information. Also see the Person and Store tables." />
+                  </CustomProperties>
+                </Table>
+                <Table Name="PersonCreditCard">
+                  <PkConstraintName Name="PK_PersonCreditCard_BusinessEntityID_CreditCardID" />
+                  <Fields>
+                    <Field Name="BusinessEntityID" Ordinal="1" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Clustered index created by a primary key constraint." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="CreditCardID" Ordinal="2" IsPrimaryKey="true" DbType="8" Precision="10">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Credit card identification number. Foreign key to CreditCard.CreditCardID." />
+                      </CustomProperties>
+                    </Field>
+                    <Field Name="ModifiedDate" Ordinal="3" HasDefaultValue="true" DefaultValue="getdate()" DbType="4">
+                      <CustomProperties>
+                        <CustomProperty Name="MS_Description" Value="Date and time the record was last updated." />
+                      </CustomProperties>
+                    </Field>
+                  </Fields>
+                  <CustomProperties>
+                    <CustomProperty Name="MS_Description" Value="Cross-reference table mapping people to their credit card information in the CreditCard table. " />
                   </CustomProperties>
                 </Table>
                 <Table Name="SalesOrderDetail">
@@ -4497,6 +4976,26 @@
                     <CustomProperty Name="MS_Description" Value="Individual customers (names and addresses) that purchase Adventure Works Cycles products online." />
                   </CustomProperties>
                 </View>
+                <View Name="vPersonDemographics">
+                  <Fields>
+                    <Field Name="BusinessEntityID" Ordinal="1" DbType="8" Precision="10" />
+                    <Field Name="TotalPurchaseYTD" Ordinal="2" IsOptional="true" DbType="9" Precision="19" Scale="4" />
+                    <Field Name="DateFirstPurchase" Ordinal="3" IsOptional="true" DbType="4" />
+                    <Field Name="BirthDate" Ordinal="4" IsOptional="true" DbType="4" />
+                    <Field Name="MaritalStatus" Ordinal="5" IsOptional="true" DbType="12" Length="1" />
+                    <Field Name="YearlyIncome" Ordinal="6" IsOptional="true" DbType="12" Length="30" />
+                    <Field Name="Gender" Ordinal="7" IsOptional="true" DbType="12" Length="1" />
+                    <Field Name="TotalChildren" Ordinal="8" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="NumberChildrenAtHome" Ordinal="9" IsOptional="true" DbType="8" Precision="10" />
+                    <Field Name="Education" Ordinal="10" IsOptional="true" DbType="12" Length="30" />
+                    <Field Name="Occupation" Ordinal="11" IsOptional="true" DbType="12" Length="30" />
+                    <Field Name="HomeOwnerFlag" Ordinal="12" IsOptional="true" DbType="2" />
+                    <Field Name="NumberCarsOwned" Ordinal="13" IsOptional="true" DbType="8" Precision="10" />
+                  </Fields>
+                  <CustomProperties>
+                    <CustomProperty Name="MS_Description" Value="Displays the content from each element in the xml column Demographics for each customer in the Person.Person table." />
+                  </CustomProperties>
+                </View>
                 <View Name="vSalesPerson">
                   <Fields>
                     <Field Name="BusinessEntityID" Ordinal="1" DbType="8" Precision="10" />
@@ -4540,6 +5039,41 @@
                     <CustomProperty Name="MS_Description" Value="Uses PIVOT to return aggregated sales information for each sales representative." />
                   </CustomProperties>
                 </View>
+                <View Name="vStoreWithAddresses">
+                  <Fields>
+                    <Field Name="BusinessEntityID" Ordinal="1" DbType="8" Precision="10" />
+                    <Field Name="Name" Ordinal="2" DbType="12" Length="50" />
+                    <Field Name="AddressType" Ordinal="3" DbType="12" Length="50" />
+                    <Field Name="AddressLine1" Ordinal="4" DbType="12" Length="60" />
+                    <Field Name="AddressLine2" Ordinal="5" IsOptional="true" DbType="12" Length="60" />
+                    <Field Name="City" Ordinal="6" DbType="12" Length="30" />
+                    <Field Name="StateProvinceName" Ordinal="7" DbType="12" Length="50" />
+                    <Field Name="PostalCode" Ordinal="8" DbType="12" Length="15" />
+                    <Field Name="CountryRegionName" Ordinal="9" DbType="12" Length="50" />
+                  </Fields>
+                  <CustomProperties>
+                    <CustomProperty Name="MS_Description" Value="Stores (including store addresses) that sell Adventure Works Cycles products to consumers." />
+                  </CustomProperties>
+                </View>
+                <View Name="vStoreWithContacts">
+                  <Fields>
+                    <Field Name="BusinessEntityID" Ordinal="1" DbType="8" Precision="10" />
+                    <Field Name="Name" Ordinal="2" DbType="12" Length="50" />
+                    <Field Name="ContactType" Ordinal="3" DbType="12" Length="50" />
+                    <Field Name="Title" Ordinal="4" IsOptional="true" DbType="12" Length="8" />
+                    <Field Name="FirstName" Ordinal="5" DbType="12" Length="50" />
+                    <Field Name="MiddleName" Ordinal="6" IsOptional="true" DbType="12" Length="50" />
+                    <Field Name="LastName" Ordinal="7" DbType="12" Length="50" />
+                    <Field Name="Suffix" Ordinal="8" IsOptional="true" DbType="12" Length="10" />
+                    <Field Name="PhoneNumber" Ordinal="9" IsOptional="true" DbType="12" Length="25" />
+                    <Field Name="PhoneNumberType" Ordinal="10" IsOptional="true" DbType="12" Length="50" />
+                    <Field Name="EmailAddress" Ordinal="11" IsOptional="true" DbType="12" Length="50" />
+                    <Field Name="EmailPromotion" Ordinal="12" DbType="8" Precision="10" />
+                  </Fields>
+                  <CustomProperties>
+                    <CustomProperty Name="MS_Description" Value="Stores (including store contacts) that sell Adventure Works Cycles products to consumers." />
+                  </CustomProperties>
+                </View>
                 <View Name="vStoreWithDemographics">
                   <Fields>
                     <Field Name="BusinessEntityID" Ordinal="1" DbType="8" Precision="10" />
@@ -4563,6 +5097,11 @@
             </Schema>
           </Schemas>
           <ForeignKeyConstraints>
+            <ForeignKeyConstraint Name="HumanResources:Employee:FK_Employee_Person_BusinessEntityID">
+              <FieldPairs>
+                <FieldPair PkField="Person:Person:BusinessEntityID" FkField="HumanResources:Employee:BusinessEntityID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
             <ForeignKeyConstraint Name="HumanResources:EmployeeDepartmentHistory:FK_EmployeeDepartmentHistory_Department_DepartmentID">
               <FieldPairs>
                 <FieldPair PkField="HumanResources:Department:DepartmentID" FkField="HumanResources:EmployeeDepartmentHistory:DepartmentID" />
@@ -4591,6 +5130,61 @@
             <ForeignKeyConstraint Name="Person:Address:FK_Address_StateProvince_StateProvinceID">
               <FieldPairs>
                 <FieldPair PkField="Person:StateProvince:StateProvinceID" FkField="Person:Address:StateProvinceID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Person:BusinessEntityAddress:FK_BusinessEntityAddress_Address_AddressID">
+              <FieldPairs>
+                <FieldPair PkField="Person:Address:AddressID" FkField="Person:BusinessEntityAddress:AddressID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Person:BusinessEntityAddress:FK_BusinessEntityAddress_AddressType_AddressTypeID">
+              <FieldPairs>
+                <FieldPair PkField="Person:AddressType:AddressTypeID" FkField="Person:BusinessEntityAddress:AddressTypeID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Person:BusinessEntityAddress:FK_BusinessEntityAddress_BusinessEntity_BusinessEntityID">
+              <FieldPairs>
+                <FieldPair PkField="Person:BusinessEntity:BusinessEntityID" FkField="Person:BusinessEntityAddress:BusinessEntityID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Person:BusinessEntityContact:FK_BusinessEntityContact_BusinessEntity_BusinessEntityID">
+              <FieldPairs>
+                <FieldPair PkField="Person:BusinessEntity:BusinessEntityID" FkField="Person:BusinessEntityContact:BusinessEntityID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Person:BusinessEntityContact:FK_BusinessEntityContact_ContactType_ContactTypeID">
+              <FieldPairs>
+                <FieldPair PkField="Person:ContactType:ContactTypeID" FkField="Person:BusinessEntityContact:ContactTypeID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Person:BusinessEntityContact:FK_BusinessEntityContact_Person_PersonID">
+              <FieldPairs>
+                <FieldPair PkField="Person:Person:BusinessEntityID" FkField="Person:BusinessEntityContact:PersonID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Person:EmailAddress:FK_EmailAddress_Person_BusinessEntityID">
+              <FieldPairs>
+                <FieldPair PkField="Person:Person:BusinessEntityID" FkField="Person:EmailAddress:BusinessEntityID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Person:Password:FK_Password_Person_BusinessEntityID">
+              <FieldPairs>
+                <FieldPair PkField="Person:Person:BusinessEntityID" FkField="Person:Password:BusinessEntityID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Person:Person:FK_Person_BusinessEntity_BusinessEntityID">
+              <FieldPairs>
+                <FieldPair PkField="Person:BusinessEntity:BusinessEntityID" FkField="Person:Person:BusinessEntityID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Person:PersonPhone:FK_PersonPhone_Person_BusinessEntityID">
+              <FieldPairs>
+                <FieldPair PkField="Person:Person:BusinessEntityID" FkField="Person:PersonPhone:BusinessEntityID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Person:PersonPhone:FK_PersonPhone_PhoneNumberType_PhoneNumberTypeID">
+              <FieldPairs>
+                <FieldPair PkField="Person:PhoneNumberType:PhoneNumberTypeID" FkField="Person:PersonPhone:PhoneNumberTypeID" />
               </FieldPairs>
             </ForeignKeyConstraint>
             <ForeignKeyConstraint Name="Person:StateProvince:FK_StateProvince_CountryRegion_CountryRegionCode">
@@ -4783,6 +5377,11 @@
                 <FieldPair PkField="Purchasing:Vendor:BusinessEntityID" FkField="Purchasing:PurchaseOrderHeader:VendorID" />
               </FieldPairs>
             </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Purchasing:Vendor:FK_Vendor_BusinessEntity_BusinessEntityID">
+              <FieldPairs>
+                <FieldPair PkField="Person:BusinessEntity:BusinessEntityID" FkField="Purchasing:Vendor:BusinessEntityID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
             <ForeignKeyConstraint Name="Sales:CountryRegionCurrency:FK_CountryRegionCurrency_CountryRegion_CountryRegionCode">
               <FieldPairs>
                 <FieldPair PkField="Person:CountryRegion:CountryRegionCode" FkField="Sales:CountryRegionCurrency:CountryRegionCode" />
@@ -4803,6 +5402,11 @@
                 <FieldPair PkField="Sales:Currency:CurrencyCode" FkField="Sales:CurrencyRate:ToCurrencyCode" />
               </FieldPairs>
             </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Sales:Customer:FK_Customer_Person_PersonID">
+              <FieldPairs>
+                <FieldPair PkField="Person:Person:BusinessEntityID" FkField="Sales:Customer:PersonID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
             <ForeignKeyConstraint Name="Sales:Customer:FK_Customer_SalesTerritory_TerritoryID">
               <FieldPairs>
                 <FieldPair PkField="Sales:SalesTerritory:TerritoryID" FkField="Sales:Customer:TerritoryID" />
@@ -4811,6 +5415,16 @@
             <ForeignKeyConstraint Name="Sales:Customer:FK_Customer_Store_StoreID">
               <FieldPairs>
                 <FieldPair PkField="Sales:Store:BusinessEntityID" FkField="Sales:Customer:StoreID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Sales:PersonCreditCard:FK_PersonCreditCard_CreditCard_CreditCardID">
+              <FieldPairs>
+                <FieldPair PkField="Sales:CreditCard:CreditCardID" FkField="Sales:PersonCreditCard:CreditCardID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Sales:PersonCreditCard:FK_PersonCreditCard_Person_BusinessEntityID">
+              <FieldPairs>
+                <FieldPair PkField="Person:Person:BusinessEntityID" FkField="Sales:PersonCreditCard:BusinessEntityID" />
               </FieldPairs>
             </ForeignKeyConstraint>
             <ForeignKeyConstraint Name="Sales:SalesOrderDetail:FK_SalesOrderDetail_SalesOrderHeader_SalesOrderID" DeleteRuleAction="1">
@@ -4924,6 +5538,11 @@
                 <FieldPair PkField="Sales:SpecialOffer:SpecialOfferID" FkField="Sales:SpecialOfferProduct:SpecialOfferID" />
               </FieldPairs>
             </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="Sales:Store:FK_Store_BusinessEntity_BusinessEntityID">
+              <FieldPairs>
+                <FieldPair PkField="Person:BusinessEntity:BusinessEntityID" FkField="Sales:Store:BusinessEntityID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
             <ForeignKeyConstraint Name="Sales:Store:FK_Store_SalesPerson_SalesPersonID">
               <FieldPairs>
                 <FieldPair PkField="Sales:SalesPerson:BusinessEntityID" FkField="Sales:Store:SalesPersonID" />
@@ -4937,7 +5556,7 @@
   <MappingStores>
     <MappingStore Type="2D18D138-1DD2-467E-86CC-4838250611AE">
       <EntityMappings>
-        <EntityMapping EntityName="HumanResources:Department" TargetName="AdventureWorks2014:HumanResources:Department">
+        <EntityMapping EntityName="HumanResources:Department" TargetName="AdventureWorks2012:HumanResources:Department">
           <FieldMappings>
             <FieldMapping FieldName="DepartmentId" TargetFieldName="DepartmentID" SequenceToUse="SCOPE_IDENTITY()" />
             <FieldMapping FieldName="GroupName" TargetFieldName="GroupName" />
@@ -4945,7 +5564,7 @@
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="HumanResources:Employee" TargetName="AdventureWorks2014:HumanResources:Employee">
+        <EntityMapping EntityName="HumanResources:Employee" TargetName="AdventureWorks2012:HumanResources:Employee">
           <FieldMappings>
             <FieldMapping FieldName="BirthDate" TargetFieldName="BirthDate" />
             <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
@@ -4965,7 +5584,7 @@
             <FieldMapping FieldName="VacationHours" TargetFieldName="VacationHours" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="HumanResources:EmployeeDepartmentHistory" TargetName="AdventureWorks2014:HumanResources:EmployeeDepartmentHistory">
+        <EntityMapping EntityName="HumanResources:EmployeeDepartmentHistory" TargetName="AdventureWorks2012:HumanResources:EmployeeDepartmentHistory">
           <FieldMappings>
             <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
             <FieldMapping FieldName="DepartmentId" TargetFieldName="DepartmentID" />
@@ -4975,7 +5594,7 @@
             <FieldMapping FieldName="StartDate" TargetFieldName="StartDate" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="HumanResources:EmployeePayHistory" TargetName="AdventureWorks2014:HumanResources:EmployeePayHistory">
+        <EntityMapping EntityName="HumanResources:EmployeePayHistory" TargetName="AdventureWorks2012:HumanResources:EmployeePayHistory">
           <FieldMappings>
             <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
@@ -4984,7 +5603,7 @@
             <FieldMapping FieldName="RateChangeDate" TargetFieldName="RateChangeDate" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="HumanResources:JobCandidate" TargetName="AdventureWorks2014:HumanResources:JobCandidate">
+        <EntityMapping EntityName="HumanResources:JobCandidate" TargetName="AdventureWorks2012:HumanResources:JobCandidate">
           <FieldMappings>
             <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
             <FieldMapping FieldName="JobCandidateId" TargetFieldName="JobCandidateID" SequenceToUse="SCOPE_IDENTITY()" />
@@ -4992,7 +5611,7 @@
             <FieldMapping FieldName="Resume" TargetFieldName="Resume" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="HumanResources:Shift" TargetName="AdventureWorks2014:HumanResources:Shift">
+        <EntityMapping EntityName="HumanResources:Shift" TargetName="AdventureWorks2012:HumanResources:Shift">
           <FieldMappings>
             <FieldMapping FieldName="EndTime" TargetFieldName="EndTime" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
@@ -5001,7 +5620,7 @@
             <FieldMapping FieldName="StartTime" TargetFieldName="StartTime" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Person:Address" TargetName="AdventureWorks2014:Person:Address">
+        <EntityMapping EntityName="Person:Address" TargetName="AdventureWorks2012:Person:Address">
           <FieldMappings>
             <FieldMapping FieldName="AddressId" TargetFieldName="AddressID" SequenceToUse="SCOPE_IDENTITY()" />
             <FieldMapping FieldName="AddressLine1" TargetFieldName="AddressLine1" />
@@ -5014,7 +5633,7 @@
             <FieldMapping FieldName="StateProvinceId" TargetFieldName="StateProvinceID" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Person:AddressType" TargetName="AdventureWorks2014:Person:AddressType">
+        <EntityMapping EntityName="Person:AddressType" TargetName="AdventureWorks2012:Person:AddressType">
           <FieldMappings>
             <FieldMapping FieldName="AddressTypeId" TargetFieldName="AddressTypeID" SequenceToUse="SCOPE_IDENTITY()" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
@@ -5022,21 +5641,96 @@
             <FieldMapping FieldName="Rowguid" TargetFieldName="rowguid" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Person:ContactType" TargetName="AdventureWorks2014:Person:ContactType">
+        <EntityMapping EntityName="Person:BusinessEntity" TargetName="AdventureWorks2012:Person:BusinessEntity">
+          <FieldMappings>
+            <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
+            <FieldMapping FieldName="Rowguid" TargetFieldName="rowguid" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName="Person:BusinessEntityAddress" TargetName="AdventureWorks2012:Person:BusinessEntityAddress">
+          <FieldMappings>
+            <FieldMapping FieldName="AddressId" TargetFieldName="AddressID" />
+            <FieldMapping FieldName="AddressTypeId" TargetFieldName="AddressTypeID" />
+            <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
+            <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
+            <FieldMapping FieldName="Rowguid" TargetFieldName="rowguid" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName="Person:BusinessEntityContact" TargetName="AdventureWorks2012:Person:BusinessEntityContact">
+          <FieldMappings>
+            <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
+            <FieldMapping FieldName="ContactTypeId" TargetFieldName="ContactTypeID" />
+            <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
+            <FieldMapping FieldName="PersonId" TargetFieldName="PersonID" />
+            <FieldMapping FieldName="Rowguid" TargetFieldName="rowguid" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName="Person:ContactType" TargetName="AdventureWorks2012:Person:ContactType">
           <FieldMappings>
             <FieldMapping FieldName="ContactTypeId" TargetFieldName="ContactTypeID" SequenceToUse="SCOPE_IDENTITY()" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Person:CountryRegion" TargetName="AdventureWorks2014:Person:CountryRegion">
+        <EntityMapping EntityName="Person:CountryRegion" TargetName="AdventureWorks2012:Person:CountryRegion">
           <FieldMappings>
             <FieldMapping FieldName="CountryRegionCode" TargetFieldName="CountryRegionCode" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Person:StateProvince" TargetName="AdventureWorks2014:Person:StateProvince">
+        <EntityMapping EntityName="Person:EmailAddress" TargetName="AdventureWorks2012:Person:EmailAddress">
+          <FieldMappings>
+            <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
+            <FieldMapping FieldName="EmailAddress" TargetFieldName="EmailAddress" />
+            <FieldMapping FieldName="EmailAddressId" TargetFieldName="EmailAddressID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
+            <FieldMapping FieldName="Rowguid" TargetFieldName="rowguid" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName="Person:Password" TargetName="AdventureWorks2012:Person:Password">
+          <FieldMappings>
+            <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
+            <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
+            <FieldMapping FieldName="PasswordHash" TargetFieldName="PasswordHash" />
+            <FieldMapping FieldName="PasswordSalt" TargetFieldName="PasswordSalt" />
+            <FieldMapping FieldName="Rowguid" TargetFieldName="rowguid" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName="Person:Person" TargetName="AdventureWorks2012:Person:Person">
+          <FieldMappings>
+            <FieldMapping FieldName="AdditionalContactInfo" TargetFieldName="AdditionalContactInfo" />
+            <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
+            <FieldMapping FieldName="Demographics" TargetFieldName="Demographics" />
+            <FieldMapping FieldName="EmailPromotion" TargetFieldName="EmailPromotion" />
+            <FieldMapping FieldName="FirstName" TargetFieldName="FirstName" />
+            <FieldMapping FieldName="LastName" TargetFieldName="LastName" />
+            <FieldMapping FieldName="MiddleName" TargetFieldName="MiddleName" />
+            <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
+            <FieldMapping FieldName="NameStyle" TargetFieldName="NameStyle" />
+            <FieldMapping FieldName="PersonType" TargetFieldName="PersonType" />
+            <FieldMapping FieldName="Rowguid" TargetFieldName="rowguid" />
+            <FieldMapping FieldName="Suffix" TargetFieldName="Suffix" />
+            <FieldMapping FieldName="Title" TargetFieldName="Title" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName="Person:PersonPhone" TargetName="AdventureWorks2012:Person:PersonPhone">
+          <FieldMappings>
+            <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
+            <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
+            <FieldMapping FieldName="PhoneNumber" TargetFieldName="PhoneNumber" />
+            <FieldMapping FieldName="PhoneNumberTypeId" TargetFieldName="PhoneNumberTypeID" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName="Person:PhoneNumberType" TargetName="AdventureWorks2012:Person:PhoneNumberType">
+          <FieldMappings>
+            <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
+            <FieldMapping FieldName="Name" TargetFieldName="Name" />
+            <FieldMapping FieldName="PhoneNumberTypeId" TargetFieldName="PhoneNumberTypeID" SequenceToUse="SCOPE_IDENTITY()" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName="Person:StateProvince" TargetName="AdventureWorks2012:Person:StateProvince">
           <FieldMappings>
             <FieldMapping FieldName="CountryRegionCode" TargetFieldName="CountryRegionCode" />
             <FieldMapping FieldName="IsOnlyStateProvinceFlag" TargetFieldName="IsOnlyStateProvinceFlag" />
@@ -5048,7 +5742,7 @@
             <FieldMapping FieldName="TerritoryId" TargetFieldName="TerritoryID" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:BillOfMaterial" TargetName="AdventureWorks2014:Production:BillOfMaterials">
+        <EntityMapping EntityName="Production:BillOfMaterial" TargetName="AdventureWorks2012:Production:BillOfMaterials">
           <FieldMappings>
             <FieldMapping FieldName="BillOfMaterialsId" TargetFieldName="BillOfMaterialsID" SequenceToUse="SCOPE_IDENTITY()" />
             <FieldMapping FieldName="Bomlevel" TargetFieldName="BOMLevel" />
@@ -5061,14 +5755,14 @@
             <FieldMapping FieldName="UnitMeasureCode" TargetFieldName="UnitMeasureCode" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:Culture" TargetName="AdventureWorks2014:Production:Culture">
+        <EntityMapping EntityName="Production:Culture" TargetName="AdventureWorks2012:Production:Culture">
           <FieldMappings>
             <FieldMapping FieldName="CultureId" TargetFieldName="CultureID" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:Document" TargetName="AdventureWorks2014:Production:Document">
+        <EntityMapping EntityName="Production:Document" TargetName="AdventureWorks2012:Production:Document">
           <FieldMappings>
             <FieldMapping FieldName="ChangeNumber" TargetFieldName="ChangeNumber" />
             <FieldMapping FieldName="Document" TargetFieldName="Document" />
@@ -5086,14 +5780,14 @@
             <FieldMapping FieldName="Title" TargetFieldName="Title" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:Illustration" TargetName="AdventureWorks2014:Production:Illustration">
+        <EntityMapping EntityName="Production:Illustration" TargetName="AdventureWorks2012:Production:Illustration">
           <FieldMappings>
             <FieldMapping FieldName="Diagram" TargetFieldName="Diagram" />
             <FieldMapping FieldName="IllustrationId" TargetFieldName="IllustrationID" SequenceToUse="SCOPE_IDENTITY()" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:Location" TargetName="AdventureWorks2014:Production:Location">
+        <EntityMapping EntityName="Production:Location" TargetName="AdventureWorks2012:Production:Location">
           <FieldMappings>
             <FieldMapping FieldName="Availability" TargetFieldName="Availability" />
             <FieldMapping FieldName="CostRate" TargetFieldName="CostRate" />
@@ -5102,7 +5796,7 @@
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:Product" TargetName="AdventureWorks2014:Production:Product">
+        <EntityMapping EntityName="Production:Product" TargetName="AdventureWorks2012:Production:Product">
           <FieldMappings>
             <FieldMapping FieldName="Class" TargetFieldName="Class" />
             <FieldMapping FieldName="Color" TargetFieldName="Color" />
@@ -5131,7 +5825,7 @@
             <FieldMapping FieldName="WeightUnitMeasureCode" TargetFieldName="WeightUnitMeasureCode" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ProductCategory" TargetName="AdventureWorks2014:Production:ProductCategory">
+        <EntityMapping EntityName="Production:ProductCategory" TargetName="AdventureWorks2012:Production:ProductCategory">
           <FieldMappings>
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
@@ -5139,7 +5833,7 @@
             <FieldMapping FieldName="Rowguid" TargetFieldName="rowguid" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ProductCostHistory" TargetName="AdventureWorks2014:Production:ProductCostHistory">
+        <EntityMapping EntityName="Production:ProductCostHistory" TargetName="AdventureWorks2012:Production:ProductCostHistory">
           <FieldMappings>
             <FieldMapping FieldName="EndDate" TargetFieldName="EndDate" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
@@ -5148,7 +5842,7 @@
             <FieldMapping FieldName="StartDate" TargetFieldName="StartDate" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ProductDescription" TargetName="AdventureWorks2014:Production:ProductDescription">
+        <EntityMapping EntityName="Production:ProductDescription" TargetName="AdventureWorks2012:Production:ProductDescription">
           <FieldMappings>
             <FieldMapping FieldName="Description" TargetFieldName="Description" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
@@ -5156,14 +5850,14 @@
             <FieldMapping FieldName="Rowguid" TargetFieldName="rowguid" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ProductDocument" TargetName="AdventureWorks2014:Production:ProductDocument">
+        <EntityMapping EntityName="Production:ProductDocument" TargetName="AdventureWorks2012:Production:ProductDocument">
           <FieldMappings>
             <FieldMapping FieldName="DocumentNode" TargetFieldName="DocumentNode" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="ProductId" TargetFieldName="ProductID" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ProductInventory" TargetName="AdventureWorks2014:Production:ProductInventory">
+        <EntityMapping EntityName="Production:ProductInventory" TargetName="AdventureWorks2012:Production:ProductInventory">
           <FieldMappings>
             <FieldMapping FieldName="Bin" TargetFieldName="Bin" />
             <FieldMapping FieldName="LocationId" TargetFieldName="LocationID" />
@@ -5174,7 +5868,7 @@
             <FieldMapping FieldName="Shelf" TargetFieldName="Shelf" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ProductListPriceHistory" TargetName="AdventureWorks2014:Production:ProductListPriceHistory">
+        <EntityMapping EntityName="Production:ProductListPriceHistory" TargetName="AdventureWorks2012:Production:ProductListPriceHistory">
           <FieldMappings>
             <FieldMapping FieldName="EndDate" TargetFieldName="EndDate" />
             <FieldMapping FieldName="ListPrice" TargetFieldName="ListPrice" />
@@ -5183,7 +5877,7 @@
             <FieldMapping FieldName="StartDate" TargetFieldName="StartDate" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ProductModel" TargetName="AdventureWorks2014:Production:ProductModel">
+        <EntityMapping EntityName="Production:ProductModel" TargetName="AdventureWorks2012:Production:ProductModel">
           <FieldMappings>
             <FieldMapping FieldName="CatalogDescription" TargetFieldName="CatalogDescription" />
             <FieldMapping FieldName="Instructions" TargetFieldName="Instructions" />
@@ -5193,14 +5887,14 @@
             <FieldMapping FieldName="Rowguid" TargetFieldName="rowguid" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ProductModelIllustration" TargetName="AdventureWorks2014:Production:ProductModelIllustration">
+        <EntityMapping EntityName="Production:ProductModelIllustration" TargetName="AdventureWorks2012:Production:ProductModelIllustration">
           <FieldMappings>
             <FieldMapping FieldName="IllustrationId" TargetFieldName="IllustrationID" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="ProductModelId" TargetFieldName="ProductModelID" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ProductModelProductDescriptionCulture" TargetName="AdventureWorks2014:Production:ProductModelProductDescriptionCulture">
+        <EntityMapping EntityName="Production:ProductModelProductDescriptionCulture" TargetName="AdventureWorks2012:Production:ProductModelProductDescriptionCulture">
           <FieldMappings>
             <FieldMapping FieldName="CultureId" TargetFieldName="CultureID" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
@@ -5208,7 +5902,7 @@
             <FieldMapping FieldName="ProductModelId" TargetFieldName="ProductModelID" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ProductPhoto" TargetName="AdventureWorks2014:Production:ProductPhoto">
+        <EntityMapping EntityName="Production:ProductPhoto" TargetName="AdventureWorks2012:Production:ProductPhoto">
           <FieldMappings>
             <FieldMapping FieldName="LargePhoto" TargetFieldName="LargePhoto" />
             <FieldMapping FieldName="LargePhotoFileName" TargetFieldName="LargePhotoFileName" />
@@ -5218,7 +5912,7 @@
             <FieldMapping FieldName="ThumbnailPhotoFileName" TargetFieldName="ThumbnailPhotoFileName" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ProductProductPhoto" TargetName="AdventureWorks2014:Production:ProductProductPhoto">
+        <EntityMapping EntityName="Production:ProductProductPhoto" TargetName="AdventureWorks2012:Production:ProductProductPhoto">
           <FieldMappings>
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="Primary" TargetFieldName="Primary" />
@@ -5226,7 +5920,7 @@
             <FieldMapping FieldName="ProductPhotoId" TargetFieldName="ProductPhotoID" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ProductReview" TargetName="AdventureWorks2014:Production:ProductReview">
+        <EntityMapping EntityName="Production:ProductReview" TargetName="AdventureWorks2012:Production:ProductReview">
           <FieldMappings>
             <FieldMapping FieldName="Comments" TargetFieldName="Comments" />
             <FieldMapping FieldName="EmailAddress" TargetFieldName="EmailAddress" />
@@ -5238,7 +5932,7 @@
             <FieldMapping FieldName="ReviewerName" TargetFieldName="ReviewerName" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ProductSubcategory" TargetName="AdventureWorks2014:Production:ProductSubcategory">
+        <EntityMapping EntityName="Production:ProductSubcategory" TargetName="AdventureWorks2012:Production:ProductSubcategory">
           <FieldMappings>
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
@@ -5247,14 +5941,14 @@
             <FieldMapping FieldName="Rowguid" TargetFieldName="rowguid" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:ScrapReason" TargetName="AdventureWorks2014:Production:ScrapReason">
+        <EntityMapping EntityName="Production:ScrapReason" TargetName="AdventureWorks2012:Production:ScrapReason">
           <FieldMappings>
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
             <FieldMapping FieldName="ScrapReasonId" TargetFieldName="ScrapReasonID" SequenceToUse="SCOPE_IDENTITY()" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:TransactionHistory" TargetName="AdventureWorks2014:Production:TransactionHistory">
+        <EntityMapping EntityName="Production:TransactionHistory" TargetName="AdventureWorks2012:Production:TransactionHistory">
           <FieldMappings>
             <FieldMapping FieldName="ActualCost" TargetFieldName="ActualCost" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
@@ -5267,7 +5961,7 @@
             <FieldMapping FieldName="TransactionType" TargetFieldName="TransactionType" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:TransactionHistoryArchive" TargetName="AdventureWorks2014:Production:TransactionHistoryArchive">
+        <EntityMapping EntityName="Production:TransactionHistoryArchive" TargetName="AdventureWorks2012:Production:TransactionHistoryArchive">
           <FieldMappings>
             <FieldMapping FieldName="ActualCost" TargetFieldName="ActualCost" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
@@ -5280,14 +5974,14 @@
             <FieldMapping FieldName="TransactionType" TargetFieldName="TransactionType" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:UnitMeasure" TargetName="AdventureWorks2014:Production:UnitMeasure">
+        <EntityMapping EntityName="Production:UnitMeasure" TargetName="AdventureWorks2012:Production:UnitMeasure">
           <FieldMappings>
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
             <FieldMapping FieldName="UnitMeasureCode" TargetFieldName="UnitMeasureCode" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:WorkOrder" TargetName="AdventureWorks2014:Production:WorkOrder">
+        <EntityMapping EntityName="Production:WorkOrder" TargetName="AdventureWorks2012:Production:WorkOrder">
           <FieldMappings>
             <FieldMapping FieldName="DueDate" TargetFieldName="DueDate" />
             <FieldMapping FieldName="EndDate" TargetFieldName="EndDate" />
@@ -5301,7 +5995,7 @@
             <FieldMapping FieldName="WorkOrderId" TargetFieldName="WorkOrderID" SequenceToUse="SCOPE_IDENTITY()" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Production:WorkOrderRouting" TargetName="AdventureWorks2014:Production:WorkOrderRouting">
+        <EntityMapping EntityName="Production:WorkOrderRouting" TargetName="AdventureWorks2012:Production:WorkOrderRouting">
           <FieldMappings>
             <FieldMapping FieldName="ActualCost" TargetFieldName="ActualCost" />
             <FieldMapping FieldName="ActualEndDate" TargetFieldName="ActualEndDate" />
@@ -5317,7 +6011,7 @@
             <FieldMapping FieldName="WorkOrderId" TargetFieldName="WorkOrderID" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Purchasing:ProductVendor" TargetName="AdventureWorks2014:Purchasing:ProductVendor">
+        <EntityMapping EntityName="Purchasing:ProductVendor" TargetName="AdventureWorks2012:Purchasing:ProductVendor">
           <FieldMappings>
             <FieldMapping FieldName="AverageLeadTime" TargetFieldName="AverageLeadTime" />
             <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
@@ -5332,7 +6026,7 @@
             <FieldMapping FieldName="UnitMeasureCode" TargetFieldName="UnitMeasureCode" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Purchasing:PurchaseOrderDetail" TargetName="AdventureWorks2014:Purchasing:PurchaseOrderDetail">
+        <EntityMapping EntityName="Purchasing:PurchaseOrderDetail" TargetName="AdventureWorks2012:Purchasing:PurchaseOrderDetail">
           <FieldMappings>
             <FieldMapping FieldName="DueDate" TargetFieldName="DueDate" />
             <FieldMapping FieldName="LineTotal" TargetFieldName="LineTotal" />
@@ -5347,7 +6041,7 @@
             <FieldMapping FieldName="UnitPrice" TargetFieldName="UnitPrice" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Purchasing:PurchaseOrderHeader" TargetName="AdventureWorks2014:Purchasing:PurchaseOrderHeader">
+        <EntityMapping EntityName="Purchasing:PurchaseOrderHeader" TargetName="AdventureWorks2012:Purchasing:PurchaseOrderHeader">
           <FieldMappings>
             <FieldMapping FieldName="EmployeeId" TargetFieldName="EmployeeID" />
             <FieldMapping FieldName="Freight" TargetFieldName="Freight" />
@@ -5364,7 +6058,7 @@
             <FieldMapping FieldName="VendorId" TargetFieldName="VendorID" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Purchasing:ShipMethod" TargetName="AdventureWorks2014:Purchasing:ShipMethod">
+        <EntityMapping EntityName="Purchasing:ShipMethod" TargetName="AdventureWorks2012:Purchasing:ShipMethod">
           <FieldMappings>
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
@@ -5374,7 +6068,7 @@
             <FieldMapping FieldName="ShipRate" TargetFieldName="ShipRate" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Purchasing:Vendor" TargetName="AdventureWorks2014:Purchasing:Vendor">
+        <EntityMapping EntityName="Purchasing:Vendor" TargetName="AdventureWorks2012:Purchasing:Vendor">
           <FieldMappings>
             <FieldMapping FieldName="AccountNumber" TargetFieldName="AccountNumber" />
             <FieldMapping FieldName="ActiveFlag" TargetFieldName="ActiveFlag" />
@@ -5386,14 +6080,14 @@
             <FieldMapping FieldName="PurchasingWebServiceUrl" TargetFieldName="PurchasingWebServiceURL" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:CountryRegionCurrency" TargetName="AdventureWorks2014:Sales:CountryRegionCurrency">
+        <EntityMapping EntityName="Sales:CountryRegionCurrency" TargetName="AdventureWorks2012:Sales:CountryRegionCurrency">
           <FieldMappings>
             <FieldMapping FieldName="CountryRegionCode" TargetFieldName="CountryRegionCode" />
             <FieldMapping FieldName="CurrencyCode" TargetFieldName="CurrencyCode" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:CreditCard" TargetName="AdventureWorks2014:Sales:CreditCard">
+        <EntityMapping EntityName="Sales:CreditCard" TargetName="AdventureWorks2012:Sales:CreditCard">
           <FieldMappings>
             <FieldMapping FieldName="CardNumber" TargetFieldName="CardNumber" />
             <FieldMapping FieldName="CardType" TargetFieldName="CardType" />
@@ -5403,14 +6097,14 @@
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:Currency" TargetName="AdventureWorks2014:Sales:Currency">
+        <EntityMapping EntityName="Sales:Currency" TargetName="AdventureWorks2012:Sales:Currency">
           <FieldMappings>
             <FieldMapping FieldName="CurrencyCode" TargetFieldName="CurrencyCode" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:CurrencyRate" TargetName="AdventureWorks2014:Sales:CurrencyRate">
+        <EntityMapping EntityName="Sales:CurrencyRate" TargetName="AdventureWorks2012:Sales:CurrencyRate">
           <FieldMappings>
             <FieldMapping FieldName="AverageRate" TargetFieldName="AverageRate" />
             <FieldMapping FieldName="CurrencyRateDate" TargetFieldName="CurrencyRateDate" />
@@ -5421,7 +6115,7 @@
             <FieldMapping FieldName="ToCurrencyCode" TargetFieldName="ToCurrencyCode" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:Customer" TargetName="AdventureWorks2014:Sales:Customer">
+        <EntityMapping EntityName="Sales:Customer" TargetName="AdventureWorks2012:Sales:Customer">
           <FieldMappings>
             <FieldMapping FieldName="AccountNumber" TargetFieldName="AccountNumber" />
             <FieldMapping FieldName="CustomerId" TargetFieldName="CustomerID" SequenceToUse="SCOPE_IDENTITY()" />
@@ -5432,7 +6126,14 @@
             <FieldMapping FieldName="TerritoryId" TargetFieldName="TerritoryID" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:SalesOrderDetail" TargetName="AdventureWorks2014:Sales:SalesOrderDetail">
+        <EntityMapping EntityName="Sales:PersonCreditCard" TargetName="AdventureWorks2012:Sales:PersonCreditCard">
+          <FieldMappings>
+            <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
+            <FieldMapping FieldName="CreditCardId" TargetFieldName="CreditCardID" />
+            <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName="Sales:SalesOrderDetail" TargetName="AdventureWorks2012:Sales:SalesOrderDetail">
           <FieldMappings>
             <FieldMapping FieldName="CarrierTrackingNumber" TargetFieldName="CarrierTrackingNumber" />
             <FieldMapping FieldName="LineTotal" TargetFieldName="LineTotal" />
@@ -5447,7 +6148,7 @@
             <FieldMapping FieldName="UnitPriceDiscount" TargetFieldName="UnitPriceDiscount" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:SalesOrderHeader" TargetName="AdventureWorks2014:Sales:SalesOrderHeader">
+        <EntityMapping EntityName="Sales:SalesOrderHeader" TargetName="AdventureWorks2012:Sales:SalesOrderHeader">
           <FieldMappings>
             <FieldMapping FieldName="AccountNumber" TargetFieldName="AccountNumber" />
             <FieldMapping FieldName="BillToAddressId" TargetFieldName="BillToAddressID" />
@@ -5477,14 +6178,14 @@
             <FieldMapping FieldName="TotalDue" TargetFieldName="TotalDue" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:SalesOrderHeaderSalesReason" TargetName="AdventureWorks2014:Sales:SalesOrderHeaderSalesReason">
+        <EntityMapping EntityName="Sales:SalesOrderHeaderSalesReason" TargetName="AdventureWorks2012:Sales:SalesOrderHeaderSalesReason">
           <FieldMappings>
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="SalesOrderId" TargetFieldName="SalesOrderID" />
             <FieldMapping FieldName="SalesReasonId" TargetFieldName="SalesReasonID" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:SalesPerson" TargetName="AdventureWorks2014:Sales:SalesPerson">
+        <EntityMapping EntityName="Sales:SalesPerson" TargetName="AdventureWorks2012:Sales:SalesPerson">
           <FieldMappings>
             <FieldMapping FieldName="Bonus" TargetFieldName="Bonus" />
             <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
@@ -5497,7 +6198,7 @@
             <FieldMapping FieldName="TerritoryId" TargetFieldName="TerritoryID" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:SalesPersonQuotaHistory" TargetName="AdventureWorks2014:Sales:SalesPersonQuotaHistory">
+        <EntityMapping EntityName="Sales:SalesPersonQuotaHistory" TargetName="AdventureWorks2012:Sales:SalesPersonQuotaHistory">
           <FieldMappings>
             <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
@@ -5506,7 +6207,7 @@
             <FieldMapping FieldName="SalesQuota" TargetFieldName="SalesQuota" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:SalesReason" TargetName="AdventureWorks2014:Sales:SalesReason">
+        <EntityMapping EntityName="Sales:SalesReason" TargetName="AdventureWorks2012:Sales:SalesReason">
           <FieldMappings>
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
@@ -5514,7 +6215,7 @@
             <FieldMapping FieldName="SalesReasonId" TargetFieldName="SalesReasonID" SequenceToUse="SCOPE_IDENTITY()" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:SalesTaxRate" TargetName="AdventureWorks2014:Sales:SalesTaxRate">
+        <EntityMapping EntityName="Sales:SalesTaxRate" TargetName="AdventureWorks2012:Sales:SalesTaxRate">
           <FieldMappings>
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
@@ -5525,7 +6226,7 @@
             <FieldMapping FieldName="TaxType" TargetFieldName="TaxType" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:SalesTerritory" TargetName="AdventureWorks2014:Sales:SalesTerritory">
+        <EntityMapping EntityName="Sales:SalesTerritory" TargetName="AdventureWorks2012:Sales:SalesTerritory">
           <FieldMappings>
             <FieldMapping FieldName="CostLastYear" TargetFieldName="CostLastYear" />
             <FieldMapping FieldName="CostYtd" TargetFieldName="CostYTD" />
@@ -5539,7 +6240,7 @@
             <FieldMapping FieldName="TerritoryId" TargetFieldName="TerritoryID" SequenceToUse="SCOPE_IDENTITY()" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:SalesTerritoryHistory" TargetName="AdventureWorks2014:Sales:SalesTerritoryHistory">
+        <EntityMapping EntityName="Sales:SalesTerritoryHistory" TargetName="AdventureWorks2012:Sales:SalesTerritoryHistory">
           <FieldMappings>
             <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
             <FieldMapping FieldName="EndDate" TargetFieldName="EndDate" />
@@ -5549,7 +6250,7 @@
             <FieldMapping FieldName="TerritoryId" TargetFieldName="TerritoryID" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:ShoppingCartItem" TargetName="AdventureWorks2014:Sales:ShoppingCartItem">
+        <EntityMapping EntityName="Sales:ShoppingCartItem" TargetName="AdventureWorks2012:Sales:ShoppingCartItem">
           <FieldMappings>
             <FieldMapping FieldName="DateCreated" TargetFieldName="DateCreated" />
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
@@ -5559,7 +6260,7 @@
             <FieldMapping FieldName="ShoppingCartItemId" TargetFieldName="ShoppingCartItemID" SequenceToUse="SCOPE_IDENTITY()" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:SpecialOffer" TargetName="AdventureWorks2014:Sales:SpecialOffer">
+        <EntityMapping EntityName="Sales:SpecialOffer" TargetName="AdventureWorks2012:Sales:SpecialOffer">
           <FieldMappings>
             <FieldMapping FieldName="Category" TargetFieldName="Category" />
             <FieldMapping FieldName="Description" TargetFieldName="Description" />
@@ -5574,7 +6275,7 @@
             <FieldMapping FieldName="Type" TargetFieldName="Type" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:SpecialOfferProduct" TargetName="AdventureWorks2014:Sales:SpecialOfferProduct">
+        <EntityMapping EntityName="Sales:SpecialOfferProduct" TargetName="AdventureWorks2012:Sales:SpecialOfferProduct">
           <FieldMappings>
             <FieldMapping FieldName="ModifiedDate" TargetFieldName="ModifiedDate" />
             <FieldMapping FieldName="ProductId" TargetFieldName="ProductID" />
@@ -5582,7 +6283,7 @@
             <FieldMapping FieldName="SpecialOfferId" TargetFieldName="SpecialOfferID" />
           </FieldMappings>
         </EntityMapping>
-        <EntityMapping EntityName="Sales:Store" TargetName="AdventureWorks2014:Sales:Store">
+        <EntityMapping EntityName="Sales:Store" TargetName="AdventureWorks2012:Sales:Store">
           <FieldMappings>
             <FieldMapping FieldName="BusinessEntityId" TargetFieldName="BusinessEntityID" />
             <FieldMapping FieldName="Demographics" TargetFieldName="Demographics" />
@@ -5595,7 +6296,7 @@
       </EntityMappings>
       <TypedViewMappings />
       <SPCallMappings>
-        <SPCallMapping SPCallName=":GetBillOfMaterials" TargetName="AdventureWorks2014:dbo:uspGetBillOfMaterials">
+        <SPCallMapping SPCallName=":GetBillOfMaterials" TargetName="AdventureWorks2012:dbo:uspGetBillOfMaterials">
           <FieldMappings>
             <FieldMapping FieldName="CheckDate" TargetFieldName="@CheckDate" />
             <FieldMapping FieldName="StartProductId" TargetFieldName="@StartProductID" />

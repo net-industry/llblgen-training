@@ -25,13 +25,11 @@ namespace AdventureWorks.Dal.EntityClasses
 {
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
-	
 	/// <summary>Entity class which represents the entity 'Customer'.<br/><br/></summary>
 	[Serializable]
 	public partial class CustomerEntity : CommonEntityBase
 		// __LLBLGENPRO_USER_CODE_REGION_START AdditionalInterfaces
-		// __LLBLGENPRO_USER_CODE_REGION_END
-			
+		// __LLBLGENPRO_USER_CODE_REGION_END	
 	{
 		#region Class Member Declarations
 		private EntityCollection<SalesOrderHeaderEntity> _salesOrderHeaders;
@@ -42,12 +40,12 @@ namespace AdventureWorks.Dal.EntityClasses
 		private EntityCollection<CurrencyRateEntity> _currencyRateCollectionViaSalesOrderHeader;
 		private EntityCollection<SalesPersonEntity> _salesPersonCollectionViaSalesOrderHeader;
 		private EntityCollection<SalesTerritoryEntity> _salesTerritoryCollectionViaSalesOrderHeader;
+		private PersonEntity _person;
 		private SalesTerritoryEntity _salesTerritory;
 		private StoreEntity _store;
 
 		// __LLBLGENPRO_USER_CODE_REGION_START PrivateMembers
 		// __LLBLGENPRO_USER_CODE_REGION_END
-		
 		#endregion
 
 		#region Statics
@@ -57,6 +55,8 @@ namespace AdventureWorks.Dal.EntityClasses
 		/// <summary>All names of fields mapped onto a relation. Usable for in-memory filtering</summary>
 		public static partial class MemberNames
 		{
+			/// <summary>Member name Person</summary>
+			public static readonly string Person = "Person";
 			/// <summary>Member name SalesTerritory</summary>
 			public static readonly string SalesTerritory = "SalesTerritory";
 			/// <summary>Member name Store</summary>
@@ -142,6 +142,11 @@ namespace AdventureWorks.Dal.EntityClasses
 				_currencyRateCollectionViaSalesOrderHeader = (EntityCollection<CurrencyRateEntity>)info.GetValue("_currencyRateCollectionViaSalesOrderHeader", typeof(EntityCollection<CurrencyRateEntity>));
 				_salesPersonCollectionViaSalesOrderHeader = (EntityCollection<SalesPersonEntity>)info.GetValue("_salesPersonCollectionViaSalesOrderHeader", typeof(EntityCollection<SalesPersonEntity>));
 				_salesTerritoryCollectionViaSalesOrderHeader = (EntityCollection<SalesTerritoryEntity>)info.GetValue("_salesTerritoryCollectionViaSalesOrderHeader", typeof(EntityCollection<SalesTerritoryEntity>));
+				_person = (PersonEntity)info.GetValue("_person", typeof(PersonEntity));
+				if(_person!=null)
+				{
+					_person.AfterSave+=new EventHandler(OnEntityAfterSave);
+				}
 				_salesTerritory = (SalesTerritoryEntity)info.GetValue("_salesTerritory", typeof(SalesTerritoryEntity));
 				if(_salesTerritory!=null)
 				{
@@ -156,7 +161,6 @@ namespace AdventureWorks.Dal.EntityClasses
 			}
 			// __LLBLGENPRO_USER_CODE_REGION_START DeserializationConstructor
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 		}
 
 		
@@ -166,6 +170,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			switch((CustomerFieldIndex)fieldIndex)
 			{
+				case CustomerFieldIndex.PersonId:
+					DesetupSyncPerson(true, false);
+					break;
 				case CustomerFieldIndex.StoreId:
 					DesetupSyncStore(true, false);
 					break;
@@ -186,6 +193,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			switch(propertyName)
 			{
+				case "Person":
+					this.Person = (PersonEntity)entity;
+					break;
 				case "SalesTerritory":
 					this.SalesTerritory = (SalesTerritoryEntity)entity;
 					break;
@@ -252,6 +262,9 @@ namespace AdventureWorks.Dal.EntityClasses
 			RelationCollection toReturn = new RelationCollection();
 			switch(fieldName)
 			{
+				case "Person":
+					toReturn.Add(Relations.PersonEntityUsingPersonId);
+					break;
 				case "SalesTerritory":
 					toReturn.Add(Relations.SalesTerritoryEntityUsingTerritoryId);
 					break;
@@ -317,6 +330,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			switch(fieldName)
 			{
+				case "Person":
+					SetupSyncPerson(relatedEntity);
+					break;
 				case "SalesTerritory":
 					SetupSyncSalesTerritory(relatedEntity);
 					break;
@@ -339,6 +355,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			switch(fieldName)
 			{
+				case "Person":
+					DesetupSyncPerson(false, true);
+					break;
 				case "SalesTerritory":
 					DesetupSyncSalesTerritory(false, true);
 					break;
@@ -367,6 +386,10 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override List<IEntity2> GetDependentRelatedEntities()
 		{
 			List<IEntity2> toReturn = new List<IEntity2>();
+			if(_person!=null)
+			{
+				toReturn.Add(_person);
+			}
 			if(_salesTerritory!=null)
 			{
 				toReturn.Add(_salesTerritory);
@@ -403,12 +426,12 @@ namespace AdventureWorks.Dal.EntityClasses
 				info.AddValue("_currencyRateCollectionViaSalesOrderHeader", ((_currencyRateCollectionViaSalesOrderHeader!=null) && (_currencyRateCollectionViaSalesOrderHeader.Count>0) && !this.MarkedForDeletion)?_currencyRateCollectionViaSalesOrderHeader:null);
 				info.AddValue("_salesPersonCollectionViaSalesOrderHeader", ((_salesPersonCollectionViaSalesOrderHeader!=null) && (_salesPersonCollectionViaSalesOrderHeader.Count>0) && !this.MarkedForDeletion)?_salesPersonCollectionViaSalesOrderHeader:null);
 				info.AddValue("_salesTerritoryCollectionViaSalesOrderHeader", ((_salesTerritoryCollectionViaSalesOrderHeader!=null) && (_salesTerritoryCollectionViaSalesOrderHeader.Count>0) && !this.MarkedForDeletion)?_salesTerritoryCollectionViaSalesOrderHeader:null);
+				info.AddValue("_person", (!this.MarkedForDeletion?_person:null));
 				info.AddValue("_salesTerritory", (!this.MarkedForDeletion?_salesTerritory:null));
 				info.AddValue("_store", (!this.MarkedForDeletion?_store:null));
 			}
 			// __LLBLGENPRO_USER_CODE_REGION_START GetObjectInfo
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 			base.GetObjectData(info, context);
 		}
 
@@ -497,6 +520,15 @@ namespace AdventureWorks.Dal.EntityClasses
 			IRelationPredicateBucket bucket = new RelationPredicateBucket();
 			bucket.Relations.AddRange(GetRelationsForFieldOfType("SalesTerritoryCollectionViaSalesOrderHeader"));
 			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(CustomerFields.CustomerId, null, ComparisonOperator.Equal, this.CustomerId, "CustomerEntity__"));
+			return bucket;
+		}
+
+		/// <summary> Creates a new IRelationPredicateBucket object which contains the predicate expression and relation collection to fetch the related entity of type 'Person' to this entity.</summary>
+		/// <returns></returns>
+		public virtual IRelationPredicateBucket GetRelationInfoPerson()
+		{
+			IRelationPredicateBucket bucket = new RelationPredicateBucket();
+			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(PersonFields.BusinessEntityId, null, ComparisonOperator.Equal, this.PersonId));
 			return bucket;
 		}
 
@@ -593,6 +625,7 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override Dictionary<string, object> GetRelatedData()
 		{
 			Dictionary<string, object> toReturn = new Dictionary<string, object>();
+			toReturn.Add("Person", _person);
 			toReturn.Add("SalesTerritory", _salesTerritory);
 			toReturn.Add("Store", _store);
 			toReturn.Add("SalesOrderHeaders", _salesOrderHeaders);
@@ -613,7 +646,6 @@ namespace AdventureWorks.Dal.EntityClasses
 			
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassMembers
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 			OnInitClassMembersComplete();
 		}
 
@@ -641,6 +673,39 @@ namespace AdventureWorks.Dal.EntityClasses
 			_fieldsCustomProperties.Add("TerritoryId", fieldHashtable);
 		}
 		#endregion
+
+		/// <summary> Removes the sync logic for member _person</summary>
+		/// <param name="signalRelatedEntity">If set to true, it will call the related entity's UnsetRelatedEntity method</param>
+		/// <param name="resetFKFields">if set to true it will also reset the FK fields pointing to the related entity</param>
+		private void DesetupSyncPerson(bool signalRelatedEntity, bool resetFKFields)
+		{
+			this.PerformDesetupSyncRelatedEntity( _person, new PropertyChangedEventHandler( OnPersonPropertyChanged ), "Person", AdventureWorks.Dal.RelationClasses.StaticCustomerRelations.PersonEntityUsingPersonIdStatic, true, signalRelatedEntity, "Customers", resetFKFields, new int[] { (int)CustomerFieldIndex.PersonId } );
+			_person = null;
+		}
+
+		/// <summary> setups the sync logic for member _person</summary>
+		/// <param name="relatedEntity">Instance to set as the related entity of type entityType</param>
+		private void SetupSyncPerson(IEntityCore relatedEntity)
+		{
+			if(_person!=relatedEntity)
+			{
+				DesetupSyncPerson(true, true);
+				_person = (PersonEntity)relatedEntity;
+				this.PerformSetupSyncRelatedEntity( _person, new PropertyChangedEventHandler( OnPersonPropertyChanged ), "Person", AdventureWorks.Dal.RelationClasses.StaticCustomerRelations.PersonEntityUsingPersonIdStatic, true, new string[] {  } );
+			}
+		}
+		
+		/// <summary>Handles property change events of properties in a related entity.</summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OnPersonPropertyChanged( object sender, PropertyChangedEventArgs e )
+		{
+			switch( e.PropertyName )
+			{
+				default:
+					break;
+			}
+		}
 
 		/// <summary> Removes the sync logic for member _salesTerritory</summary>
 		/// <param name="signalRelatedEntity">If set to true, it will call the related entity's UnsetRelatedEntity method</param>
@@ -720,7 +785,6 @@ namespace AdventureWorks.Dal.EntityClasses
 
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassEmpty
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 
 			OnInitialized();
 
@@ -836,6 +900,13 @@ namespace AdventureWorks.Dal.EntityClasses
 				return new PrefetchPathElement2(new EntityCollection<SalesTerritoryEntity>(EntityFactoryCache2.GetEntityFactory(typeof(SalesTerritoryEntityFactory))), intermediateRelation,
 					(int)AdventureWorks.Dal.EntityType.CustomerEntity, (int)AdventureWorks.Dal.EntityType.SalesTerritoryEntity, 0, null, null, GetRelationsForField("SalesTerritoryCollectionViaSalesOrderHeader"), null, "SalesTerritoryCollectionViaSalesOrderHeader", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.ManyToMany);
 			}
+		}
+
+		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'Person' for this entity.</summary>
+		/// <returns>Ready to use IPrefetchPathElement2 implementation.</returns>
+		public static IPrefetchPathElement2 PrefetchPathPerson
+		{
+			get	{ return new PrefetchPathElement2(new EntityCollection(EntityFactoryCache2.GetEntityFactory(typeof(PersonEntityFactory))),	(IEntityRelation)GetRelationsForField("Person")[0], (int)AdventureWorks.Dal.EntityType.CustomerEntity, (int)AdventureWorks.Dal.EntityType.PersonEntity, 0, null, null, null, null, "Person", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.ManyToOne); }
 		}
 
 		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'SalesTerritory' for this entity.</summary>
@@ -1002,6 +1073,24 @@ namespace AdventureWorks.Dal.EntityClasses
 			get { return GetOrCreateEntityCollection<SalesTerritoryEntity, SalesTerritoryEntityFactory>("CustomerCollectionViaSalesOrderHeader", false, true, ref _salesTerritoryCollectionViaSalesOrderHeader);	}
 		}
 
+		/// <summary> Gets / sets related entity of type 'PersonEntity' which has to be set using a fetch action earlier. If no related entity is set for this property, null is returned..<br/><br/></summary>
+		[Browsable(false)]
+		public virtual PersonEntity Person
+		{
+			get	{ return _person; }
+			set
+			{
+				if(this.IsDeserializing)
+				{
+					SetupSyncPerson(value);
+				}
+				else
+				{
+					SetSingleRelatedEntityNavigator(value, "Customers", "Person", _person, true); 
+				}
+			}
+		}
+
 		/// <summary> Gets / sets related entity of type 'SalesTerritoryEntity' which has to be set using a fetch action earlier. If no related entity is set for this property, null is returned..<br/><br/></summary>
 		[Browsable(false)]
 		public virtual SalesTerritoryEntity SalesTerritory
@@ -1064,7 +1153,6 @@ namespace AdventureWorks.Dal.EntityClasses
 		
 		// __LLBLGENPRO_USER_CODE_REGION_START CustomEntityCode
 		// __LLBLGENPRO_USER_CODE_REGION_END
-		
 		#endregion
 
 		#region Included code

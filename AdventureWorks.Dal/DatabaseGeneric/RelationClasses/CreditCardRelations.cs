@@ -30,11 +30,27 @@ namespace AdventureWorks.Dal.RelationClasses
 		public virtual List<IEntityRelation> GetAllRelations()
 		{
 			List<IEntityRelation> toReturn = new List<IEntityRelation>();
+			toReturn.Add(this.PersonCreditCardEntityUsingCreditCardId);
 			toReturn.Add(this.SalesOrderHeaderEntityUsingCreditCardId);
 			return toReturn;
 		}
 
 		#region Class Property Declarations
+
+		/// <summary>Returns a new IEntityRelation object, between CreditCardEntity and PersonCreditCardEntity over the 1:n relation they have, using the relation between the fields:
+		/// CreditCard.CreditCardId - PersonCreditCard.CreditCardId
+		/// </summary>
+		public virtual IEntityRelation PersonCreditCardEntityUsingCreditCardId
+		{
+			get
+			{
+				IEntityRelation relation = new EntityRelation(SD.LLBLGen.Pro.ORMSupportClasses.RelationType.OneToMany, "PersonCreditCards" , true);
+				relation.AddEntityFieldPair(CreditCardFields.CreditCardId, PersonCreditCardFields.CreditCardId);
+				relation.InheritanceInfoPkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("CreditCardEntity", true);
+				relation.InheritanceInfoFkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("PersonCreditCardEntity", false);
+				return relation;
+			}
+		}
 
 		/// <summary>Returns a new IEntityRelation object, between CreditCardEntity and SalesOrderHeaderEntity over the 1:n relation they have, using the relation between the fields:
 		/// CreditCard.CreditCardId - SalesOrderHeader.CreditCardId
@@ -66,6 +82,7 @@ namespace AdventureWorks.Dal.RelationClasses
 	/// <summary>Static class which is used for providing relationship instances which are re-used internally for syncing</summary>
 	internal static class StaticCreditCardRelations
 	{
+		internal static readonly IEntityRelation PersonCreditCardEntityUsingCreditCardIdStatic = new CreditCardRelations().PersonCreditCardEntityUsingCreditCardId;
 		internal static readonly IEntityRelation SalesOrderHeaderEntityUsingCreditCardIdStatic = new CreditCardRelations().SalesOrderHeaderEntityUsingCreditCardId;
 
 		/// <summary>CTor</summary>

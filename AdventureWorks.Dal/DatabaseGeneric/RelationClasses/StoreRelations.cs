@@ -31,6 +31,7 @@ namespace AdventureWorks.Dal.RelationClasses
 		{
 			List<IEntityRelation> toReturn = new List<IEntityRelation>();
 			toReturn.Add(this.CustomerEntityUsingStoreId);
+			toReturn.Add(this.BusinessEntityEntityUsingBusinessEntityId);
 			toReturn.Add(this.SalesPersonEntityUsingSalesPersonId);
 			return toReturn;
 		}
@@ -52,6 +53,24 @@ namespace AdventureWorks.Dal.RelationClasses
 			}
 		}
 
+		/// <summary>Returns a new IEntityRelation object, between StoreEntity and BusinessEntityEntity over the 1:1 relation they have, using the relation between the fields:
+		/// Store.BusinessEntityId - BusinessEntity.BusinessEntityId
+		/// </summary>
+		public virtual IEntityRelation BusinessEntityEntityUsingBusinessEntityId
+		{
+			get
+			{
+				IEntityRelation relation = new EntityRelation(SD.LLBLGen.Pro.ORMSupportClasses.RelationType.OneToOne, "BusinessEntity", false);
+
+
+
+				relation.AddEntityFieldPair(BusinessEntityFields.BusinessEntityId, StoreFields.BusinessEntityId);
+
+				relation.InheritanceInfoPkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("BusinessEntityEntity", false);
+				relation.InheritanceInfoFkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("StoreEntity", true);
+				return relation;
+			}
+		}
 
 		/// <summary>Returns a new IEntityRelation object, between StoreEntity and SalesPersonEntity over the m:1 relation they have, using the relation between the fields:
 		/// Store.SalesPersonId - SalesPerson.BusinessEntityId
@@ -82,6 +101,7 @@ namespace AdventureWorks.Dal.RelationClasses
 	internal static class StaticStoreRelations
 	{
 		internal static readonly IEntityRelation CustomerEntityUsingStoreIdStatic = new StoreRelations().CustomerEntityUsingStoreId;
+		internal static readonly IEntityRelation BusinessEntityEntityUsingBusinessEntityIdStatic = new StoreRelations().BusinessEntityEntityUsingBusinessEntityId;
 		internal static readonly IEntityRelation SalesPersonEntityUsingSalesPersonIdStatic = new StoreRelations().SalesPersonEntityUsingSalesPersonId;
 
 		/// <summary>CTor</summary>

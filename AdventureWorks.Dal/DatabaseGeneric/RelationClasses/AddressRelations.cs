@@ -30,6 +30,7 @@ namespace AdventureWorks.Dal.RelationClasses
 		public virtual List<IEntityRelation> GetAllRelations()
 		{
 			List<IEntityRelation> toReturn = new List<IEntityRelation>();
+			toReturn.Add(this.BusinessEntityAddressEntityUsingAddressId);
 			toReturn.Add(this.SalesOrderHeaderEntityUsingBillToAddressId);
 			toReturn.Add(this.SalesOrderHeaderEntityUsingShipToAddressId);
 			toReturn.Add(this.StateProvinceEntityUsingStateProvinceId);
@@ -37,6 +38,21 @@ namespace AdventureWorks.Dal.RelationClasses
 		}
 
 		#region Class Property Declarations
+
+		/// <summary>Returns a new IEntityRelation object, between AddressEntity and BusinessEntityAddressEntity over the 1:n relation they have, using the relation between the fields:
+		/// Address.AddressId - BusinessEntityAddress.AddressId
+		/// </summary>
+		public virtual IEntityRelation BusinessEntityAddressEntityUsingAddressId
+		{
+			get
+			{
+				IEntityRelation relation = new EntityRelation(SD.LLBLGen.Pro.ORMSupportClasses.RelationType.OneToMany, "BusinessEntityAddresses" , true);
+				relation.AddEntityFieldPair(AddressFields.AddressId, BusinessEntityAddressFields.AddressId);
+				relation.InheritanceInfoPkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("AddressEntity", true);
+				relation.InheritanceInfoFkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("BusinessEntityAddressEntity", false);
+				return relation;
+			}
+		}
 
 		/// <summary>Returns a new IEntityRelation object, between AddressEntity and SalesOrderHeaderEntity over the 1:n relation they have, using the relation between the fields:
 		/// Address.AddressId - SalesOrderHeader.BillToAddressId
@@ -97,6 +113,7 @@ namespace AdventureWorks.Dal.RelationClasses
 	/// <summary>Static class which is used for providing relationship instances which are re-used internally for syncing</summary>
 	internal static class StaticAddressRelations
 	{
+		internal static readonly IEntityRelation BusinessEntityAddressEntityUsingAddressIdStatic = new AddressRelations().BusinessEntityAddressEntityUsingAddressId;
 		internal static readonly IEntityRelation SalesOrderHeaderEntityUsingBillToAddressIdStatic = new AddressRelations().SalesOrderHeaderEntityUsingBillToAddressId;
 		internal static readonly IEntityRelation SalesOrderHeaderEntityUsingShipToAddressIdStatic = new AddressRelations().SalesOrderHeaderEntityUsingShipToAddressId;
 		internal static readonly IEntityRelation StateProvinceEntityUsingStateProvinceIdStatic = new AddressRelations().StateProvinceEntityUsingStateProvinceId;

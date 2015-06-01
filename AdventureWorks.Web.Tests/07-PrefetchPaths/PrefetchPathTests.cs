@@ -13,7 +13,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
 		[TestMethod]
 		public void GetManagerAndContactWithEmployeeFrom1974()
 		{
-			IQueryable<EmployeeEntity> employees = metaData.Employee;
+		/*	IQueryable<EmployeeEntity> employees = metaData.Employee;
 
             adapter.ParameterisedPrefetchPathThreshold = 5;
             
@@ -27,14 +27,14 @@ namespace AdventureWorks.Web.Tests._01_Predicates
 			foreach (var employee in employees)
 			{
 				Console.WriteLine(employee.Contact.LastName);
-			}
+			}*/
 		}		
 		
 		
 		[TestMethod]
 		public void GetManagerAndContactWithEmployeeLotsOfPrefetches()
 		{
-			IQueryable<EmployeeEntity> employees = metaData.Employee;
+			/*IQueryable<EmployeeEntity> employees = metaData.Employee;
 
 			employees = employees
 				.Where(e => e.BirthDate.Year == 1974)
@@ -64,13 +64,13 @@ namespace AdventureWorks.Web.Tests._01_Predicates
 					}
 				}
 					
-			}
+			}*/
 		}
 		
 		[TestMethod]
 		public void GetManagerAndContactWithEmployeeReusePaths()
 		{
-			IQueryable<EmployeeEntity> employees = metaData.Employee;
+			/*IQueryable<EmployeeEntity> employees = metaData.Employee;
 
 			employees = employees
 				.Where(e => e.BirthDate.Year == 1974)
@@ -98,14 +98,14 @@ namespace AdventureWorks.Web.Tests._01_Predicates
 				}
 
 				adapter.SaveEntity(employee, true, true);
-			}
+			}*/
 		}
 		
 		[TestMethod]
 		public void GetManagerAndContactWithEmployee()
 		{
 			IQueryable<EmployeeEntity> employees = metaData.Employee;
-
+/*
 			employees = employees
 				//.Where(e => e.BirthDate.Year == 1974)
 				.OrderBy(e => e.Contact.LastName)
@@ -117,7 +117,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
 			foreach (var employee in employees)
 			{
 				Console.WriteLine(employee.Contact.LastName);
-			}
+			}*/
 
 		}
 	}

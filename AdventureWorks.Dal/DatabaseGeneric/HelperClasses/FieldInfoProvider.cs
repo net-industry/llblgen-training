@@ -16,7 +16,6 @@ namespace AdventureWorks.Dal.HelperClasses
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
 	
-	
 	/// <summary>Singleton implementation of the FieldInfoProvider. This class is the singleton wrapper through which the actual instance is retrieved.</summary>
 	/// <remarks>It uses a single instance of an internal class. The access isn't marked with locks as the FieldInfoProviderBase class is threadsafe.</remarks>
 	internal static class FieldInfoProviderSingleton
@@ -50,7 +49,7 @@ namespace AdventureWorks.Dal.HelperClasses
 		/// <summary>Method which initializes the internal datastores.</summary>
 		private void Init()
 		{
-			this.InitClass( (59 + 0));
+			this.InitClass( (68 + 0));
 			InitDepartmentEntityInfos();
 			InitEmployeeEntityInfos();
 			InitEmployeeDepartmentHistoryEntityInfos();
@@ -59,8 +58,16 @@ namespace AdventureWorks.Dal.HelperClasses
 			InitShiftEntityInfos();
 			InitAddressEntityInfos();
 			InitAddressTypeEntityInfos();
+			InitBusinessEntityEntityInfos();
+			InitBusinessEntityAddressEntityInfos();
+			InitBusinessEntityContactEntityInfos();
 			InitContactTypeEntityInfos();
 			InitCountryRegionEntityInfos();
+			InitEmailAddressEntityInfos();
+			InitPasswordEntityInfos();
+			InitPersonEntityInfos();
+			InitPersonPhoneEntityInfos();
+			InitPhoneNumberTypeEntityInfos();
 			InitStateProvinceEntityInfos();
 			InitBillOfMaterialEntityInfos();
 			InitCultureEntityInfos();
@@ -97,6 +104,7 @@ namespace AdventureWorks.Dal.HelperClasses
 			InitCurrencyEntityInfos();
 			InitCurrencyRateEntityInfos();
 			InitCustomerEntityInfos();
+			InitPersonCreditCardEntityInfos();
 			InitSalesOrderDetailEntityInfos();
 			InitSalesOrderHeaderEntityInfos();
 			InitSalesOrderHeaderSalesReasonEntityInfos();
@@ -128,7 +136,7 @@ namespace AdventureWorks.Dal.HelperClasses
 		{
 			this.AddFieldIndexEnumForElementName(typeof(EmployeeFieldIndex), "EmployeeEntity");
 			this.AddElementFieldInfo("EmployeeEntity", "BirthDate", typeof(System.DateTime), false, false, false, false,  (int)EmployeeFieldIndex.BirthDate, 0, 0, 0);
-			this.AddElementFieldInfo("EmployeeEntity", "BusinessEntityId", typeof(System.Int32), true, false, false, false,  (int)EmployeeFieldIndex.BusinessEntityId, 0, 0, 10);
+			this.AddElementFieldInfo("EmployeeEntity", "BusinessEntityId", typeof(System.Int32), true, true, false, false,  (int)EmployeeFieldIndex.BusinessEntityId, 0, 0, 10);
 			this.AddElementFieldInfo("EmployeeEntity", "CurrentFlag", typeof(System.Boolean), false, false, false, false,  (int)EmployeeFieldIndex.CurrentFlag, 0, 0, 0);
 			this.AddElementFieldInfo("EmployeeEntity", "Gender", typeof(System.String), false, false, false, false,  (int)EmployeeFieldIndex.Gender, 1, 0, 0);
 			this.AddElementFieldInfo("EmployeeEntity", "HireDate", typeof(System.DateTime), false, false, false, false,  (int)EmployeeFieldIndex.HireDate, 0, 0, 0);
@@ -207,6 +215,34 @@ namespace AdventureWorks.Dal.HelperClasses
 			this.AddElementFieldInfo("AddressTypeEntity", "Name", typeof(System.String), false, false, false, false,  (int)AddressTypeFieldIndex.Name, 50, 0, 0);
 			this.AddElementFieldInfo("AddressTypeEntity", "Rowguid", typeof(System.Guid), false, false, false, false,  (int)AddressTypeFieldIndex.Rowguid, 0, 0, 0);
 		}
+		/// <summary>Inits BusinessEntityEntity's FieldInfo objects</summary>
+		private void InitBusinessEntityEntityInfos()
+		{
+			this.AddFieldIndexEnumForElementName(typeof(BusinessEntityFieldIndex), "BusinessEntityEntity");
+			this.AddElementFieldInfo("BusinessEntityEntity", "BusinessEntityId", typeof(System.Int32), true, false, true, false,  (int)BusinessEntityFieldIndex.BusinessEntityId, 0, 0, 10);
+			this.AddElementFieldInfo("BusinessEntityEntity", "ModifiedDate", typeof(System.DateTime), false, false, false, false,  (int)BusinessEntityFieldIndex.ModifiedDate, 0, 0, 0);
+			this.AddElementFieldInfo("BusinessEntityEntity", "Rowguid", typeof(System.Guid), false, false, false, false,  (int)BusinessEntityFieldIndex.Rowguid, 0, 0, 0);
+		}
+		/// <summary>Inits BusinessEntityAddressEntity's FieldInfo objects</summary>
+		private void InitBusinessEntityAddressEntityInfos()
+		{
+			this.AddFieldIndexEnumForElementName(typeof(BusinessEntityAddressFieldIndex), "BusinessEntityAddressEntity");
+			this.AddElementFieldInfo("BusinessEntityAddressEntity", "AddressId", typeof(System.Int32), true, true, false, false,  (int)BusinessEntityAddressFieldIndex.AddressId, 0, 0, 10);
+			this.AddElementFieldInfo("BusinessEntityAddressEntity", "AddressTypeId", typeof(System.Int32), true, true, false, false,  (int)BusinessEntityAddressFieldIndex.AddressTypeId, 0, 0, 10);
+			this.AddElementFieldInfo("BusinessEntityAddressEntity", "BusinessEntityId", typeof(System.Int32), true, true, false, false,  (int)BusinessEntityAddressFieldIndex.BusinessEntityId, 0, 0, 10);
+			this.AddElementFieldInfo("BusinessEntityAddressEntity", "ModifiedDate", typeof(System.DateTime), false, false, false, false,  (int)BusinessEntityAddressFieldIndex.ModifiedDate, 0, 0, 0);
+			this.AddElementFieldInfo("BusinessEntityAddressEntity", "Rowguid", typeof(System.Guid), false, false, false, false,  (int)BusinessEntityAddressFieldIndex.Rowguid, 0, 0, 0);
+		}
+		/// <summary>Inits BusinessEntityContactEntity's FieldInfo objects</summary>
+		private void InitBusinessEntityContactEntityInfos()
+		{
+			this.AddFieldIndexEnumForElementName(typeof(BusinessEntityContactFieldIndex), "BusinessEntityContactEntity");
+			this.AddElementFieldInfo("BusinessEntityContactEntity", "BusinessEntityId", typeof(System.Int32), true, true, false, false,  (int)BusinessEntityContactFieldIndex.BusinessEntityId, 0, 0, 10);
+			this.AddElementFieldInfo("BusinessEntityContactEntity", "ContactTypeId", typeof(System.Int32), true, true, false, false,  (int)BusinessEntityContactFieldIndex.ContactTypeId, 0, 0, 10);
+			this.AddElementFieldInfo("BusinessEntityContactEntity", "ModifiedDate", typeof(System.DateTime), false, false, false, false,  (int)BusinessEntityContactFieldIndex.ModifiedDate, 0, 0, 0);
+			this.AddElementFieldInfo("BusinessEntityContactEntity", "PersonId", typeof(System.Int32), true, true, false, false,  (int)BusinessEntityContactFieldIndex.PersonId, 0, 0, 10);
+			this.AddElementFieldInfo("BusinessEntityContactEntity", "Rowguid", typeof(System.Guid), false, false, false, false,  (int)BusinessEntityContactFieldIndex.Rowguid, 0, 0, 0);
+		}
 		/// <summary>Inits ContactTypeEntity's FieldInfo objects</summary>
 		private void InitContactTypeEntityInfos()
 		{
@@ -222,6 +258,61 @@ namespace AdventureWorks.Dal.HelperClasses
 			this.AddElementFieldInfo("CountryRegionEntity", "CountryRegionCode", typeof(System.String), true, false, false, false,  (int)CountryRegionFieldIndex.CountryRegionCode, 3, 0, 0);
 			this.AddElementFieldInfo("CountryRegionEntity", "ModifiedDate", typeof(System.DateTime), false, false, false, false,  (int)CountryRegionFieldIndex.ModifiedDate, 0, 0, 0);
 			this.AddElementFieldInfo("CountryRegionEntity", "Name", typeof(System.String), false, false, false, false,  (int)CountryRegionFieldIndex.Name, 50, 0, 0);
+		}
+		/// <summary>Inits EmailAddressEntity's FieldInfo objects</summary>
+		private void InitEmailAddressEntityInfos()
+		{
+			this.AddFieldIndexEnumForElementName(typeof(EmailAddressFieldIndex), "EmailAddressEntity");
+			this.AddElementFieldInfo("EmailAddressEntity", "BusinessEntityId", typeof(System.Int32), true, true, false, false,  (int)EmailAddressFieldIndex.BusinessEntityId, 0, 0, 10);
+			this.AddElementFieldInfo("EmailAddressEntity", "EmailAddress", typeof(System.String), false, false, false, true,  (int)EmailAddressFieldIndex.EmailAddress, 50, 0, 0);
+			this.AddElementFieldInfo("EmailAddressEntity", "EmailAddressId", typeof(System.Int32), true, false, true, false,  (int)EmailAddressFieldIndex.EmailAddressId, 0, 0, 10);
+			this.AddElementFieldInfo("EmailAddressEntity", "ModifiedDate", typeof(System.DateTime), false, false, false, false,  (int)EmailAddressFieldIndex.ModifiedDate, 0, 0, 0);
+			this.AddElementFieldInfo("EmailAddressEntity", "Rowguid", typeof(System.Guid), false, false, false, false,  (int)EmailAddressFieldIndex.Rowguid, 0, 0, 0);
+		}
+		/// <summary>Inits PasswordEntity's FieldInfo objects</summary>
+		private void InitPasswordEntityInfos()
+		{
+			this.AddFieldIndexEnumForElementName(typeof(PasswordFieldIndex), "PasswordEntity");
+			this.AddElementFieldInfo("PasswordEntity", "BusinessEntityId", typeof(System.Int32), true, true, false, false,  (int)PasswordFieldIndex.BusinessEntityId, 0, 0, 10);
+			this.AddElementFieldInfo("PasswordEntity", "ModifiedDate", typeof(System.DateTime), false, false, false, false,  (int)PasswordFieldIndex.ModifiedDate, 0, 0, 0);
+			this.AddElementFieldInfo("PasswordEntity", "PasswordHash", typeof(System.String), false, false, false, false,  (int)PasswordFieldIndex.PasswordHash, 128, 0, 0);
+			this.AddElementFieldInfo("PasswordEntity", "PasswordSalt", typeof(System.String), false, false, false, false,  (int)PasswordFieldIndex.PasswordSalt, 10, 0, 0);
+			this.AddElementFieldInfo("PasswordEntity", "Rowguid", typeof(System.Guid), false, false, false, false,  (int)PasswordFieldIndex.Rowguid, 0, 0, 0);
+		}
+		/// <summary>Inits PersonEntity's FieldInfo objects</summary>
+		private void InitPersonEntityInfos()
+		{
+			this.AddFieldIndexEnumForElementName(typeof(PersonFieldIndex), "PersonEntity");
+			this.AddElementFieldInfo("PersonEntity", "AdditionalContactInfo", typeof(System.String), false, false, false, true,  (int)PersonFieldIndex.AdditionalContactInfo, 2147483647, 0, 0);
+			this.AddElementFieldInfo("PersonEntity", "BusinessEntityId", typeof(System.Int32), true, true, false, false,  (int)PersonFieldIndex.BusinessEntityId, 0, 0, 10);
+			this.AddElementFieldInfo("PersonEntity", "Demographics", typeof(System.String), false, false, false, true,  (int)PersonFieldIndex.Demographics, 2147483647, 0, 0);
+			this.AddElementFieldInfo("PersonEntity", "EmailPromotion", typeof(System.Int32), false, false, false, false,  (int)PersonFieldIndex.EmailPromotion, 0, 0, 10);
+			this.AddElementFieldInfo("PersonEntity", "FirstName", typeof(System.String), false, false, false, false,  (int)PersonFieldIndex.FirstName, 50, 0, 0);
+			this.AddElementFieldInfo("PersonEntity", "LastName", typeof(System.String), false, false, false, false,  (int)PersonFieldIndex.LastName, 50, 0, 0);
+			this.AddElementFieldInfo("PersonEntity", "MiddleName", typeof(System.String), false, false, false, true,  (int)PersonFieldIndex.MiddleName, 50, 0, 0);
+			this.AddElementFieldInfo("PersonEntity", "ModifiedDate", typeof(System.DateTime), false, false, false, false,  (int)PersonFieldIndex.ModifiedDate, 0, 0, 0);
+			this.AddElementFieldInfo("PersonEntity", "NameStyle", typeof(System.Boolean), false, false, false, false,  (int)PersonFieldIndex.NameStyle, 0, 0, 0);
+			this.AddElementFieldInfo("PersonEntity", "PersonType", typeof(System.String), false, false, false, false,  (int)PersonFieldIndex.PersonType, 2, 0, 0);
+			this.AddElementFieldInfo("PersonEntity", "Rowguid", typeof(System.Guid), false, false, false, false,  (int)PersonFieldIndex.Rowguid, 0, 0, 0);
+			this.AddElementFieldInfo("PersonEntity", "Suffix", typeof(System.String), false, false, false, true,  (int)PersonFieldIndex.Suffix, 10, 0, 0);
+			this.AddElementFieldInfo("PersonEntity", "Title", typeof(System.String), false, false, false, true,  (int)PersonFieldIndex.Title, 8, 0, 0);
+		}
+		/// <summary>Inits PersonPhoneEntity's FieldInfo objects</summary>
+		private void InitPersonPhoneEntityInfos()
+		{
+			this.AddFieldIndexEnumForElementName(typeof(PersonPhoneFieldIndex), "PersonPhoneEntity");
+			this.AddElementFieldInfo("PersonPhoneEntity", "BusinessEntityId", typeof(System.Int32), true, true, false, false,  (int)PersonPhoneFieldIndex.BusinessEntityId, 0, 0, 10);
+			this.AddElementFieldInfo("PersonPhoneEntity", "ModifiedDate", typeof(System.DateTime), false, false, false, false,  (int)PersonPhoneFieldIndex.ModifiedDate, 0, 0, 0);
+			this.AddElementFieldInfo("PersonPhoneEntity", "PhoneNumber", typeof(System.String), true, false, false, false,  (int)PersonPhoneFieldIndex.PhoneNumber, 25, 0, 0);
+			this.AddElementFieldInfo("PersonPhoneEntity", "PhoneNumberTypeId", typeof(System.Int32), true, true, false, false,  (int)PersonPhoneFieldIndex.PhoneNumberTypeId, 0, 0, 10);
+		}
+		/// <summary>Inits PhoneNumberTypeEntity's FieldInfo objects</summary>
+		private void InitPhoneNumberTypeEntityInfos()
+		{
+			this.AddFieldIndexEnumForElementName(typeof(PhoneNumberTypeFieldIndex), "PhoneNumberTypeEntity");
+			this.AddElementFieldInfo("PhoneNumberTypeEntity", "ModifiedDate", typeof(System.DateTime), false, false, false, false,  (int)PhoneNumberTypeFieldIndex.ModifiedDate, 0, 0, 0);
+			this.AddElementFieldInfo("PhoneNumberTypeEntity", "Name", typeof(System.String), false, false, false, false,  (int)PhoneNumberTypeFieldIndex.Name, 50, 0, 0);
+			this.AddElementFieldInfo("PhoneNumberTypeEntity", "PhoneNumberTypeId", typeof(System.Int32), true, false, true, false,  (int)PhoneNumberTypeFieldIndex.PhoneNumberTypeId, 0, 0, 10);
 		}
 		/// <summary>Inits StateProvinceEntity's FieldInfo objects</summary>
 		private void InitStateProvinceEntityInfos()
@@ -597,7 +688,7 @@ namespace AdventureWorks.Dal.HelperClasses
 			this.AddFieldIndexEnumForElementName(typeof(VendorFieldIndex), "VendorEntity");
 			this.AddElementFieldInfo("VendorEntity", "AccountNumber", typeof(System.String), false, false, false, false,  (int)VendorFieldIndex.AccountNumber, 15, 0, 0);
 			this.AddElementFieldInfo("VendorEntity", "ActiveFlag", typeof(System.Boolean), false, false, false, false,  (int)VendorFieldIndex.ActiveFlag, 0, 0, 0);
-			this.AddElementFieldInfo("VendorEntity", "BusinessEntityId", typeof(System.Int32), true, false, false, false,  (int)VendorFieldIndex.BusinessEntityId, 0, 0, 10);
+			this.AddElementFieldInfo("VendorEntity", "BusinessEntityId", typeof(System.Int32), true, true, false, false,  (int)VendorFieldIndex.BusinessEntityId, 0, 0, 10);
 			this.AddElementFieldInfo("VendorEntity", "CreditRating", typeof(System.Byte), false, false, false, false,  (int)VendorFieldIndex.CreditRating, 0, 0, 3);
 			this.AddElementFieldInfo("VendorEntity", "ModifiedDate", typeof(System.DateTime), false, false, false, false,  (int)VendorFieldIndex.ModifiedDate, 0, 0, 0);
 			this.AddElementFieldInfo("VendorEntity", "Name", typeof(System.String), false, false, false, false,  (int)VendorFieldIndex.Name, 50, 0, 0);
@@ -650,10 +741,18 @@ namespace AdventureWorks.Dal.HelperClasses
 			this.AddElementFieldInfo("CustomerEntity", "AccountNumber", typeof(System.String), false, false, true, false,  (int)CustomerFieldIndex.AccountNumber, 10, 0, 0);
 			this.AddElementFieldInfo("CustomerEntity", "CustomerId", typeof(System.Int32), true, false, true, false,  (int)CustomerFieldIndex.CustomerId, 0, 0, 10);
 			this.AddElementFieldInfo("CustomerEntity", "ModifiedDate", typeof(System.DateTime), false, false, false, false,  (int)CustomerFieldIndex.ModifiedDate, 0, 0, 0);
-			this.AddElementFieldInfo("CustomerEntity", "PersonId", typeof(Nullable<System.Int32>), false, false, false, true,  (int)CustomerFieldIndex.PersonId, 0, 0, 10);
+			this.AddElementFieldInfo("CustomerEntity", "PersonId", typeof(Nullable<System.Int32>), false, true, false, true,  (int)CustomerFieldIndex.PersonId, 0, 0, 10);
 			this.AddElementFieldInfo("CustomerEntity", "Rowguid", typeof(System.Guid), false, false, false, false,  (int)CustomerFieldIndex.Rowguid, 0, 0, 0);
 			this.AddElementFieldInfo("CustomerEntity", "StoreId", typeof(Nullable<System.Int32>), false, true, false, true,  (int)CustomerFieldIndex.StoreId, 0, 0, 10);
 			this.AddElementFieldInfo("CustomerEntity", "TerritoryId", typeof(Nullable<System.Int32>), false, true, false, true,  (int)CustomerFieldIndex.TerritoryId, 0, 0, 10);
+		}
+		/// <summary>Inits PersonCreditCardEntity's FieldInfo objects</summary>
+		private void InitPersonCreditCardEntityInfos()
+		{
+			this.AddFieldIndexEnumForElementName(typeof(PersonCreditCardFieldIndex), "PersonCreditCardEntity");
+			this.AddElementFieldInfo("PersonCreditCardEntity", "BusinessEntityId", typeof(System.Int32), true, true, false, false,  (int)PersonCreditCardFieldIndex.BusinessEntityId, 0, 0, 10);
+			this.AddElementFieldInfo("PersonCreditCardEntity", "CreditCardId", typeof(System.Int32), true, true, false, false,  (int)PersonCreditCardFieldIndex.CreditCardId, 0, 0, 10);
+			this.AddElementFieldInfo("PersonCreditCardEntity", "ModifiedDate", typeof(System.DateTime), false, false, false, false,  (int)PersonCreditCardFieldIndex.ModifiedDate, 0, 0, 0);
 		}
 		/// <summary>Inits SalesOrderDetailEntity's FieldInfo objects</summary>
 		private void InitSalesOrderDetailEntityInfos()
@@ -821,7 +920,7 @@ namespace AdventureWorks.Dal.HelperClasses
 		private void InitStoreEntityInfos()
 		{
 			this.AddFieldIndexEnumForElementName(typeof(StoreFieldIndex), "StoreEntity");
-			this.AddElementFieldInfo("StoreEntity", "BusinessEntityId", typeof(System.Int32), true, false, false, false,  (int)StoreFieldIndex.BusinessEntityId, 0, 0, 10);
+			this.AddElementFieldInfo("StoreEntity", "BusinessEntityId", typeof(System.Int32), true, true, false, false,  (int)StoreFieldIndex.BusinessEntityId, 0, 0, 10);
 			this.AddElementFieldInfo("StoreEntity", "Demographics", typeof(System.String), false, false, false, true,  (int)StoreFieldIndex.Demographics, 2147483647, 0, 0);
 			this.AddElementFieldInfo("StoreEntity", "ModifiedDate", typeof(System.DateTime), false, false, false, false,  (int)StoreFieldIndex.ModifiedDate, 0, 0, 0);
 			this.AddElementFieldInfo("StoreEntity", "Name", typeof(System.String), false, false, false, false,  (int)StoreFieldIndex.Name, 50, 0, 0);

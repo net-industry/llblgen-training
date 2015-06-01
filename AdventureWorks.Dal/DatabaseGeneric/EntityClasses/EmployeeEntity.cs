@@ -25,13 +25,11 @@ namespace AdventureWorks.Dal.EntityClasses
 {
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
-	
 	/// <summary>Entity class which represents the entity 'Employee'.<br/><br/></summary>
 	[Serializable]
 	public partial class EmployeeEntity : CommonEntityBase
 		// __LLBLGENPRO_USER_CODE_REGION_START AdditionalInterfaces
-		// __LLBLGENPRO_USER_CODE_REGION_END
-			
+		// __LLBLGENPRO_USER_CODE_REGION_END	
 	{
 		#region Class Member Declarations
 		private EntityCollection<EmployeeDepartmentHistoryEntity> _employeeDepartmentHistories;
@@ -43,11 +41,11 @@ namespace AdventureWorks.Dal.EntityClasses
 		private EntityCollection<ShiftEntity> _shiftCollectionViaEmployeeDepartmentHistory;
 		private EntityCollection<ShipMethodEntity> _shipMethodCollectionViaPurchaseOrderHeader;
 		private EntityCollection<VendorEntity> _vendorCollectionViaPurchaseOrderHeader;
+		private PersonEntity _person;
 		private SalesPersonEntity _salesPerson;
 
 		// __LLBLGENPRO_USER_CODE_REGION_START PrivateMembers
 		// __LLBLGENPRO_USER_CODE_REGION_END
-		
 		#endregion
 
 		#region Statics
@@ -75,6 +73,8 @@ namespace AdventureWorks.Dal.EntityClasses
 			public static readonly string ShipMethodCollectionViaPurchaseOrderHeader = "ShipMethodCollectionViaPurchaseOrderHeader";
 			/// <summary>Member name VendorCollectionViaPurchaseOrderHeader</summary>
 			public static readonly string VendorCollectionViaPurchaseOrderHeader = "VendorCollectionViaPurchaseOrderHeader";
+			/// <summary>Member name Person</summary>
+			public static readonly string Person = "Person";
 			/// <summary>Member name SalesPerson</summary>
 			public static readonly string SalesPerson = "SalesPerson";
 		}
@@ -143,6 +143,11 @@ namespace AdventureWorks.Dal.EntityClasses
 				_shiftCollectionViaEmployeeDepartmentHistory = (EntityCollection<ShiftEntity>)info.GetValue("_shiftCollectionViaEmployeeDepartmentHistory", typeof(EntityCollection<ShiftEntity>));
 				_shipMethodCollectionViaPurchaseOrderHeader = (EntityCollection<ShipMethodEntity>)info.GetValue("_shipMethodCollectionViaPurchaseOrderHeader", typeof(EntityCollection<ShipMethodEntity>));
 				_vendorCollectionViaPurchaseOrderHeader = (EntityCollection<VendorEntity>)info.GetValue("_vendorCollectionViaPurchaseOrderHeader", typeof(EntityCollection<VendorEntity>));
+				_person = (PersonEntity)info.GetValue("_person", typeof(PersonEntity));
+				if(_person!=null)
+				{
+					_person.AfterSave+=new EventHandler(OnEntityAfterSave);
+				}
 				_salesPerson = (SalesPersonEntity)info.GetValue("_salesPerson", typeof(SalesPersonEntity));
 				if(_salesPerson!=null)
 				{
@@ -152,9 +157,23 @@ namespace AdventureWorks.Dal.EntityClasses
 			}
 			// __LLBLGENPRO_USER_CODE_REGION_START DeserializationConstructor
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 		}
 
+		
+		/// <summary>Performs the desync setup when an FK field has been changed. The entity referenced based on the FK field will be dereferenced and sync info will be removed.</summary>
+		/// <param name="fieldIndex">The fieldindex.</param>
+		protected override void PerformDesyncSetupFKFieldChange(int fieldIndex)
+		{
+			switch((EmployeeFieldIndex)fieldIndex)
+			{
+				case EmployeeFieldIndex.BusinessEntityId:
+					DesetupSyncPerson(true, false);
+					break;
+				default:
+					base.PerformDesyncSetupFKFieldChange(fieldIndex);
+					break;
+			}
+		}
 
 		/// <summary> Sets the related entity property to the entity specified. If the property is a collection, it will add the entity specified to that collection.</summary>
 		/// <param name="propertyName">Name of the property.</param>
@@ -198,6 +217,9 @@ namespace AdventureWorks.Dal.EntityClasses
 					this.VendorCollectionViaPurchaseOrderHeader.IsReadOnly = false;
 					this.VendorCollectionViaPurchaseOrderHeader.Add((VendorEntity)entity);
 					this.VendorCollectionViaPurchaseOrderHeader.IsReadOnly = true;
+					break;
+				case "Person":
+					this.Person = (PersonEntity)entity;
 					break;
 				case "SalesPerson":
 					this.SalesPerson = (SalesPersonEntity)entity;
@@ -255,6 +277,9 @@ namespace AdventureWorks.Dal.EntityClasses
 					toReturn.Add(Relations.PurchaseOrderHeaderEntityUsingEmployeeId, "EmployeeEntity__", "PurchaseOrderHeader_", JoinHint.None);
 					toReturn.Add(PurchaseOrderHeaderEntity.Relations.VendorEntityUsingVendorId, "PurchaseOrderHeader_", string.Empty, JoinHint.None);
 					break;
+				case "Person":
+					toReturn.Add(Relations.PersonEntityUsingBusinessEntityId);
+					break;
 				case "SalesPerson":
 					toReturn.Add(Relations.SalesPersonEntityUsingBusinessEntityId);
 					break;
@@ -301,6 +326,9 @@ namespace AdventureWorks.Dal.EntityClasses
 				case "PurchaseOrderHeaders":
 					this.PurchaseOrderHeaders.Add((PurchaseOrderHeaderEntity)relatedEntity);
 					break;
+				case "Person":
+					SetupSyncPerson(relatedEntity);
+					break;
 				case "SalesPerson":
 					SetupSyncSalesPerson(relatedEntity);
 					break;
@@ -332,6 +360,9 @@ namespace AdventureWorks.Dal.EntityClasses
 				case "PurchaseOrderHeaders":
 					this.PerformRelatedEntityRemoval(this.PurchaseOrderHeaders, relatedEntity, signalRelatedEntityManyToOne);
 					break;
+				case "Person":
+					DesetupSyncPerson(false, true);
+					break;
 				case "SalesPerson":
 					DesetupSyncSalesPerson(false, true);
 					break;
@@ -345,6 +376,8 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override List<IEntity2> GetDependingRelatedEntities()
 		{
 			List<IEntity2> toReturn = new List<IEntity2>();
+
+
 			if(_salesPerson!=null)
 			{
 				toReturn.Add(_salesPerson);
@@ -359,6 +392,11 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override List<IEntity2> GetDependentRelatedEntities()
 		{
 			List<IEntity2> toReturn = new List<IEntity2>();
+			if(_person!=null)
+			{
+				toReturn.Add(_person);
+			}
+
 
 
 			return toReturn;
@@ -394,11 +432,11 @@ namespace AdventureWorks.Dal.EntityClasses
 				info.AddValue("_shiftCollectionViaEmployeeDepartmentHistory", ((_shiftCollectionViaEmployeeDepartmentHistory!=null) && (_shiftCollectionViaEmployeeDepartmentHistory.Count>0) && !this.MarkedForDeletion)?_shiftCollectionViaEmployeeDepartmentHistory:null);
 				info.AddValue("_shipMethodCollectionViaPurchaseOrderHeader", ((_shipMethodCollectionViaPurchaseOrderHeader!=null) && (_shipMethodCollectionViaPurchaseOrderHeader.Count>0) && !this.MarkedForDeletion)?_shipMethodCollectionViaPurchaseOrderHeader:null);
 				info.AddValue("_vendorCollectionViaPurchaseOrderHeader", ((_vendorCollectionViaPurchaseOrderHeader!=null) && (_vendorCollectionViaPurchaseOrderHeader.Count>0) && !this.MarkedForDeletion)?_vendorCollectionViaPurchaseOrderHeader:null);
+				info.AddValue("_person", (!this.MarkedForDeletion?_person:null));
 				info.AddValue("_salesPerson", (!this.MarkedForDeletion?_salesPerson:null));
 			}
 			// __LLBLGENPRO_USER_CODE_REGION_START GetObjectInfo
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 			base.GetObjectData(info, context);
 		}
 
@@ -493,6 +531,15 @@ namespace AdventureWorks.Dal.EntityClasses
 			IRelationPredicateBucket bucket = new RelationPredicateBucket();
 			bucket.Relations.AddRange(GetRelationsForFieldOfType("VendorCollectionViaPurchaseOrderHeader"));
 			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(EmployeeFields.BusinessEntityId, null, ComparisonOperator.Equal, this.BusinessEntityId, "EmployeeEntity__"));
+			return bucket;
+		}
+
+		/// <summary> Creates a new IRelationPredicateBucket object which contains the predicate expression and relation collection to fetch the related entity of type 'Person' to this entity.</summary>
+		/// <returns></returns>
+		public virtual IRelationPredicateBucket GetRelationInfoPerson()
+		{
+			IRelationPredicateBucket bucket = new RelationPredicateBucket();
+			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(PersonFields.BusinessEntityId, null, ComparisonOperator.Equal, this.BusinessEntityId));
 			return bucket;
 		}
 
@@ -593,6 +640,7 @@ namespace AdventureWorks.Dal.EntityClasses
 			toReturn.Add("ShiftCollectionViaEmployeeDepartmentHistory", _shiftCollectionViaEmployeeDepartmentHistory);
 			toReturn.Add("ShipMethodCollectionViaPurchaseOrderHeader", _shipMethodCollectionViaPurchaseOrderHeader);
 			toReturn.Add("VendorCollectionViaPurchaseOrderHeader", _vendorCollectionViaPurchaseOrderHeader);
+			toReturn.Add("Person", _person);
 			toReturn.Add("SalesPerson", _salesPerson);
 			return toReturn;
 		}
@@ -604,7 +652,6 @@ namespace AdventureWorks.Dal.EntityClasses
 			
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassMembers
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 			OnInitClassMembersComplete();
 		}
 
@@ -651,6 +698,39 @@ namespace AdventureWorks.Dal.EntityClasses
 		}
 		#endregion
 
+		/// <summary> Removes the sync logic for member _person</summary>
+		/// <param name="signalRelatedEntity">If set to true, it will call the related entity's UnsetRelatedEntity method</param>
+		/// <param name="resetFKFields">if set to true it will also reset the FK fields pointing to the related entity</param>
+		private void DesetupSyncPerson(bool signalRelatedEntity, bool resetFKFields)
+		{
+			this.PerformDesetupSyncRelatedEntity( _person, new PropertyChangedEventHandler( OnPersonPropertyChanged ), "Person", AdventureWorks.Dal.RelationClasses.StaticEmployeeRelations.PersonEntityUsingBusinessEntityIdStatic, true, signalRelatedEntity, "Employee", false, new int[] { (int)EmployeeFieldIndex.BusinessEntityId } );
+			_person = null;
+		}
+		
+		/// <summary> setups the sync logic for member _person</summary>
+		/// <param name="relatedEntity">Instance to set as the related entity of type entityType</param>
+		private void SetupSyncPerson(IEntityCore relatedEntity)
+		{
+			if(_person!=relatedEntity)
+			{
+				DesetupSyncPerson(true, true);
+				_person = (PersonEntity)relatedEntity;
+				this.PerformSetupSyncRelatedEntity( _person, new PropertyChangedEventHandler( OnPersonPropertyChanged ), "Person", AdventureWorks.Dal.RelationClasses.StaticEmployeeRelations.PersonEntityUsingBusinessEntityIdStatic, true, new string[] {  } );
+			}
+		}
+		
+		/// <summary>Handles property change events of properties in a related entity.</summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OnPersonPropertyChanged( object sender, PropertyChangedEventArgs e )
+		{
+			switch( e.PropertyName )
+			{
+				default:
+					break;
+			}
+		}
+
 		/// <summary> Removes the sync logic for member _salesPerson</summary>
 		/// <param name="signalRelatedEntity">If set to true, it will call the related entity's UnsetRelatedEntity method</param>
 		/// <param name="resetFKFields">if set to true it will also reset the FK fields pointing to the related entity</param>
@@ -696,7 +776,6 @@ namespace AdventureWorks.Dal.EntityClasses
 
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassEmpty
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 
 			OnInitialized();
 
@@ -801,6 +880,13 @@ namespace AdventureWorks.Dal.EntityClasses
 				return new PrefetchPathElement2(new EntityCollection<VendorEntity>(EntityFactoryCache2.GetEntityFactory(typeof(VendorEntityFactory))), intermediateRelation,
 					(int)AdventureWorks.Dal.EntityType.EmployeeEntity, (int)AdventureWorks.Dal.EntityType.VendorEntity, 0, null, null, GetRelationsForField("VendorCollectionViaPurchaseOrderHeader"), null, "VendorCollectionViaPurchaseOrderHeader", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.ManyToMany);
 			}
+		}
+
+		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'Person' for this entity.</summary>
+		/// <returns>Ready to use IPrefetchPathElement2 implementation.</returns>
+		public static IPrefetchPathElement2 PrefetchPathPerson
+		{
+			get { return new PrefetchPathElement2(new EntityCollection(EntityFactoryCache2.GetEntityFactory(typeof(PersonEntityFactory))), (IEntityRelation)GetRelationsForField("Person")[0], (int)AdventureWorks.Dal.EntityType.EmployeeEntity, (int)AdventureWorks.Dal.EntityType.PersonEntity, 0, null, null, null, null, "Person", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.OneToOne);	}
 		}
 
 		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'SalesPerson' for this entity.</summary>
@@ -1057,6 +1143,42 @@ namespace AdventureWorks.Dal.EntityClasses
 			get { return GetOrCreateEntityCollection<VendorEntity, VendorEntityFactory>("EmployeeCollectionViaPurchaseOrderHeader", false, true, ref _vendorCollectionViaPurchaseOrderHeader);	}
 		}
 
+		/// <summary> Gets / sets related entity of type 'PersonEntity' which has to be set using a fetch action earlier. If no related entity is set for this property, null is returned.<br/><br/>
+		/// </summary>
+		[Browsable(false)]
+		public virtual PersonEntity Person
+		{
+			get { return _person; }
+			set
+			{
+				if(this.IsDeserializing)
+				{
+					SetupSyncPerson(value);
+					CallSetRelatedEntityDuringDeserialization(value, "Employee");
+				}
+				else
+				{
+					if(value==null)
+					{
+						bool raisePropertyChanged = (_person !=null);
+						DesetupSyncPerson(true, true);
+						if(raisePropertyChanged)
+						{
+							OnPropertyChanged("Person");
+						}
+					}
+					else
+					{
+						if(_person!=value)
+						{
+							((IEntity2)value).SetRelatedEntity(this, "Employee");
+							SetupSyncPerson(value);
+						}
+					}
+				}
+			}
+		}
+
 		/// <summary> Gets / sets related entity of type 'SalesPersonEntity' which has to be set using a fetch action earlier. If no related entity is set for this property, null is returned.<br/><br/>
 		/// </summary>
 		[Browsable(false)]
@@ -1119,7 +1241,6 @@ namespace AdventureWorks.Dal.EntityClasses
 		
 		// __LLBLGENPRO_USER_CODE_REGION_START CustomEntityCode
 		// __LLBLGENPRO_USER_CODE_REGION_END
-		
 		#endregion
 
 		#region Included code

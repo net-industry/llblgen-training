@@ -75,6 +75,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
         [TestMethod]
         public void GetCustomersWithTotalSpendingsGroupedBy() 
         {
+            /*
             var queryable = this.metaData.Customer
                 .GroupBy(c => c.CustomerType)
                 .Select(c=>new { 
@@ -86,7 +87,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
             
             foreach (var c in queryable) {
                 Console.WriteLine(c);
-            }
+            }*/
         }
 
         string accountNumber = "";

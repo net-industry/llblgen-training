@@ -25,19 +25,19 @@ namespace AdventureWorks.Dal.EntityClasses
 {
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
-	
 	/// <summary>Entity class which represents the entity 'ContactType'.<br/><br/></summary>
 	[Serializable]
 	public partial class ContactTypeEntity : CommonEntityBase
 		// __LLBLGENPRO_USER_CODE_REGION_START AdditionalInterfaces
-		// __LLBLGENPRO_USER_CODE_REGION_END
-			
+		// __LLBLGENPRO_USER_CODE_REGION_END	
 	{
 		#region Class Member Declarations
+		private EntityCollection<BusinessEntityContactEntity> _businessEntityContacts;
+		private EntityCollection<BusinessEntityEntity> _businessEntityCollectionViaBusinessEntityContact;
+		private EntityCollection<PersonEntity> _personCollectionViaBusinessEntityContact;
 
 		// __LLBLGENPRO_USER_CODE_REGION_START PrivateMembers
 		// __LLBLGENPRO_USER_CODE_REGION_END
-		
 		#endregion
 
 		#region Statics
@@ -47,6 +47,12 @@ namespace AdventureWorks.Dal.EntityClasses
 		/// <summary>All names of fields mapped onto a relation. Usable for in-memory filtering</summary>
 		public static partial class MemberNames
 		{
+			/// <summary>Member name BusinessEntityContacts</summary>
+			public static readonly string BusinessEntityContacts = "BusinessEntityContacts";
+			/// <summary>Member name BusinessEntityCollectionViaBusinessEntityContact</summary>
+			public static readonly string BusinessEntityCollectionViaBusinessEntityContact = "BusinessEntityCollectionViaBusinessEntityContact";
+			/// <summary>Member name PersonCollectionViaBusinessEntityContact</summary>
+			public static readonly string PersonCollectionViaBusinessEntityContact = "PersonCollectionViaBusinessEntityContact";
 		}
 		#endregion
 		
@@ -104,11 +110,13 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			if(SerializationHelper.Optimization != SerializationOptimization.Fast) 
 			{
+				_businessEntityContacts = (EntityCollection<BusinessEntityContactEntity>)info.GetValue("_businessEntityContacts", typeof(EntityCollection<BusinessEntityContactEntity>));
+				_businessEntityCollectionViaBusinessEntityContact = (EntityCollection<BusinessEntityEntity>)info.GetValue("_businessEntityCollectionViaBusinessEntityContact", typeof(EntityCollection<BusinessEntityEntity>));
+				_personCollectionViaBusinessEntityContact = (EntityCollection<PersonEntity>)info.GetValue("_personCollectionViaBusinessEntityContact", typeof(EntityCollection<PersonEntity>));
 				this.FixupDeserialization(FieldInfoProviderSingleton.GetInstance());
 			}
 			// __LLBLGENPRO_USER_CODE_REGION_START DeserializationConstructor
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 		}
 
 
@@ -120,6 +128,19 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			switch(propertyName)
 			{
+				case "BusinessEntityContacts":
+					this.BusinessEntityContacts.Add((BusinessEntityContactEntity)entity);
+					break;
+				case "BusinessEntityCollectionViaBusinessEntityContact":
+					this.BusinessEntityCollectionViaBusinessEntityContact.IsReadOnly = false;
+					this.BusinessEntityCollectionViaBusinessEntityContact.Add((BusinessEntityEntity)entity);
+					this.BusinessEntityCollectionViaBusinessEntityContact.IsReadOnly = true;
+					break;
+				case "PersonCollectionViaBusinessEntityContact":
+					this.PersonCollectionViaBusinessEntityContact.IsReadOnly = false;
+					this.PersonCollectionViaBusinessEntityContact.Add((PersonEntity)entity);
+					this.PersonCollectionViaBusinessEntityContact.IsReadOnly = true;
+					break;
 				default:
 					this.OnSetRelatedEntityProperty(propertyName, entity);
 					break;
@@ -142,6 +163,17 @@ namespace AdventureWorks.Dal.EntityClasses
 			RelationCollection toReturn = new RelationCollection();
 			switch(fieldName)
 			{
+				case "BusinessEntityContacts":
+					toReturn.Add(Relations.BusinessEntityContactEntityUsingContactTypeId);
+					break;
+				case "BusinessEntityCollectionViaBusinessEntityContact":
+					toReturn.Add(Relations.BusinessEntityContactEntityUsingContactTypeId, "ContactTypeEntity__", "BusinessEntityContact_", JoinHint.None);
+					toReturn.Add(BusinessEntityContactEntity.Relations.BusinessEntityEntityUsingBusinessEntityId, "BusinessEntityContact_", string.Empty, JoinHint.None);
+					break;
+				case "PersonCollectionViaBusinessEntityContact":
+					toReturn.Add(Relations.BusinessEntityContactEntityUsingContactTypeId, "ContactTypeEntity__", "BusinessEntityContact_", JoinHint.None);
+					toReturn.Add(BusinessEntityContactEntity.Relations.PersonEntityUsingPersonId, "BusinessEntityContact_", string.Empty, JoinHint.None);
+					break;
 				default:
 					break;				
 			}
@@ -170,6 +202,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			switch(fieldName)
 			{
+				case "BusinessEntityContacts":
+					this.BusinessEntityContacts.Add((BusinessEntityContactEntity)relatedEntity);
+					break;
 				default:
 					break;
 			}
@@ -183,6 +218,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			switch(fieldName)
 			{
+				case "BusinessEntityContacts":
+					this.PerformRelatedEntityRemoval(this.BusinessEntityContacts, relatedEntity, signalRelatedEntityManyToOne);
+					break;
 				default:
 					break;
 			}
@@ -210,6 +248,7 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override List<IEntityCollection2> GetMemberEntityCollections()
 		{
 			List<IEntityCollection2> toReturn = new List<IEntityCollection2>();
+			toReturn.Add(this.BusinessEntityContacts);
 			return toReturn;
 		}
 
@@ -221,10 +260,12 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			if (SerializationHelper.Optimization != SerializationOptimization.Fast) 
 			{
+				info.AddValue("_businessEntityContacts", ((_businessEntityContacts!=null) && (_businessEntityContacts.Count>0) && !this.MarkedForDeletion)?_businessEntityContacts:null);
+				info.AddValue("_businessEntityCollectionViaBusinessEntityContact", ((_businessEntityCollectionViaBusinessEntityContact!=null) && (_businessEntityCollectionViaBusinessEntityContact.Count>0) && !this.MarkedForDeletion)?_businessEntityCollectionViaBusinessEntityContact:null);
+				info.AddValue("_personCollectionViaBusinessEntityContact", ((_personCollectionViaBusinessEntityContact!=null) && (_personCollectionViaBusinessEntityContact.Count>0) && !this.MarkedForDeletion)?_personCollectionViaBusinessEntityContact:null);
 			}
 			// __LLBLGENPRO_USER_CODE_REGION_START GetObjectInfo
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 			base.GetObjectData(info, context);
 		}
 
@@ -235,6 +276,35 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override List<IEntityRelation> GetAllRelations()
 		{
 			return new ContactTypeRelations().GetAllRelations();
+		}
+
+		/// <summary> Creates a new IRelationPredicateBucket object which contains the predicate expression and relation collection to fetch the related entities of type 'BusinessEntityContact' to this entity.</summary>
+		/// <returns></returns>
+		public virtual IRelationPredicateBucket GetRelationInfoBusinessEntityContacts()
+		{
+			IRelationPredicateBucket bucket = new RelationPredicateBucket();
+			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(BusinessEntityContactFields.ContactTypeId, null, ComparisonOperator.Equal, this.ContactTypeId));
+			return bucket;
+		}
+
+		/// <summary> Creates a new IRelationPredicateBucket object which contains the predicate expression and relation collection to fetch the related entities of type 'BusinessEntity' to this entity.</summary>
+		/// <returns></returns>
+		public virtual IRelationPredicateBucket GetRelationInfoBusinessEntityCollectionViaBusinessEntityContact()
+		{
+			IRelationPredicateBucket bucket = new RelationPredicateBucket();
+			bucket.Relations.AddRange(GetRelationsForFieldOfType("BusinessEntityCollectionViaBusinessEntityContact"));
+			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(ContactTypeFields.ContactTypeId, null, ComparisonOperator.Equal, this.ContactTypeId, "ContactTypeEntity__"));
+			return bucket;
+		}
+
+		/// <summary> Creates a new IRelationPredicateBucket object which contains the predicate expression and relation collection to fetch the related entities of type 'Person' to this entity.</summary>
+		/// <returns></returns>
+		public virtual IRelationPredicateBucket GetRelationInfoPersonCollectionViaBusinessEntityContact()
+		{
+			IRelationPredicateBucket bucket = new RelationPredicateBucket();
+			bucket.Relations.AddRange(GetRelationsForFieldOfType("PersonCollectionViaBusinessEntityContact"));
+			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(ContactTypeFields.ContactTypeId, null, ComparisonOperator.Equal, this.ContactTypeId, "ContactTypeEntity__"));
+			return bucket;
 		}
 		
 
@@ -249,6 +319,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override void AddToMemberEntityCollectionsQueue(Queue<IEntityCollection2> collectionsQueue) 
 		{
 			base.AddToMemberEntityCollectionsQueue(collectionsQueue);
+			collectionsQueue.Enqueue(this._businessEntityContacts);
+			collectionsQueue.Enqueue(this._businessEntityCollectionViaBusinessEntityContact);
+			collectionsQueue.Enqueue(this._personCollectionViaBusinessEntityContact);
 		}
 		
 		/// <summary>Gets the member collections queue from the queue (base first)</summary>
@@ -256,6 +329,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override void GetFromMemberEntityCollectionsQueue(Queue<IEntityCollection2> collectionsQueue)
 		{
 			base.GetFromMemberEntityCollectionsQueue(collectionsQueue);
+			this._businessEntityContacts = (EntityCollection<BusinessEntityContactEntity>) collectionsQueue.Dequeue();
+			this._businessEntityCollectionViaBusinessEntityContact = (EntityCollection<BusinessEntityEntity>) collectionsQueue.Dequeue();
+			this._personCollectionViaBusinessEntityContact = (EntityCollection<PersonEntity>) collectionsQueue.Dequeue();
 
 		}
 		
@@ -264,6 +340,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override bool HasPopulatedMemberEntityCollections()
 		{
 			bool toReturn = false;
+			toReturn |=(this._businessEntityContacts != null);
+			toReturn |= (this._businessEntityCollectionViaBusinessEntityContact != null);
+			toReturn |= (this._personCollectionViaBusinessEntityContact != null);
 			return toReturn ? true : base.HasPopulatedMemberEntityCollections();
 		}
 		
@@ -273,6 +352,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override void CreateMemberEntityCollectionsQueue(Queue<IEntityCollection2> collectionsQueue, Queue<bool> requiredQueue) 
 		{
 			base.CreateMemberEntityCollectionsQueue(collectionsQueue, requiredQueue);
+			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<BusinessEntityContactEntity>(EntityFactoryCache2.GetEntityFactory(typeof(BusinessEntityContactEntityFactory))) : null);
+			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<BusinessEntityEntity>(EntityFactoryCache2.GetEntityFactory(typeof(BusinessEntityEntityFactory))) : null);
+			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<PersonEntity>(EntityFactoryCache2.GetEntityFactory(typeof(PersonEntityFactory))) : null);
 		}
 #endif
 		/// <summary>Gets all related data objects, stored by name. The name is the field name mapped onto the relation for that particular data element.</summary>
@@ -280,6 +362,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override Dictionary<string, object> GetRelatedData()
 		{
 			Dictionary<string, object> toReturn = new Dictionary<string, object>();
+			toReturn.Add("BusinessEntityContacts", _businessEntityContacts);
+			toReturn.Add("BusinessEntityCollectionViaBusinessEntityContact", _businessEntityCollectionViaBusinessEntityContact);
+			toReturn.Add("PersonCollectionViaBusinessEntityContact", _personCollectionViaBusinessEntityContact);
 			return toReturn;
 		}
 
@@ -290,7 +375,6 @@ namespace AdventureWorks.Dal.EntityClasses
 			
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassMembers
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 			OnInitClassMembersComplete();
 		}
 
@@ -323,7 +407,6 @@ namespace AdventureWorks.Dal.EntityClasses
 
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassEmpty
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 
 			OnInitialized();
 
@@ -341,6 +424,39 @@ namespace AdventureWorks.Dal.EntityClasses
 		public  static Dictionary<string, string> CustomProperties
 		{
 			get { return _customProperties;}
+		}
+
+		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'BusinessEntityContact' for this entity.</summary>
+		/// <returns>Ready to use IPrefetchPathElement2 implementation.</returns>
+		public static IPrefetchPathElement2 PrefetchPathBusinessEntityContacts
+		{
+			get	{ return new PrefetchPathElement2( new EntityCollection<BusinessEntityContactEntity>(EntityFactoryCache2.GetEntityFactory(typeof(BusinessEntityContactEntityFactory))), (IEntityRelation)GetRelationsForField("BusinessEntityContacts")[0], (int)AdventureWorks.Dal.EntityType.ContactTypeEntity, (int)AdventureWorks.Dal.EntityType.BusinessEntityContactEntity, 0, null, null, null, null, "BusinessEntityContacts", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.OneToMany);	}
+		}
+
+		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'BusinessEntity' for this entity.</summary>
+		/// <returns>Ready to use IPrefetchPathElement2 implementation.</returns>
+		public static IPrefetchPathElement2 PrefetchPathBusinessEntityCollectionViaBusinessEntityContact
+		{
+			get
+			{
+				IEntityRelation intermediateRelation = Relations.BusinessEntityContactEntityUsingContactTypeId;
+				intermediateRelation.SetAliases(string.Empty, "BusinessEntityContact_");
+				return new PrefetchPathElement2(new EntityCollection<BusinessEntityEntity>(EntityFactoryCache2.GetEntityFactory(typeof(BusinessEntityEntityFactory))), intermediateRelation,
+					(int)AdventureWorks.Dal.EntityType.ContactTypeEntity, (int)AdventureWorks.Dal.EntityType.BusinessEntityEntity, 0, null, null, GetRelationsForField("BusinessEntityCollectionViaBusinessEntityContact"), null, "BusinessEntityCollectionViaBusinessEntityContact", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.ManyToMany);
+			}
+		}
+
+		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'Person' for this entity.</summary>
+		/// <returns>Ready to use IPrefetchPathElement2 implementation.</returns>
+		public static IPrefetchPathElement2 PrefetchPathPersonCollectionViaBusinessEntityContact
+		{
+			get
+			{
+				IEntityRelation intermediateRelation = Relations.BusinessEntityContactEntityUsingContactTypeId;
+				intermediateRelation.SetAliases(string.Empty, "BusinessEntityContact_");
+				return new PrefetchPathElement2(new EntityCollection<PersonEntity>(EntityFactoryCache2.GetEntityFactory(typeof(PersonEntityFactory))), intermediateRelation,
+					(int)AdventureWorks.Dal.EntityType.ContactTypeEntity, (int)AdventureWorks.Dal.EntityType.PersonEntity, 0, null, null, GetRelationsForField("PersonCollectionViaBusinessEntityContact"), null, "PersonCollectionViaBusinessEntityContact", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.ManyToMany);
+			}
 		}
 
 
@@ -396,6 +512,27 @@ namespace AdventureWorks.Dal.EntityClasses
 			get { return (System.String)GetValue((int)ContactTypeFieldIndex.Name, true); }
 			set	{ SetValue((int)ContactTypeFieldIndex.Name, value); }
 		}
+
+		/// <summary> Gets the EntityCollection with the related entities of type 'BusinessEntityContactEntity' which are related to this entity via a relation of type '1:n'. If the EntityCollection hasn't been fetched yet, the collection returned will be empty.<br/><br/></summary>
+		[TypeContainedAttribute(typeof(BusinessEntityContactEntity))]
+		public virtual EntityCollection<BusinessEntityContactEntity> BusinessEntityContacts
+		{
+			get { return GetOrCreateEntityCollection<BusinessEntityContactEntity, BusinessEntityContactEntityFactory>("ContactType", true, false, ref _businessEntityContacts);	}
+		}
+
+		/// <summary> Gets the EntityCollection with the related entities of type 'BusinessEntityEntity' which are related to this entity via a relation of type 'm:n'. If the EntityCollection hasn't been fetched yet, the collection returned will be empty.<br/><br/></summary>
+		[TypeContainedAttribute(typeof(BusinessEntityEntity))]
+		public virtual EntityCollection<BusinessEntityEntity> BusinessEntityCollectionViaBusinessEntityContact
+		{
+			get { return GetOrCreateEntityCollection<BusinessEntityEntity, BusinessEntityEntityFactory>("ContactTypeCollectionViaBusinessEntityContact", false, true, ref _businessEntityCollectionViaBusinessEntityContact);	}
+		}
+
+		/// <summary> Gets the EntityCollection with the related entities of type 'PersonEntity' which are related to this entity via a relation of type 'm:n'. If the EntityCollection hasn't been fetched yet, the collection returned will be empty.<br/><br/></summary>
+		[TypeContainedAttribute(typeof(PersonEntity))]
+		public virtual EntityCollection<PersonEntity> PersonCollectionViaBusinessEntityContact
+		{
+			get { return GetOrCreateEntityCollection<PersonEntity, PersonEntityFactory>("ContactTypeCollectionViaBusinessEntityContact", false, true, ref _personCollectionViaBusinessEntityContact);	}
+		}
 	
 		/// <summary> Gets the type of the hierarchy this entity is in. </summary>
 		protected override InheritanceHierarchyType LLBLGenProIsInHierarchyOfType
@@ -423,7 +560,6 @@ namespace AdventureWorks.Dal.EntityClasses
 		
 		// __LLBLGENPRO_USER_CODE_REGION_START CustomEntityCode
 		// __LLBLGENPRO_USER_CODE_REGION_END
-		
 		#endregion
 
 		#region Included code

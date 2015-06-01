@@ -18,26 +18,27 @@ using AdventureWorks.Dal;
 using AdventureWorks.Dal.HelperClasses;
 using AdventureWorks.Dal.FactoryClasses;
 using AdventureWorks.Dal.RelationClasses;
-using Microsoft.SqlServer.Types;
+
 using SD.LLBLGen.Pro.ORMSupportClasses;
 
 namespace AdventureWorks.Dal.EntityClasses
 {
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
-	
 	/// <summary>Entity class which represents the entity 'Address'.<br/><br/></summary>
 	[Serializable]
 	public partial class AddressEntity : CommonEntityBase
 		// __LLBLGENPRO_USER_CODE_REGION_START AdditionalInterfaces
-		// __LLBLGENPRO_USER_CODE_REGION_END
-			
+		// __LLBLGENPRO_USER_CODE_REGION_END	
 	{
 		#region Class Member Declarations
+		private EntityCollection<BusinessEntityAddressEntity> _businessEntityAddresses;
 		private EntityCollection<SalesOrderHeaderEntity> _salesOrderHeaders;
 		private EntityCollection<SalesOrderHeaderEntity> _salesOrderHeaders1;
 		private EntityCollection<AddressEntity> _addressCollectionViaSalesOrderHeader;
 		private EntityCollection<AddressEntity> _addressCollectionViaSalesOrderHeader_;
+		private EntityCollection<AddressTypeEntity> _addressTypeCollectionViaBusinessEntityAddress;
+		private EntityCollection<BusinessEntityEntity> _businessEntityCollectionViaBusinessEntityAddress;
 		private EntityCollection<ShipMethodEntity> _shipMethodCollectionViaSalesOrderHeader;
 		private EntityCollection<ShipMethodEntity> _shipMethodCollectionViaSalesOrderHeader1;
 		private EntityCollection<CreditCardEntity> _creditCardCollectionViaSalesOrderHeader;
@@ -54,7 +55,6 @@ namespace AdventureWorks.Dal.EntityClasses
 
 		// __LLBLGENPRO_USER_CODE_REGION_START PrivateMembers
 		// __LLBLGENPRO_USER_CODE_REGION_END
-		
 		#endregion
 
 		#region Statics
@@ -66,6 +66,8 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			/// <summary>Member name StateProvince</summary>
 			public static readonly string StateProvince = "StateProvince";
+			/// <summary>Member name BusinessEntityAddresses</summary>
+			public static readonly string BusinessEntityAddresses = "BusinessEntityAddresses";
 			/// <summary>Member name SalesOrderHeaders</summary>
 			public static readonly string SalesOrderHeaders = "SalesOrderHeaders";
 			/// <summary>Member name SalesOrderHeaders1</summary>
@@ -74,6 +76,10 @@ namespace AdventureWorks.Dal.EntityClasses
 			public static readonly string AddressCollectionViaSalesOrderHeader = "AddressCollectionViaSalesOrderHeader";
 			/// <summary>Member name AddressCollectionViaSalesOrderHeader_</summary>
 			public static readonly string AddressCollectionViaSalesOrderHeader_ = "AddressCollectionViaSalesOrderHeader_";
+			/// <summary>Member name AddressTypeCollectionViaBusinessEntityAddress</summary>
+			public static readonly string AddressTypeCollectionViaBusinessEntityAddress = "AddressTypeCollectionViaBusinessEntityAddress";
+			/// <summary>Member name BusinessEntityCollectionViaBusinessEntityAddress</summary>
+			public static readonly string BusinessEntityCollectionViaBusinessEntityAddress = "BusinessEntityCollectionViaBusinessEntityAddress";
 			/// <summary>Member name ShipMethodCollectionViaSalesOrderHeader</summary>
 			public static readonly string ShipMethodCollectionViaSalesOrderHeader = "ShipMethodCollectionViaSalesOrderHeader";
 			/// <summary>Member name ShipMethodCollectionViaSalesOrderHeader1</summary>
@@ -155,10 +161,13 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			if(SerializationHelper.Optimization != SerializationOptimization.Fast) 
 			{
+				_businessEntityAddresses = (EntityCollection<BusinessEntityAddressEntity>)info.GetValue("_businessEntityAddresses", typeof(EntityCollection<BusinessEntityAddressEntity>));
 				_salesOrderHeaders = (EntityCollection<SalesOrderHeaderEntity>)info.GetValue("_salesOrderHeaders", typeof(EntityCollection<SalesOrderHeaderEntity>));
 				_salesOrderHeaders1 = (EntityCollection<SalesOrderHeaderEntity>)info.GetValue("_salesOrderHeaders1", typeof(EntityCollection<SalesOrderHeaderEntity>));
 				_addressCollectionViaSalesOrderHeader = (EntityCollection<AddressEntity>)info.GetValue("_addressCollectionViaSalesOrderHeader", typeof(EntityCollection<AddressEntity>));
 				_addressCollectionViaSalesOrderHeader_ = (EntityCollection<AddressEntity>)info.GetValue("_addressCollectionViaSalesOrderHeader_", typeof(EntityCollection<AddressEntity>));
+				_addressTypeCollectionViaBusinessEntityAddress = (EntityCollection<AddressTypeEntity>)info.GetValue("_addressTypeCollectionViaBusinessEntityAddress", typeof(EntityCollection<AddressTypeEntity>));
+				_businessEntityCollectionViaBusinessEntityAddress = (EntityCollection<BusinessEntityEntity>)info.GetValue("_businessEntityCollectionViaBusinessEntityAddress", typeof(EntityCollection<BusinessEntityEntity>));
 				_shipMethodCollectionViaSalesOrderHeader = (EntityCollection<ShipMethodEntity>)info.GetValue("_shipMethodCollectionViaSalesOrderHeader", typeof(EntityCollection<ShipMethodEntity>));
 				_shipMethodCollectionViaSalesOrderHeader1 = (EntityCollection<ShipMethodEntity>)info.GetValue("_shipMethodCollectionViaSalesOrderHeader1", typeof(EntityCollection<ShipMethodEntity>));
 				_creditCardCollectionViaSalesOrderHeader = (EntityCollection<CreditCardEntity>)info.GetValue("_creditCardCollectionViaSalesOrderHeader", typeof(EntityCollection<CreditCardEntity>));
@@ -180,7 +189,6 @@ namespace AdventureWorks.Dal.EntityClasses
 			}
 			// __LLBLGENPRO_USER_CODE_REGION_START DeserializationConstructor
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 		}
 
 		
@@ -210,6 +218,9 @@ namespace AdventureWorks.Dal.EntityClasses
 				case "StateProvince":
 					this.StateProvince = (StateProvinceEntity)entity;
 					break;
+				case "BusinessEntityAddresses":
+					this.BusinessEntityAddresses.Add((BusinessEntityAddressEntity)entity);
+					break;
 				case "SalesOrderHeaders":
 					this.SalesOrderHeaders.Add((SalesOrderHeaderEntity)entity);
 					break;
@@ -225,6 +236,16 @@ namespace AdventureWorks.Dal.EntityClasses
 					this.AddressCollectionViaSalesOrderHeader_.IsReadOnly = false;
 					this.AddressCollectionViaSalesOrderHeader_.Add((AddressEntity)entity);
 					this.AddressCollectionViaSalesOrderHeader_.IsReadOnly = true;
+					break;
+				case "AddressTypeCollectionViaBusinessEntityAddress":
+					this.AddressTypeCollectionViaBusinessEntityAddress.IsReadOnly = false;
+					this.AddressTypeCollectionViaBusinessEntityAddress.Add((AddressTypeEntity)entity);
+					this.AddressTypeCollectionViaBusinessEntityAddress.IsReadOnly = true;
+					break;
+				case "BusinessEntityCollectionViaBusinessEntityAddress":
+					this.BusinessEntityCollectionViaBusinessEntityAddress.IsReadOnly = false;
+					this.BusinessEntityCollectionViaBusinessEntityAddress.Add((BusinessEntityEntity)entity);
+					this.BusinessEntityCollectionViaBusinessEntityAddress.IsReadOnly = true;
 					break;
 				case "ShipMethodCollectionViaSalesOrderHeader":
 					this.ShipMethodCollectionViaSalesOrderHeader.IsReadOnly = false;
@@ -311,6 +332,9 @@ namespace AdventureWorks.Dal.EntityClasses
 				case "StateProvince":
 					toReturn.Add(Relations.StateProvinceEntityUsingStateProvinceId);
 					break;
+				case "BusinessEntityAddresses":
+					toReturn.Add(Relations.BusinessEntityAddressEntityUsingAddressId);
+					break;
 				case "SalesOrderHeaders":
 					toReturn.Add(Relations.SalesOrderHeaderEntityUsingBillToAddressId);
 					break;
@@ -324,6 +348,14 @@ namespace AdventureWorks.Dal.EntityClasses
 				case "AddressCollectionViaSalesOrderHeader_":
 					toReturn.Add(Relations.SalesOrderHeaderEntityUsingBillToAddressId, "AddressEntity__", "SalesOrderHeader_", JoinHint.None);
 					toReturn.Add(SalesOrderHeaderEntity.Relations.AddressEntityUsingShipToAddressId, "SalesOrderHeader_", string.Empty, JoinHint.None);
+					break;
+				case "AddressTypeCollectionViaBusinessEntityAddress":
+					toReturn.Add(Relations.BusinessEntityAddressEntityUsingAddressId, "AddressEntity__", "BusinessEntityAddress_", JoinHint.None);
+					toReturn.Add(BusinessEntityAddressEntity.Relations.AddressTypeEntityUsingAddressTypeId, "BusinessEntityAddress_", string.Empty, JoinHint.None);
+					break;
+				case "BusinessEntityCollectionViaBusinessEntityAddress":
+					toReturn.Add(Relations.BusinessEntityAddressEntityUsingAddressId, "AddressEntity__", "BusinessEntityAddress_", JoinHint.None);
+					toReturn.Add(BusinessEntityAddressEntity.Relations.BusinessEntityEntityUsingBusinessEntityId, "BusinessEntityAddress_", string.Empty, JoinHint.None);
 					break;
 				case "ShipMethodCollectionViaSalesOrderHeader":
 					toReturn.Add(Relations.SalesOrderHeaderEntityUsingBillToAddressId, "AddressEntity__", "SalesOrderHeader_", JoinHint.None);
@@ -404,6 +436,9 @@ namespace AdventureWorks.Dal.EntityClasses
 				case "StateProvince":
 					SetupSyncStateProvince(relatedEntity);
 					break;
+				case "BusinessEntityAddresses":
+					this.BusinessEntityAddresses.Add((BusinessEntityAddressEntity)relatedEntity);
+					break;
 				case "SalesOrderHeaders":
 					this.SalesOrderHeaders.Add((SalesOrderHeaderEntity)relatedEntity);
 					break;
@@ -425,6 +460,9 @@ namespace AdventureWorks.Dal.EntityClasses
 			{
 				case "StateProvince":
 					DesetupSyncStateProvince(false, true);
+					break;
+				case "BusinessEntityAddresses":
+					this.PerformRelatedEntityRemoval(this.BusinessEntityAddresses, relatedEntity, signalRelatedEntityManyToOne);
 					break;
 				case "SalesOrderHeaders":
 					this.PerformRelatedEntityRemoval(this.SalesOrderHeaders, relatedEntity, signalRelatedEntityManyToOne);
@@ -463,6 +501,7 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override List<IEntityCollection2> GetMemberEntityCollections()
 		{
 			List<IEntityCollection2> toReturn = new List<IEntityCollection2>();
+			toReturn.Add(this.BusinessEntityAddresses);
 			toReturn.Add(this.SalesOrderHeaders);
 			toReturn.Add(this.SalesOrderHeaders1);
 			return toReturn;
@@ -476,10 +515,13 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			if (SerializationHelper.Optimization != SerializationOptimization.Fast) 
 			{
+				info.AddValue("_businessEntityAddresses", ((_businessEntityAddresses!=null) && (_businessEntityAddresses.Count>0) && !this.MarkedForDeletion)?_businessEntityAddresses:null);
 				info.AddValue("_salesOrderHeaders", ((_salesOrderHeaders!=null) && (_salesOrderHeaders.Count>0) && !this.MarkedForDeletion)?_salesOrderHeaders:null);
 				info.AddValue("_salesOrderHeaders1", ((_salesOrderHeaders1!=null) && (_salesOrderHeaders1.Count>0) && !this.MarkedForDeletion)?_salesOrderHeaders1:null);
 				info.AddValue("_addressCollectionViaSalesOrderHeader", ((_addressCollectionViaSalesOrderHeader!=null) && (_addressCollectionViaSalesOrderHeader.Count>0) && !this.MarkedForDeletion)?_addressCollectionViaSalesOrderHeader:null);
 				info.AddValue("_addressCollectionViaSalesOrderHeader_", ((_addressCollectionViaSalesOrderHeader_!=null) && (_addressCollectionViaSalesOrderHeader_.Count>0) && !this.MarkedForDeletion)?_addressCollectionViaSalesOrderHeader_:null);
+				info.AddValue("_addressTypeCollectionViaBusinessEntityAddress", ((_addressTypeCollectionViaBusinessEntityAddress!=null) && (_addressTypeCollectionViaBusinessEntityAddress.Count>0) && !this.MarkedForDeletion)?_addressTypeCollectionViaBusinessEntityAddress:null);
+				info.AddValue("_businessEntityCollectionViaBusinessEntityAddress", ((_businessEntityCollectionViaBusinessEntityAddress!=null) && (_businessEntityCollectionViaBusinessEntityAddress.Count>0) && !this.MarkedForDeletion)?_businessEntityCollectionViaBusinessEntityAddress:null);
 				info.AddValue("_shipMethodCollectionViaSalesOrderHeader", ((_shipMethodCollectionViaSalesOrderHeader!=null) && (_shipMethodCollectionViaSalesOrderHeader.Count>0) && !this.MarkedForDeletion)?_shipMethodCollectionViaSalesOrderHeader:null);
 				info.AddValue("_shipMethodCollectionViaSalesOrderHeader1", ((_shipMethodCollectionViaSalesOrderHeader1!=null) && (_shipMethodCollectionViaSalesOrderHeader1.Count>0) && !this.MarkedForDeletion)?_shipMethodCollectionViaSalesOrderHeader1:null);
 				info.AddValue("_creditCardCollectionViaSalesOrderHeader", ((_creditCardCollectionViaSalesOrderHeader!=null) && (_creditCardCollectionViaSalesOrderHeader.Count>0) && !this.MarkedForDeletion)?_creditCardCollectionViaSalesOrderHeader:null);
@@ -496,7 +538,6 @@ namespace AdventureWorks.Dal.EntityClasses
 			}
 			// __LLBLGENPRO_USER_CODE_REGION_START GetObjectInfo
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 			base.GetObjectData(info, context);
 		}
 
@@ -507,6 +548,15 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override List<IEntityRelation> GetAllRelations()
 		{
 			return new AddressRelations().GetAllRelations();
+		}
+
+		/// <summary> Creates a new IRelationPredicateBucket object which contains the predicate expression and relation collection to fetch the related entities of type 'BusinessEntityAddress' to this entity.</summary>
+		/// <returns></returns>
+		public virtual IRelationPredicateBucket GetRelationInfoBusinessEntityAddresses()
+		{
+			IRelationPredicateBucket bucket = new RelationPredicateBucket();
+			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(BusinessEntityAddressFields.AddressId, null, ComparisonOperator.Equal, this.AddressId));
+			return bucket;
 		}
 
 		/// <summary> Creates a new IRelationPredicateBucket object which contains the predicate expression and relation collection to fetch the related entities of type 'SalesOrderHeader' to this entity.</summary>
@@ -543,6 +593,26 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			IRelationPredicateBucket bucket = new RelationPredicateBucket();
 			bucket.Relations.AddRange(GetRelationsForFieldOfType("AddressCollectionViaSalesOrderHeader_"));
+			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(AddressFields.AddressId, null, ComparisonOperator.Equal, this.AddressId, "AddressEntity__"));
+			return bucket;
+		}
+
+		/// <summary> Creates a new IRelationPredicateBucket object which contains the predicate expression and relation collection to fetch the related entities of type 'AddressType' to this entity.</summary>
+		/// <returns></returns>
+		public virtual IRelationPredicateBucket GetRelationInfoAddressTypeCollectionViaBusinessEntityAddress()
+		{
+			IRelationPredicateBucket bucket = new RelationPredicateBucket();
+			bucket.Relations.AddRange(GetRelationsForFieldOfType("AddressTypeCollectionViaBusinessEntityAddress"));
+			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(AddressFields.AddressId, null, ComparisonOperator.Equal, this.AddressId, "AddressEntity__"));
+			return bucket;
+		}
+
+		/// <summary> Creates a new IRelationPredicateBucket object which contains the predicate expression and relation collection to fetch the related entities of type 'BusinessEntity' to this entity.</summary>
+		/// <returns></returns>
+		public virtual IRelationPredicateBucket GetRelationInfoBusinessEntityCollectionViaBusinessEntityAddress()
+		{
+			IRelationPredicateBucket bucket = new RelationPredicateBucket();
+			bucket.Relations.AddRange(GetRelationsForFieldOfType("BusinessEntityCollectionViaBusinessEntityAddress"));
 			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(AddressFields.AddressId, null, ComparisonOperator.Equal, this.AddressId, "AddressEntity__"));
 			return bucket;
 		}
@@ -688,10 +758,13 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override void AddToMemberEntityCollectionsQueue(Queue<IEntityCollection2> collectionsQueue) 
 		{
 			base.AddToMemberEntityCollectionsQueue(collectionsQueue);
+			collectionsQueue.Enqueue(this._businessEntityAddresses);
 			collectionsQueue.Enqueue(this._salesOrderHeaders);
 			collectionsQueue.Enqueue(this._salesOrderHeaders1);
 			collectionsQueue.Enqueue(this._addressCollectionViaSalesOrderHeader);
 			collectionsQueue.Enqueue(this._addressCollectionViaSalesOrderHeader_);
+			collectionsQueue.Enqueue(this._addressTypeCollectionViaBusinessEntityAddress);
+			collectionsQueue.Enqueue(this._businessEntityCollectionViaBusinessEntityAddress);
 			collectionsQueue.Enqueue(this._shipMethodCollectionViaSalesOrderHeader);
 			collectionsQueue.Enqueue(this._shipMethodCollectionViaSalesOrderHeader1);
 			collectionsQueue.Enqueue(this._creditCardCollectionViaSalesOrderHeader);
@@ -711,10 +784,13 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override void GetFromMemberEntityCollectionsQueue(Queue<IEntityCollection2> collectionsQueue)
 		{
 			base.GetFromMemberEntityCollectionsQueue(collectionsQueue);
+			this._businessEntityAddresses = (EntityCollection<BusinessEntityAddressEntity>) collectionsQueue.Dequeue();
 			this._salesOrderHeaders = (EntityCollection<SalesOrderHeaderEntity>) collectionsQueue.Dequeue();
 			this._salesOrderHeaders1 = (EntityCollection<SalesOrderHeaderEntity>) collectionsQueue.Dequeue();
 			this._addressCollectionViaSalesOrderHeader = (EntityCollection<AddressEntity>) collectionsQueue.Dequeue();
 			this._addressCollectionViaSalesOrderHeader_ = (EntityCollection<AddressEntity>) collectionsQueue.Dequeue();
+			this._addressTypeCollectionViaBusinessEntityAddress = (EntityCollection<AddressTypeEntity>) collectionsQueue.Dequeue();
+			this._businessEntityCollectionViaBusinessEntityAddress = (EntityCollection<BusinessEntityEntity>) collectionsQueue.Dequeue();
 			this._shipMethodCollectionViaSalesOrderHeader = (EntityCollection<ShipMethodEntity>) collectionsQueue.Dequeue();
 			this._shipMethodCollectionViaSalesOrderHeader1 = (EntityCollection<ShipMethodEntity>) collectionsQueue.Dequeue();
 			this._creditCardCollectionViaSalesOrderHeader = (EntityCollection<CreditCardEntity>) collectionsQueue.Dequeue();
@@ -735,10 +811,13 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override bool HasPopulatedMemberEntityCollections()
 		{
 			bool toReturn = false;
+			toReturn |=(this._businessEntityAddresses != null);
 			toReturn |=(this._salesOrderHeaders != null);
 			toReturn |=(this._salesOrderHeaders1 != null);
 			toReturn |= (this._addressCollectionViaSalesOrderHeader != null);
 			toReturn |= (this._addressCollectionViaSalesOrderHeader_ != null);
+			toReturn |= (this._addressTypeCollectionViaBusinessEntityAddress != null);
+			toReturn |= (this._businessEntityCollectionViaBusinessEntityAddress != null);
 			toReturn |= (this._shipMethodCollectionViaSalesOrderHeader != null);
 			toReturn |= (this._shipMethodCollectionViaSalesOrderHeader1 != null);
 			toReturn |= (this._creditCardCollectionViaSalesOrderHeader != null);
@@ -760,10 +839,13 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override void CreateMemberEntityCollectionsQueue(Queue<IEntityCollection2> collectionsQueue, Queue<bool> requiredQueue) 
 		{
 			base.CreateMemberEntityCollectionsQueue(collectionsQueue, requiredQueue);
+			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<BusinessEntityAddressEntity>(EntityFactoryCache2.GetEntityFactory(typeof(BusinessEntityAddressEntityFactory))) : null);
 			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<SalesOrderHeaderEntity>(EntityFactoryCache2.GetEntityFactory(typeof(SalesOrderHeaderEntityFactory))) : null);
 			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<SalesOrderHeaderEntity>(EntityFactoryCache2.GetEntityFactory(typeof(SalesOrderHeaderEntityFactory))) : null);
 			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<AddressEntity>(EntityFactoryCache2.GetEntityFactory(typeof(AddressEntityFactory))) : null);
 			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<AddressEntity>(EntityFactoryCache2.GetEntityFactory(typeof(AddressEntityFactory))) : null);
+			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<AddressTypeEntity>(EntityFactoryCache2.GetEntityFactory(typeof(AddressTypeEntityFactory))) : null);
+			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<BusinessEntityEntity>(EntityFactoryCache2.GetEntityFactory(typeof(BusinessEntityEntityFactory))) : null);
 			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<ShipMethodEntity>(EntityFactoryCache2.GetEntityFactory(typeof(ShipMethodEntityFactory))) : null);
 			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<ShipMethodEntity>(EntityFactoryCache2.GetEntityFactory(typeof(ShipMethodEntityFactory))) : null);
 			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<CreditCardEntity>(EntityFactoryCache2.GetEntityFactory(typeof(CreditCardEntityFactory))) : null);
@@ -784,10 +866,13 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			Dictionary<string, object> toReturn = new Dictionary<string, object>();
 			toReturn.Add("StateProvince", _stateProvince);
+			toReturn.Add("BusinessEntityAddresses", _businessEntityAddresses);
 			toReturn.Add("SalesOrderHeaders", _salesOrderHeaders);
 			toReturn.Add("SalesOrderHeaders1", _salesOrderHeaders1);
 			toReturn.Add("AddressCollectionViaSalesOrderHeader", _addressCollectionViaSalesOrderHeader);
 			toReturn.Add("AddressCollectionViaSalesOrderHeader_", _addressCollectionViaSalesOrderHeader_);
+			toReturn.Add("AddressTypeCollectionViaBusinessEntityAddress", _addressTypeCollectionViaBusinessEntityAddress);
+			toReturn.Add("BusinessEntityCollectionViaBusinessEntityAddress", _businessEntityCollectionViaBusinessEntityAddress);
 			toReturn.Add("ShipMethodCollectionViaSalesOrderHeader", _shipMethodCollectionViaSalesOrderHeader);
 			toReturn.Add("ShipMethodCollectionViaSalesOrderHeader1", _shipMethodCollectionViaSalesOrderHeader1);
 			toReturn.Add("CreditCardCollectionViaSalesOrderHeader", _creditCardCollectionViaSalesOrderHeader);
@@ -810,7 +895,6 @@ namespace AdventureWorks.Dal.EntityClasses
 			
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassMembers
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 			OnInitClassMembersComplete();
 		}
 
@@ -888,7 +972,6 @@ namespace AdventureWorks.Dal.EntityClasses
 
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassEmpty
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 
 			OnInitialized();
 
@@ -906,6 +989,13 @@ namespace AdventureWorks.Dal.EntityClasses
 		public  static Dictionary<string, string> CustomProperties
 		{
 			get { return _customProperties;}
+		}
+
+		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'BusinessEntityAddress' for this entity.</summary>
+		/// <returns>Ready to use IPrefetchPathElement2 implementation.</returns>
+		public static IPrefetchPathElement2 PrefetchPathBusinessEntityAddresses
+		{
+			get	{ return new PrefetchPathElement2( new EntityCollection<BusinessEntityAddressEntity>(EntityFactoryCache2.GetEntityFactory(typeof(BusinessEntityAddressEntityFactory))), (IEntityRelation)GetRelationsForField("BusinessEntityAddresses")[0], (int)AdventureWorks.Dal.EntityType.AddressEntity, (int)AdventureWorks.Dal.EntityType.BusinessEntityAddressEntity, 0, null, null, null, null, "BusinessEntityAddresses", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.OneToMany);	}
 		}
 
 		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'SalesOrderHeader' for this entity.</summary>
@@ -945,6 +1035,32 @@ namespace AdventureWorks.Dal.EntityClasses
 				intermediateRelation.SetAliases(string.Empty, "SalesOrderHeader_");
 				return new PrefetchPathElement2(new EntityCollection<AddressEntity>(EntityFactoryCache2.GetEntityFactory(typeof(AddressEntityFactory))), intermediateRelation,
 					(int)AdventureWorks.Dal.EntityType.AddressEntity, (int)AdventureWorks.Dal.EntityType.AddressEntity, 0, null, null, GetRelationsForField("AddressCollectionViaSalesOrderHeader_"), null, "AddressCollectionViaSalesOrderHeader_", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.ManyToMany);
+			}
+		}
+
+		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'AddressType' for this entity.</summary>
+		/// <returns>Ready to use IPrefetchPathElement2 implementation.</returns>
+		public static IPrefetchPathElement2 PrefetchPathAddressTypeCollectionViaBusinessEntityAddress
+		{
+			get
+			{
+				IEntityRelation intermediateRelation = Relations.BusinessEntityAddressEntityUsingAddressId;
+				intermediateRelation.SetAliases(string.Empty, "BusinessEntityAddress_");
+				return new PrefetchPathElement2(new EntityCollection<AddressTypeEntity>(EntityFactoryCache2.GetEntityFactory(typeof(AddressTypeEntityFactory))), intermediateRelation,
+					(int)AdventureWorks.Dal.EntityType.AddressEntity, (int)AdventureWorks.Dal.EntityType.AddressTypeEntity, 0, null, null, GetRelationsForField("AddressTypeCollectionViaBusinessEntityAddress"), null, "AddressTypeCollectionViaBusinessEntityAddress", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.ManyToMany);
+			}
+		}
+
+		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'BusinessEntity' for this entity.</summary>
+		/// <returns>Ready to use IPrefetchPathElement2 implementation.</returns>
+		public static IPrefetchPathElement2 PrefetchPathBusinessEntityCollectionViaBusinessEntityAddress
+		{
+			get
+			{
+				IEntityRelation intermediateRelation = Relations.BusinessEntityAddressEntityUsingAddressId;
+				intermediateRelation.SetAliases(string.Empty, "BusinessEntityAddress_");
+				return new PrefetchPathElement2(new EntityCollection<BusinessEntityEntity>(EntityFactoryCache2.GetEntityFactory(typeof(BusinessEntityEntityFactory))), intermediateRelation,
+					(int)AdventureWorks.Dal.EntityType.AddressEntity, (int)AdventureWorks.Dal.EntityType.BusinessEntityEntity, 0, null, null, GetRelationsForField("BusinessEntityCollectionViaBusinessEntityAddress"), null, "BusinessEntityCollectionViaBusinessEntityAddress", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.ManyToMany);
 			}
 		}
 
@@ -1209,7 +1325,7 @@ namespace AdventureWorks.Dal.EntityClasses
 		/// <remarks>Mapped on  table field: "Address"."SpatialLocation"<br/>
 		/// Table field type characteristics (type, precision, scale, length): Udt, 0, 0, 0<br/>
 		/// Table field behavior characteristics (is nullable, is PK, is identity): true, false, false</remarks>
-		public virtual SqlGeography SpatialLocation
+		public virtual Microsoft.SqlServer.Types.SqlGeography SpatialLocation
 		{
 			get { return (Microsoft.SqlServer.Types.SqlGeography)GetValue((int)AddressFieldIndex.SpatialLocation, true); }
 			set	{ SetValue((int)AddressFieldIndex.SpatialLocation, value); }
@@ -1223,6 +1339,13 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			get { return (System.Int32)GetValue((int)AddressFieldIndex.StateProvinceId, true); }
 			set	{ SetValue((int)AddressFieldIndex.StateProvinceId, value); }
+		}
+
+		/// <summary> Gets the EntityCollection with the related entities of type 'BusinessEntityAddressEntity' which are related to this entity via a relation of type '1:n'. If the EntityCollection hasn't been fetched yet, the collection returned will be empty.<br/><br/></summary>
+		[TypeContainedAttribute(typeof(BusinessEntityAddressEntity))]
+		public virtual EntityCollection<BusinessEntityAddressEntity> BusinessEntityAddresses
+		{
+			get { return GetOrCreateEntityCollection<BusinessEntityAddressEntity, BusinessEntityAddressEntityFactory>("Address", true, false, ref _businessEntityAddresses);	}
 		}
 
 		/// <summary> Gets the EntityCollection with the related entities of type 'SalesOrderHeaderEntity' which are related to this entity via a relation of type '1:n'. If the EntityCollection hasn't been fetched yet, the collection returned will be empty.<br/><br/></summary>
@@ -1251,6 +1374,20 @@ namespace AdventureWorks.Dal.EntityClasses
 		public virtual EntityCollection<AddressEntity> AddressCollectionViaSalesOrderHeader_
 		{
 			get { return GetOrCreateEntityCollection<AddressEntity, AddressEntityFactory>("AddressCollectionViaSalesOrderHeader", false, true, ref _addressCollectionViaSalesOrderHeader_);	}
+		}
+
+		/// <summary> Gets the EntityCollection with the related entities of type 'AddressTypeEntity' which are related to this entity via a relation of type 'm:n'. If the EntityCollection hasn't been fetched yet, the collection returned will be empty.<br/><br/></summary>
+		[TypeContainedAttribute(typeof(AddressTypeEntity))]
+		public virtual EntityCollection<AddressTypeEntity> AddressTypeCollectionViaBusinessEntityAddress
+		{
+			get { return GetOrCreateEntityCollection<AddressTypeEntity, AddressTypeEntityFactory>("AddressCollectionViaBusinessEntityAddress", false, true, ref _addressTypeCollectionViaBusinessEntityAddress);	}
+		}
+
+		/// <summary> Gets the EntityCollection with the related entities of type 'BusinessEntityEntity' which are related to this entity via a relation of type 'm:n'. If the EntityCollection hasn't been fetched yet, the collection returned will be empty.<br/><br/></summary>
+		[TypeContainedAttribute(typeof(BusinessEntityEntity))]
+		public virtual EntityCollection<BusinessEntityEntity> BusinessEntityCollectionViaBusinessEntityAddress
+		{
+			get { return GetOrCreateEntityCollection<BusinessEntityEntity, BusinessEntityEntityFactory>("AddressCollectionViaBusinessEntityAddress", false, true, ref _businessEntityCollectionViaBusinessEntityAddress);	}
 		}
 
 		/// <summary> Gets the EntityCollection with the related entities of type 'ShipMethodEntity' which are related to this entity via a relation of type 'm:n'. If the EntityCollection hasn't been fetched yet, the collection returned will be empty.<br/><br/></summary>
@@ -1381,7 +1518,6 @@ namespace AdventureWorks.Dal.EntityClasses
 		
 		// __LLBLGENPRO_USER_CODE_REGION_START CustomEntityCode
 		// __LLBLGENPRO_USER_CODE_REGION_END
-		
 		#endregion
 
 		#region Included code

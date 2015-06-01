@@ -30,11 +30,26 @@ namespace AdventureWorks.Dal.RelationClasses
 		public virtual List<IEntityRelation> GetAllRelations()
 		{
 			List<IEntityRelation> toReturn = new List<IEntityRelation>();
+			toReturn.Add(this.BusinessEntityAddressEntityUsingAddressTypeId);
 			return toReturn;
 		}
 
 		#region Class Property Declarations
 
+		/// <summary>Returns a new IEntityRelation object, between AddressTypeEntity and BusinessEntityAddressEntity over the 1:n relation they have, using the relation between the fields:
+		/// AddressType.AddressTypeId - BusinessEntityAddress.AddressTypeId
+		/// </summary>
+		public virtual IEntityRelation BusinessEntityAddressEntityUsingAddressTypeId
+		{
+			get
+			{
+				IEntityRelation relation = new EntityRelation(SD.LLBLGen.Pro.ORMSupportClasses.RelationType.OneToMany, "BusinessEntityAddresses" , true);
+				relation.AddEntityFieldPair(AddressTypeFields.AddressTypeId, BusinessEntityAddressFields.AddressTypeId);
+				relation.InheritanceInfoPkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("AddressTypeEntity", true);
+				relation.InheritanceInfoFkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("BusinessEntityAddressEntity", false);
+				return relation;
+			}
+		}
 
 
 		/// <summary>stub, not used in this entity, only for TargetPerEntity entities.</summary>
@@ -51,6 +66,7 @@ namespace AdventureWorks.Dal.RelationClasses
 	/// <summary>Static class which is used for providing relationship instances which are re-used internally for syncing</summary>
 	internal static class StaticAddressTypeRelations
 	{
+		internal static readonly IEntityRelation BusinessEntityAddressEntityUsingAddressTypeIdStatic = new AddressTypeRelations().BusinessEntityAddressEntityUsingAddressTypeId;
 
 		/// <summary>CTor</summary>
 		static StaticAddressTypeRelations()

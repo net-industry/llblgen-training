@@ -86,11 +86,35 @@ namespace AdventureWorks.Dal.Linq
 				case AdventureWorks.Dal.EntityType.AddressTypeEntity:
 					toReturn = this.AddressType;
 					break;
+				case AdventureWorks.Dal.EntityType.BusinessEntityEntity:
+					toReturn = this.BusinessEntity;
+					break;
+				case AdventureWorks.Dal.EntityType.BusinessEntityAddressEntity:
+					toReturn = this.BusinessEntityAddress;
+					break;
+				case AdventureWorks.Dal.EntityType.BusinessEntityContactEntity:
+					toReturn = this.BusinessEntityContact;
+					break;
 				case AdventureWorks.Dal.EntityType.ContactTypeEntity:
 					toReturn = this.ContactType;
 					break;
 				case AdventureWorks.Dal.EntityType.CountryRegionEntity:
 					toReturn = this.CountryRegion;
+					break;
+				case AdventureWorks.Dal.EntityType.EmailAddressEntity:
+					toReturn = this.EmailAddress;
+					break;
+				case AdventureWorks.Dal.EntityType.PasswordEntity:
+					toReturn = this.Password;
+					break;
+				case AdventureWorks.Dal.EntityType.PersonEntity:
+					toReturn = this.Person;
+					break;
+				case AdventureWorks.Dal.EntityType.PersonPhoneEntity:
+					toReturn = this.PersonPhone;
+					break;
+				case AdventureWorks.Dal.EntityType.PhoneNumberTypeEntity:
+					toReturn = this.PhoneNumberType;
 					break;
 				case AdventureWorks.Dal.EntityType.StateProvinceEntity:
 					toReturn = this.StateProvince;
@@ -200,6 +224,9 @@ namespace AdventureWorks.Dal.Linq
 				case AdventureWorks.Dal.EntityType.CustomerEntity:
 					toReturn = this.Customer;
 					break;
+				case AdventureWorks.Dal.EntityType.PersonCreditCardEntity:
+					toReturn = this.PersonCreditCard;
+					break;
 				case AdventureWorks.Dal.EntityType.SalesOrderDetailEntity:
 					toReturn = this.SalesOrderDetail;
 					break;
@@ -303,6 +330,24 @@ namespace AdventureWorks.Dal.Linq
 			get { return new DataSource2<AddressTypeEntity>(_adapterToUse, new ElementCreator(), _customFunctionMappings, _contextToUse); }
 		}
 		
+		/// <summary>returns the datasource to use in a Linq query when targeting BusinessEntityEntity instances in the database.</summary>
+		public DataSource2<BusinessEntityEntity> BusinessEntity
+		{
+			get { return new DataSource2<BusinessEntityEntity>(_adapterToUse, new ElementCreator(), _customFunctionMappings, _contextToUse); }
+		}
+		
+		/// <summary>returns the datasource to use in a Linq query when targeting BusinessEntityAddressEntity instances in the database.</summary>
+		public DataSource2<BusinessEntityAddressEntity> BusinessEntityAddress
+		{
+			get { return new DataSource2<BusinessEntityAddressEntity>(_adapterToUse, new ElementCreator(), _customFunctionMappings, _contextToUse); }
+		}
+		
+		/// <summary>returns the datasource to use in a Linq query when targeting BusinessEntityContactEntity instances in the database.</summary>
+		public DataSource2<BusinessEntityContactEntity> BusinessEntityContact
+		{
+			get { return new DataSource2<BusinessEntityContactEntity>(_adapterToUse, new ElementCreator(), _customFunctionMappings, _contextToUse); }
+		}
+		
 		/// <summary>returns the datasource to use in a Linq query when targeting ContactTypeEntity instances in the database.</summary>
 		public DataSource2<ContactTypeEntity> ContactType
 		{
@@ -313,6 +358,36 @@ namespace AdventureWorks.Dal.Linq
 		public DataSource2<CountryRegionEntity> CountryRegion
 		{
 			get { return new DataSource2<CountryRegionEntity>(_adapterToUse, new ElementCreator(), _customFunctionMappings, _contextToUse); }
+		}
+		
+		/// <summary>returns the datasource to use in a Linq query when targeting EmailAddressEntity instances in the database.</summary>
+		public DataSource2<EmailAddressEntity> EmailAddress
+		{
+			get { return new DataSource2<EmailAddressEntity>(_adapterToUse, new ElementCreator(), _customFunctionMappings, _contextToUse); }
+		}
+		
+		/// <summary>returns the datasource to use in a Linq query when targeting PasswordEntity instances in the database.</summary>
+		public DataSource2<PasswordEntity> Password
+		{
+			get { return new DataSource2<PasswordEntity>(_adapterToUse, new ElementCreator(), _customFunctionMappings, _contextToUse); }
+		}
+		
+		/// <summary>returns the datasource to use in a Linq query when targeting PersonEntity instances in the database.</summary>
+		public DataSource2<PersonEntity> Person
+		{
+			get { return new DataSource2<PersonEntity>(_adapterToUse, new ElementCreator(), _customFunctionMappings, _contextToUse); }
+		}
+		
+		/// <summary>returns the datasource to use in a Linq query when targeting PersonPhoneEntity instances in the database.</summary>
+		public DataSource2<PersonPhoneEntity> PersonPhone
+		{
+			get { return new DataSource2<PersonPhoneEntity>(_adapterToUse, new ElementCreator(), _customFunctionMappings, _contextToUse); }
+		}
+		
+		/// <summary>returns the datasource to use in a Linq query when targeting PhoneNumberTypeEntity instances in the database.</summary>
+		public DataSource2<PhoneNumberTypeEntity> PhoneNumberType
+		{
+			get { return new DataSource2<PhoneNumberTypeEntity>(_adapterToUse, new ElementCreator(), _customFunctionMappings, _contextToUse); }
 		}
 		
 		/// <summary>returns the datasource to use in a Linq query when targeting StateProvinceEntity instances in the database.</summary>
@@ -529,6 +604,12 @@ namespace AdventureWorks.Dal.Linq
 		public DataSource2<CustomerEntity> Customer
 		{
 			get { return new DataSource2<CustomerEntity>(_adapterToUse, new ElementCreator(), _customFunctionMappings, _contextToUse); }
+		}
+		
+		/// <summary>returns the datasource to use in a Linq query when targeting PersonCreditCardEntity instances in the database.</summary>
+		public DataSource2<PersonCreditCardEntity> PersonCreditCard
+		{
+			get { return new DataSource2<PersonCreditCardEntity>(_adapterToUse, new ElementCreator(), _customFunctionMappings, _contextToUse); }
 		}
 		
 		/// <summary>returns the datasource to use in a Linq query when targeting SalesOrderDetailEntity instances in the database.</summary>

@@ -23,7 +23,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
         {
             var birthDays = metaData.Employee
                     .Where(e => e.BirthDate.Year == 1980)
-                    .Select(e=>e.BirthDate);
+                    .Select(e => e.BirthDate);
             
             //IQueryable<DateTime> dateTimes = birthDays.Where(b => b.Year == 1980);
 
@@ -55,51 +55,51 @@ namespace AdventureWorks.Web.Tests._01_Predicates
             adapter.ParameterisedPrefetchPathThreshold = 400;
 
             var city = "";
-
-            employeesInRedmond = employeesInRedmond.WithPath(
-                r=>r
-                    .Prefetch<AddressEntity>(e=>e.Addresses)
-                        .FilterOn(a=>a.City==city)
-                        .LimitTo(1)
-                    .Prefetch<ContactEntity>(e=>e.Contact)
-            );
-
-            Console.WriteLine(employeesInRedmond.Count());
-
-            if(!string.IsNullOrEmpty(city))
-                employeesInRedmond = employeesInRedmond.Where(e => e.Addresses.Any(a => a.City == city));
-
-            foreach (var employee in employeesInRedmond)
-            {
-                Console.WriteLine(employee.BirthDate);
-
-                //Assert.IsTrue(employee.Addresses.Count(a => a.City == city) > 0);
-            }
-
             /*
+                      employeesInRedmond = employeesInRedmond.WithPath(
+                          r=>r
+                              .Prefetch<AddressEntity>(e=>e.Addresses )
+                                  .FilterOn(a=>a.City==city)
+                                  .LimitTo(1)
+                              .Prefetch<ContactEntity>(e=>e.Contact)
+                      );
 
-            employeesInRedmond = employeesInRedmond.WithPath(p => p
-                .Prefetch(e => e.Contact)
-                .Prefetch<AddressEntity>(e => e.Addresses)
-             );
-            
+                      Console.WriteLine(employeesInRedmond.Count());
 
-            //var anonTypes = employeesInRedmond.Select(e => new { e.BirthDate, Gender = e.Gender, e.Contact.FirstName, e.Contact.LastName });
+                      if(!string.IsNullOrEmpty(city))
+                          employeesInRedmond = employeesInRedmond.Where(e => e.Addresses.Any(a => a.City == city));
 
-            List<EmployeeEntity> employeeEntities = employeesInRedmond.ToList();
+                      foreach (var employee in employeesInRedmond)
+                      {
+                          Console.WriteLine(employee.BirthDate);
 
-            var inMemTypes = employeeEntities
-                .Select(e => new { 
-                    e.BirthDate, 
-                    Gender = e.Gender, 
-                    Name = e.Contact.FirstName + " " + e.Contact.LastName,
-                    City = e.Addresses.First().City })
-                .ToList();
-            
-            foreach (var employee in inMemTypes)
-            {
-                Console.WriteLine(employee);
-            }*/
+                          //Assert.IsTrue(employee.Addresses.Count(a => a.City == city) > 0);
+                      }
+
+
+
+                      employeesInRedmond = employeesInRedmond.WithPath(p => p
+                          .Prefetch(e => e.Contact)
+                          .Prefetch<AddressEntity>(e => e.Addresses)
+                       );
+
+
+                      //var anonTypes = employeesInRedmond.Select(e => new { e.BirthDate, Gender = e.Gender, e.Contact.FirstName, e.Contact.LastName });
+
+                      List<EmployeeEntity> employeeEntities = employeesInRedmond.ToList();
+
+                      var inMemTypes = employeeEntities
+                          .Select(e => new { 
+                              e.BirthDate, 
+                              Gender = e.Gender, 
+                              Name = e.Contact.FirstName + " " + e.Contact.LastName,
+                              City = e.Addresses.First().City })
+                          .ToList();
+
+                      foreach (var employee in inMemTypes)
+                      {
+                          Console.WriteLine(employee);
+                      }*/
         }
     }
 }

@@ -27,7 +27,7 @@ namespace AdventureWorks.Web.Tests
 
 			//adapter.StartTransaction(IsolationLevel.Serializable, "Unit Test");
 
-			HibernatingRhinos.Profiler.Appender.LLBLGen.LLBLGenProfiler.Initialize();
+			//HibernatingRhinos.Profiler.Appender.LLBLGen.LLBLGenProfiler.Initialize();
             StartProfiler();
 		}
 

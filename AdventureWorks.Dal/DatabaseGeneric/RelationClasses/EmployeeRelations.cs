@@ -35,6 +35,7 @@ namespace AdventureWorks.Dal.RelationClasses
 			toReturn.Add(this.JobCandidateEntityUsingBusinessEntityId);
 			toReturn.Add(this.DocumentEntityUsingOwner);
 			toReturn.Add(this.PurchaseOrderHeaderEntityUsingEmployeeId);
+			toReturn.Add(this.PersonEntityUsingBusinessEntityId);
 			toReturn.Add(this.SalesPersonEntityUsingBusinessEntityId);
 			return toReturn;
 		}
@@ -116,6 +117,25 @@ namespace AdventureWorks.Dal.RelationClasses
 			}
 		}
 
+		/// <summary>Returns a new IEntityRelation object, between EmployeeEntity and PersonEntity over the 1:1 relation they have, using the relation between the fields:
+		/// Employee.BusinessEntityId - Person.BusinessEntityId
+		/// </summary>
+		public virtual IEntityRelation PersonEntityUsingBusinessEntityId
+		{
+			get
+			{
+				IEntityRelation relation = new EntityRelation(SD.LLBLGen.Pro.ORMSupportClasses.RelationType.OneToOne, "Person", false);
+
+
+
+				relation.AddEntityFieldPair(PersonFields.BusinessEntityId, EmployeeFields.BusinessEntityId);
+
+				relation.InheritanceInfoPkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("PersonEntity", false);
+				relation.InheritanceInfoFkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("EmployeeEntity", true);
+				return relation;
+			}
+		}
+
 		/// <summary>Returns a new IEntityRelation object, between EmployeeEntity and SalesPersonEntity over the 1:1 relation they have, using the relation between the fields:
 		/// Employee.BusinessEntityId - SalesPerson.BusinessEntityId
 		/// </summary>
@@ -154,6 +174,7 @@ namespace AdventureWorks.Dal.RelationClasses
 		internal static readonly IEntityRelation JobCandidateEntityUsingBusinessEntityIdStatic = new EmployeeRelations().JobCandidateEntityUsingBusinessEntityId;
 		internal static readonly IEntityRelation DocumentEntityUsingOwnerStatic = new EmployeeRelations().DocumentEntityUsingOwner;
 		internal static readonly IEntityRelation PurchaseOrderHeaderEntityUsingEmployeeIdStatic = new EmployeeRelations().PurchaseOrderHeaderEntityUsingEmployeeId;
+		internal static readonly IEntityRelation PersonEntityUsingBusinessEntityIdStatic = new EmployeeRelations().PersonEntityUsingBusinessEntityId;
 		internal static readonly IEntityRelation SalesPersonEntityUsingBusinessEntityIdStatic = new EmployeeRelations().SalesPersonEntityUsingBusinessEntityId;
 
 		/// <summary>CTor</summary>

@@ -154,6 +154,24 @@ namespace AdventureWorks.Dal.FactoryClasses
 			get { return Create<AddressTypeEntity>(); }
 		}
 
+		/// <summary>Creates and returns a new EntityQuery for the BusinessEntity entity</summary>
+		public EntityQuery<BusinessEntityEntity> BusinessEntity
+		{
+			get { return Create<BusinessEntityEntity>(); }
+		}
+
+		/// <summary>Creates and returns a new EntityQuery for the BusinessEntityAddress entity</summary>
+		public EntityQuery<BusinessEntityAddressEntity> BusinessEntityAddress
+		{
+			get { return Create<BusinessEntityAddressEntity>(); }
+		}
+
+		/// <summary>Creates and returns a new EntityQuery for the BusinessEntityContact entity</summary>
+		public EntityQuery<BusinessEntityContactEntity> BusinessEntityContact
+		{
+			get { return Create<BusinessEntityContactEntity>(); }
+		}
+
 		/// <summary>Creates and returns a new EntityQuery for the ContactType entity</summary>
 		public EntityQuery<ContactTypeEntity> ContactType
 		{
@@ -164,6 +182,36 @@ namespace AdventureWorks.Dal.FactoryClasses
 		public EntityQuery<CountryRegionEntity> CountryRegion
 		{
 			get { return Create<CountryRegionEntity>(); }
+		}
+
+		/// <summary>Creates and returns a new EntityQuery for the EmailAddress entity</summary>
+		public EntityQuery<EmailAddressEntity> EmailAddress
+		{
+			get { return Create<EmailAddressEntity>(); }
+		}
+
+		/// <summary>Creates and returns a new EntityQuery for the Password entity</summary>
+		public EntityQuery<PasswordEntity> Password
+		{
+			get { return Create<PasswordEntity>(); }
+		}
+
+		/// <summary>Creates and returns a new EntityQuery for the Person entity</summary>
+		public EntityQuery<PersonEntity> Person
+		{
+			get { return Create<PersonEntity>(); }
+		}
+
+		/// <summary>Creates and returns a new EntityQuery for the PersonPhone entity</summary>
+		public EntityQuery<PersonPhoneEntity> PersonPhone
+		{
+			get { return Create<PersonPhoneEntity>(); }
+		}
+
+		/// <summary>Creates and returns a new EntityQuery for the PhoneNumberType entity</summary>
+		public EntityQuery<PhoneNumberTypeEntity> PhoneNumberType
+		{
+			get { return Create<PhoneNumberTypeEntity>(); }
 		}
 
 		/// <summary>Creates and returns a new EntityQuery for the StateProvince entity</summary>
@@ -380,6 +428,12 @@ namespace AdventureWorks.Dal.FactoryClasses
 		public EntityQuery<CustomerEntity> Customer
 		{
 			get { return Create<CustomerEntity>(); }
+		}
+
+		/// <summary>Creates and returns a new EntityQuery for the PersonCreditCard entity</summary>
+		public EntityQuery<PersonCreditCardEntity> PersonCreditCard
+		{
+			get { return Create<PersonCreditCardEntity>(); }
 		}
 
 		/// <summary>Creates and returns a new EntityQuery for the SalesOrderDetail entity</summary>

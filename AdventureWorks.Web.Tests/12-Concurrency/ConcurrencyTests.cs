@@ -13,7 +13,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
         [ExpectedException(typeof(ORMConcurrencyException))]
         public void AssertConcurrencyFailed()
         {
-            var customer1 = metaData.CustomerBillingAddress.First();
+            /*var customer1 = metaData.CustomerBillingAddress.First();
             var customer2 = metaData.CustomerBillingAddress.First();
 
             customer2.ConcurrencyPredicateFactoryToUse = customer1.ConcurrencyPredicateFactoryToUse = new CustomerBillingConcurrencyPredicate();
@@ -22,7 +22,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
             customer2.Rowguid = Guid.NewGuid();
 
             adapter.SaveEntity(customer1);
-            adapter.SaveEntity(customer2);
+            adapter.SaveEntity(customer2);*/
         }
 	}
 }

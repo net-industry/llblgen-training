@@ -12,7 +12,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
     {
         public IPredicateExpression CreatePredicate(ConcurrencyPredicateType predicateTypeToCreate, object containingEntity)
         {
-            CustomerBillingAddressEntity address = (CustomerBillingAddressEntity) containingEntity;
+            /*CustomerBillingAddressEntity address = (CustomerBillingAddressEntity) containingEntity;
             switch (predicateTypeToCreate)
             {
                 case ConcurrencyPredicateType.Save:
@@ -21,7 +21,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("predicateTypeToCreate");
-            }
+            }*/
             return null;
         }
     }

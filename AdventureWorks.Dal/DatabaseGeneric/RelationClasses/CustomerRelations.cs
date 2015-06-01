@@ -31,6 +31,7 @@ namespace AdventureWorks.Dal.RelationClasses
 		{
 			List<IEntityRelation> toReturn = new List<IEntityRelation>();
 			toReturn.Add(this.SalesOrderHeaderEntityUsingCustomerId);
+			toReturn.Add(this.PersonEntityUsingPersonId);
 			toReturn.Add(this.SalesTerritoryEntityUsingTerritoryId);
 			toReturn.Add(this.StoreEntityUsingStoreId);
 			return toReturn;
@@ -54,6 +55,20 @@ namespace AdventureWorks.Dal.RelationClasses
 		}
 
 
+		/// <summary>Returns a new IEntityRelation object, between CustomerEntity and PersonEntity over the m:1 relation they have, using the relation between the fields:
+		/// Customer.PersonId - Person.BusinessEntityId
+		/// </summary>
+		public virtual IEntityRelation PersonEntityUsingPersonId
+		{
+			get
+			{
+				IEntityRelation relation = new EntityRelation(SD.LLBLGen.Pro.ORMSupportClasses.RelationType.ManyToOne, "Person", false);
+				relation.AddEntityFieldPair(PersonFields.BusinessEntityId, CustomerFields.PersonId);
+				relation.InheritanceInfoPkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("PersonEntity", false);
+				relation.InheritanceInfoFkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("CustomerEntity", true);
+				return relation;
+			}
+		}
 		/// <summary>Returns a new IEntityRelation object, between CustomerEntity and SalesTerritoryEntity over the m:1 relation they have, using the relation between the fields:
 		/// Customer.TerritoryId - SalesTerritory.TerritoryId
 		/// </summary>
@@ -97,6 +112,7 @@ namespace AdventureWorks.Dal.RelationClasses
 	internal static class StaticCustomerRelations
 	{
 		internal static readonly IEntityRelation SalesOrderHeaderEntityUsingCustomerIdStatic = new CustomerRelations().SalesOrderHeaderEntityUsingCustomerId;
+		internal static readonly IEntityRelation PersonEntityUsingPersonIdStatic = new CustomerRelations().PersonEntityUsingPersonId;
 		internal static readonly IEntityRelation SalesTerritoryEntityUsingTerritoryIdStatic = new CustomerRelations().SalesTerritoryEntityUsingTerritoryId;
 		internal static readonly IEntityRelation StoreEntityUsingStoreIdStatic = new CustomerRelations().StoreEntityUsingStoreId;
 

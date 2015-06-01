@@ -21,13 +21,13 @@ namespace AdventureWorks.Web.Tests._01_Predicates
         {
             var contacts = new EntityCollection<VendorEntity>();
 
-            var relationPredicateBucket = new RelationPredicateBucket(VendorFields.Name=="Joe");
+            var relationPredicateBucket = new RelationPredicateBucket(VendorFields.Name== "Lindell");
             
             adapter.FetchEntityCollection(contacts, relationPredicateBucket);
 
             foreach (var contactEntity in contacts)
             {
-                TestContext.WriteLine("Last Name: " +contactEntity.Name);
+                TestContext.WriteLine("Name: " + contactEntity.Name);
             }
         }
         
@@ -35,7 +35,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
         [TestMethod]
         public void GetContactsNotInStoreContactType()
         {
-            var contacts = new EntityCollection<VendorEntity>();
+/*            var contacts = new EntityCollection<VendorEntity>();
             
             int[] ids = new int[]{11,14};
 
@@ -60,7 +60,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
             foreach (var contactEntity in contacts)
             {
                 Console.WriteLine("Last Name: " +contactEntity.LastName);
-            }
+            }*/
         }
     }
 }

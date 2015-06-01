@@ -42,7 +42,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
         [TestMethod]
         public void DeleteEmployee()
         {
-            EmployeeEntity employeeEntity = metaData.Employee.Where(e => e.EmployeeId == 1)
+            EmployeeEntity employeeEntity = metaData.Employee.Where(e => e.BusinessEntityId == 1)
                 .Single();
 
             //adapter.DeleteEntity(employeeEntity);

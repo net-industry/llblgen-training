@@ -14,7 +14,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
         [TestMethod]
         public void GetQuantityAsEnum()
         {
-            var productInventoryEntities = metaData.ProductInventory.Where(i => i.Quantity < (RgbColor)2);
+            var productInventoryEntities = metaData.ProductInventory.Where(i => i.Quantity < 2);
             foreach (var productInventoryEntity in productInventoryEntities)
             {
                 Console.WriteLine(productInventoryEntity.Quantity);

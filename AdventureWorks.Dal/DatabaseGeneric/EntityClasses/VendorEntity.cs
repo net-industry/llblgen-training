@@ -25,13 +25,11 @@ namespace AdventureWorks.Dal.EntityClasses
 {
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
-	
 	/// <summary>Entity class which represents the entity 'Vendor'.<br/><br/></summary>
 	[Serializable]
 	public partial class VendorEntity : CommonEntityBase
 		// __LLBLGENPRO_USER_CODE_REGION_START AdditionalInterfaces
-		// __LLBLGENPRO_USER_CODE_REGION_END
-			
+		// __LLBLGENPRO_USER_CODE_REGION_END	
 	{
 		#region Class Member Declarations
 		private EntityCollection<ProductVendorEntity> _productVendors;
@@ -40,10 +38,10 @@ namespace AdventureWorks.Dal.EntityClasses
 		private EntityCollection<ProductEntity> _productCollectionViaProductVendor;
 		private EntityCollection<UnitMeasureEntity> _unitMeasureCollectionViaProductVendor;
 		private EntityCollection<ShipMethodEntity> _shipMethodCollectionViaPurchaseOrderHeader;
+		private BusinessEntityEntity _businessEntity;
 
 		// __LLBLGENPRO_USER_CODE_REGION_START PrivateMembers
 		// __LLBLGENPRO_USER_CODE_REGION_END
-		
 		#endregion
 
 		#region Statics
@@ -65,6 +63,8 @@ namespace AdventureWorks.Dal.EntityClasses
 			public static readonly string UnitMeasureCollectionViaProductVendor = "UnitMeasureCollectionViaProductVendor";
 			/// <summary>Member name ShipMethodCollectionViaPurchaseOrderHeader</summary>
 			public static readonly string ShipMethodCollectionViaPurchaseOrderHeader = "ShipMethodCollectionViaPurchaseOrderHeader";
+			/// <summary>Member name BusinessEntity</summary>
+			public static readonly string BusinessEntity = "BusinessEntity";
 		}
 		#endregion
 		
@@ -128,13 +128,32 @@ namespace AdventureWorks.Dal.EntityClasses
 				_productCollectionViaProductVendor = (EntityCollection<ProductEntity>)info.GetValue("_productCollectionViaProductVendor", typeof(EntityCollection<ProductEntity>));
 				_unitMeasureCollectionViaProductVendor = (EntityCollection<UnitMeasureEntity>)info.GetValue("_unitMeasureCollectionViaProductVendor", typeof(EntityCollection<UnitMeasureEntity>));
 				_shipMethodCollectionViaPurchaseOrderHeader = (EntityCollection<ShipMethodEntity>)info.GetValue("_shipMethodCollectionViaPurchaseOrderHeader", typeof(EntityCollection<ShipMethodEntity>));
+				_businessEntity = (BusinessEntityEntity)info.GetValue("_businessEntity", typeof(BusinessEntityEntity));
+				if(_businessEntity!=null)
+				{
+					_businessEntity.AfterSave+=new EventHandler(OnEntityAfterSave);
+				}
 				this.FixupDeserialization(FieldInfoProviderSingleton.GetInstance());
 			}
 			// __LLBLGENPRO_USER_CODE_REGION_START DeserializationConstructor
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 		}
 
+		
+		/// <summary>Performs the desync setup when an FK field has been changed. The entity referenced based on the FK field will be dereferenced and sync info will be removed.</summary>
+		/// <param name="fieldIndex">The fieldindex.</param>
+		protected override void PerformDesyncSetupFKFieldChange(int fieldIndex)
+		{
+			switch((VendorFieldIndex)fieldIndex)
+			{
+				case VendorFieldIndex.BusinessEntityId:
+					DesetupSyncBusinessEntity(true, false);
+					break;
+				default:
+					base.PerformDesyncSetupFKFieldChange(fieldIndex);
+					break;
+			}
+		}
 
 		/// <summary> Sets the related entity property to the entity specified. If the property is a collection, it will add the entity specified to that collection.</summary>
 		/// <param name="propertyName">Name of the property.</param>
@@ -169,6 +188,9 @@ namespace AdventureWorks.Dal.EntityClasses
 					this.ShipMethodCollectionViaPurchaseOrderHeader.IsReadOnly = false;
 					this.ShipMethodCollectionViaPurchaseOrderHeader.Add((ShipMethodEntity)entity);
 					this.ShipMethodCollectionViaPurchaseOrderHeader.IsReadOnly = true;
+					break;
+				case "BusinessEntity":
+					this.BusinessEntity = (BusinessEntityEntity)entity;
 					break;
 				default:
 					this.OnSetRelatedEntityProperty(propertyName, entity);
@@ -214,6 +236,9 @@ namespace AdventureWorks.Dal.EntityClasses
 					toReturn.Add(Relations.PurchaseOrderHeaderEntityUsingVendorId, "VendorEntity__", "PurchaseOrderHeader_", JoinHint.None);
 					toReturn.Add(PurchaseOrderHeaderEntity.Relations.ShipMethodEntityUsingShipMethodId, "PurchaseOrderHeader_", string.Empty, JoinHint.None);
 					break;
+				case "BusinessEntity":
+					toReturn.Add(Relations.BusinessEntityEntityUsingBusinessEntityId);
+					break;
 				default:
 					break;				
 			}
@@ -248,6 +273,9 @@ namespace AdventureWorks.Dal.EntityClasses
 				case "PurchaseOrderHeaders":
 					this.PurchaseOrderHeaders.Add((PurchaseOrderHeaderEntity)relatedEntity);
 					break;
+				case "BusinessEntity":
+					SetupSyncBusinessEntity(relatedEntity);
+					break;
 				default:
 					break;
 			}
@@ -267,6 +295,9 @@ namespace AdventureWorks.Dal.EntityClasses
 				case "PurchaseOrderHeaders":
 					this.PerformRelatedEntityRemoval(this.PurchaseOrderHeaders, relatedEntity, signalRelatedEntityManyToOne);
 					break;
+				case "BusinessEntity":
+					DesetupSyncBusinessEntity(false, true);
+					break;
 				default:
 					break;
 			}
@@ -277,6 +308,8 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override List<IEntity2> GetDependingRelatedEntities()
 		{
 			List<IEntity2> toReturn = new List<IEntity2>();
+
+
 			return toReturn;
 		}
 		
@@ -286,6 +319,11 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override List<IEntity2> GetDependentRelatedEntities()
 		{
 			List<IEntity2> toReturn = new List<IEntity2>();
+			if(_businessEntity!=null)
+			{
+				toReturn.Add(_businessEntity);
+			}
+
 			return toReturn;
 		}
 		
@@ -313,10 +351,10 @@ namespace AdventureWorks.Dal.EntityClasses
 				info.AddValue("_productCollectionViaProductVendor", ((_productCollectionViaProductVendor!=null) && (_productCollectionViaProductVendor.Count>0) && !this.MarkedForDeletion)?_productCollectionViaProductVendor:null);
 				info.AddValue("_unitMeasureCollectionViaProductVendor", ((_unitMeasureCollectionViaProductVendor!=null) && (_unitMeasureCollectionViaProductVendor.Count>0) && !this.MarkedForDeletion)?_unitMeasureCollectionViaProductVendor:null);
 				info.AddValue("_shipMethodCollectionViaPurchaseOrderHeader", ((_shipMethodCollectionViaPurchaseOrderHeader!=null) && (_shipMethodCollectionViaPurchaseOrderHeader.Count>0) && !this.MarkedForDeletion)?_shipMethodCollectionViaPurchaseOrderHeader:null);
+				info.AddValue("_businessEntity", (!this.MarkedForDeletion?_businessEntity:null));
 			}
 			// __LLBLGENPRO_USER_CODE_REGION_START GetObjectInfo
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 			base.GetObjectData(info, context);
 		}
 
@@ -384,6 +422,15 @@ namespace AdventureWorks.Dal.EntityClasses
 			IRelationPredicateBucket bucket = new RelationPredicateBucket();
 			bucket.Relations.AddRange(GetRelationsForFieldOfType("ShipMethodCollectionViaPurchaseOrderHeader"));
 			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(VendorFields.BusinessEntityId, null, ComparisonOperator.Equal, this.BusinessEntityId, "VendorEntity__"));
+			return bucket;
+		}
+
+		/// <summary> Creates a new IRelationPredicateBucket object which contains the predicate expression and relation collection to fetch the related entity of type 'BusinessEntity' to this entity.</summary>
+		/// <returns></returns>
+		public virtual IRelationPredicateBucket GetRelationInfoBusinessEntity()
+		{
+			IRelationPredicateBucket bucket = new RelationPredicateBucket();
+			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(BusinessEntityFields.BusinessEntityId, null, ComparisonOperator.Equal, this.BusinessEntityId));
 			return bucket;
 		}
 		
@@ -460,6 +507,7 @@ namespace AdventureWorks.Dal.EntityClasses
 			toReturn.Add("ProductCollectionViaProductVendor", _productCollectionViaProductVendor);
 			toReturn.Add("UnitMeasureCollectionViaProductVendor", _unitMeasureCollectionViaProductVendor);
 			toReturn.Add("ShipMethodCollectionViaPurchaseOrderHeader", _shipMethodCollectionViaPurchaseOrderHeader);
+			toReturn.Add("BusinessEntity", _businessEntity);
 			return toReturn;
 		}
 
@@ -470,7 +518,6 @@ namespace AdventureWorks.Dal.EntityClasses
 			
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassMembers
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 			OnInitClassMembersComplete();
 		}
 
@@ -501,6 +548,39 @@ namespace AdventureWorks.Dal.EntityClasses
 		}
 		#endregion
 
+		/// <summary> Removes the sync logic for member _businessEntity</summary>
+		/// <param name="signalRelatedEntity">If set to true, it will call the related entity's UnsetRelatedEntity method</param>
+		/// <param name="resetFKFields">if set to true it will also reset the FK fields pointing to the related entity</param>
+		private void DesetupSyncBusinessEntity(bool signalRelatedEntity, bool resetFKFields)
+		{
+			this.PerformDesetupSyncRelatedEntity( _businessEntity, new PropertyChangedEventHandler( OnBusinessEntityPropertyChanged ), "BusinessEntity", AdventureWorks.Dal.RelationClasses.StaticVendorRelations.BusinessEntityEntityUsingBusinessEntityIdStatic, true, signalRelatedEntity, "Vendor", false, new int[] { (int)VendorFieldIndex.BusinessEntityId } );
+			_businessEntity = null;
+		}
+		
+		/// <summary> setups the sync logic for member _businessEntity</summary>
+		/// <param name="relatedEntity">Instance to set as the related entity of type entityType</param>
+		private void SetupSyncBusinessEntity(IEntityCore relatedEntity)
+		{
+			if(_businessEntity!=relatedEntity)
+			{
+				DesetupSyncBusinessEntity(true, true);
+				_businessEntity = (BusinessEntityEntity)relatedEntity;
+				this.PerformSetupSyncRelatedEntity( _businessEntity, new PropertyChangedEventHandler( OnBusinessEntityPropertyChanged ), "BusinessEntity", AdventureWorks.Dal.RelationClasses.StaticVendorRelations.BusinessEntityEntityUsingBusinessEntityIdStatic, true, new string[] {  } );
+			}
+		}
+		
+		/// <summary>Handles property change events of properties in a related entity.</summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void OnBusinessEntityPropertyChanged( object sender, PropertyChangedEventArgs e )
+		{
+			switch( e.PropertyName )
+			{
+				default:
+					break;
+			}
+		}
+
 		/// <summary> Initializes the class with empty data, as if it is a new Entity.</summary>
 		/// <param name="validator">The validator object for this VendorEntity</param>
 		/// <param name="fields">Fields of this entity</param>
@@ -513,7 +593,6 @@ namespace AdventureWorks.Dal.EntityClasses
 
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassEmpty
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 
 			OnInitialized();
 
@@ -597,6 +676,13 @@ namespace AdventureWorks.Dal.EntityClasses
 				return new PrefetchPathElement2(new EntityCollection<ShipMethodEntity>(EntityFactoryCache2.GetEntityFactory(typeof(ShipMethodEntityFactory))), intermediateRelation,
 					(int)AdventureWorks.Dal.EntityType.VendorEntity, (int)AdventureWorks.Dal.EntityType.ShipMethodEntity, 0, null, null, GetRelationsForField("ShipMethodCollectionViaPurchaseOrderHeader"), null, "ShipMethodCollectionViaPurchaseOrderHeader", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.ManyToMany);
 			}
+		}
+
+		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'BusinessEntity' for this entity.</summary>
+		/// <returns>Ready to use IPrefetchPathElement2 implementation.</returns>
+		public static IPrefetchPathElement2 PrefetchPathBusinessEntity
+		{
+			get { return new PrefetchPathElement2(new EntityCollection(EntityFactoryCache2.GetEntityFactory(typeof(BusinessEntityEntityFactory))), (IEntityRelation)GetRelationsForField("BusinessEntity")[0], (int)AdventureWorks.Dal.EntityType.VendorEntity, (int)AdventureWorks.Dal.EntityType.BusinessEntityEntity, 0, null, null, null, null, "BusinessEntity", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.OneToOne);	}
 		}
 
 
@@ -744,6 +830,42 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			get { return GetOrCreateEntityCollection<ShipMethodEntity, ShipMethodEntityFactory>("VendorCollectionViaPurchaseOrderHeader", false, true, ref _shipMethodCollectionViaPurchaseOrderHeader);	}
 		}
+
+		/// <summary> Gets / sets related entity of type 'BusinessEntityEntity' which has to be set using a fetch action earlier. If no related entity is set for this property, null is returned.<br/><br/>
+		/// </summary>
+		[Browsable(false)]
+		public virtual BusinessEntityEntity BusinessEntity
+		{
+			get { return _businessEntity; }
+			set
+			{
+				if(this.IsDeserializing)
+				{
+					SetupSyncBusinessEntity(value);
+					CallSetRelatedEntityDuringDeserialization(value, "Vendor");
+				}
+				else
+				{
+					if(value==null)
+					{
+						bool raisePropertyChanged = (_businessEntity !=null);
+						DesetupSyncBusinessEntity(true, true);
+						if(raisePropertyChanged)
+						{
+							OnPropertyChanged("BusinessEntity");
+						}
+					}
+					else
+					{
+						if(_businessEntity!=value)
+						{
+							((IEntity2)value).SetRelatedEntity(this, "Vendor");
+							SetupSyncBusinessEntity(value);
+						}
+					}
+				}
+			}
+		}
 	
 		/// <summary> Gets the type of the hierarchy this entity is in. </summary>
 		protected override InheritanceHierarchyType LLBLGenProIsInHierarchyOfType
@@ -771,7 +893,6 @@ namespace AdventureWorks.Dal.EntityClasses
 		
 		// __LLBLGENPRO_USER_CODE_REGION_START CustomEntityCode
 		// __LLBLGENPRO_USER_CODE_REGION_END
-		
 		#endregion
 
 		#region Included code

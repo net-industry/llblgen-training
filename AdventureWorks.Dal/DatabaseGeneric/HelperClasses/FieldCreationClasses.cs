@@ -319,6 +319,86 @@ namespace AdventureWorks.Dal.HelperClasses
 		}
 	}
 
+	/// <summary>Field Creation Class for entity BusinessEntityEntity</summary>
+	public partial class BusinessEntityFields
+	{
+		/// <summary>Creates a new BusinessEntityEntity.BusinessEntityId field instance</summary>
+		public static EntityField2 BusinessEntityId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(BusinessEntityFieldIndex.BusinessEntityId);}
+		}
+		/// <summary>Creates a new BusinessEntityEntity.ModifiedDate field instance</summary>
+		public static EntityField2 ModifiedDate
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(BusinessEntityFieldIndex.ModifiedDate);}
+		}
+		/// <summary>Creates a new BusinessEntityEntity.Rowguid field instance</summary>
+		public static EntityField2 Rowguid
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(BusinessEntityFieldIndex.Rowguid);}
+		}
+	}
+
+	/// <summary>Field Creation Class for entity BusinessEntityAddressEntity</summary>
+	public partial class BusinessEntityAddressFields
+	{
+		/// <summary>Creates a new BusinessEntityAddressEntity.AddressId field instance</summary>
+		public static EntityField2 AddressId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(BusinessEntityAddressFieldIndex.AddressId);}
+		}
+		/// <summary>Creates a new BusinessEntityAddressEntity.AddressTypeId field instance</summary>
+		public static EntityField2 AddressTypeId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(BusinessEntityAddressFieldIndex.AddressTypeId);}
+		}
+		/// <summary>Creates a new BusinessEntityAddressEntity.BusinessEntityId field instance</summary>
+		public static EntityField2 BusinessEntityId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(BusinessEntityAddressFieldIndex.BusinessEntityId);}
+		}
+		/// <summary>Creates a new BusinessEntityAddressEntity.ModifiedDate field instance</summary>
+		public static EntityField2 ModifiedDate
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(BusinessEntityAddressFieldIndex.ModifiedDate);}
+		}
+		/// <summary>Creates a new BusinessEntityAddressEntity.Rowguid field instance</summary>
+		public static EntityField2 Rowguid
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(BusinessEntityAddressFieldIndex.Rowguid);}
+		}
+	}
+
+	/// <summary>Field Creation Class for entity BusinessEntityContactEntity</summary>
+	public partial class BusinessEntityContactFields
+	{
+		/// <summary>Creates a new BusinessEntityContactEntity.BusinessEntityId field instance</summary>
+		public static EntityField2 BusinessEntityId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(BusinessEntityContactFieldIndex.BusinessEntityId);}
+		}
+		/// <summary>Creates a new BusinessEntityContactEntity.ContactTypeId field instance</summary>
+		public static EntityField2 ContactTypeId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(BusinessEntityContactFieldIndex.ContactTypeId);}
+		}
+		/// <summary>Creates a new BusinessEntityContactEntity.ModifiedDate field instance</summary>
+		public static EntityField2 ModifiedDate
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(BusinessEntityContactFieldIndex.ModifiedDate);}
+		}
+		/// <summary>Creates a new BusinessEntityContactEntity.PersonId field instance</summary>
+		public static EntityField2 PersonId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(BusinessEntityContactFieldIndex.PersonId);}
+		}
+		/// <summary>Creates a new BusinessEntityContactEntity.Rowguid field instance</summary>
+		public static EntityField2 Rowguid
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(BusinessEntityContactFieldIndex.Rowguid);}
+		}
+	}
+
 	/// <summary>Field Creation Class for entity ContactTypeEntity</summary>
 	public partial class ContactTypeFields
 	{
@@ -356,6 +436,181 @@ namespace AdventureWorks.Dal.HelperClasses
 		public static EntityField2 Name
 		{
 			get { return (EntityField2)EntityFieldFactory.Create(CountryRegionFieldIndex.Name);}
+		}
+	}
+
+	/// <summary>Field Creation Class for entity EmailAddressEntity</summary>
+	public partial class EmailAddressFields
+	{
+		/// <summary>Creates a new EmailAddressEntity.BusinessEntityId field instance</summary>
+		public static EntityField2 BusinessEntityId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(EmailAddressFieldIndex.BusinessEntityId);}
+		}
+		/// <summary>Creates a new EmailAddressEntity.EmailAddress field instance</summary>
+		public static EntityField2 EmailAddress
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(EmailAddressFieldIndex.EmailAddress);}
+		}
+		/// <summary>Creates a new EmailAddressEntity.EmailAddressId field instance</summary>
+		public static EntityField2 EmailAddressId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(EmailAddressFieldIndex.EmailAddressId);}
+		}
+		/// <summary>Creates a new EmailAddressEntity.ModifiedDate field instance</summary>
+		public static EntityField2 ModifiedDate
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(EmailAddressFieldIndex.ModifiedDate);}
+		}
+		/// <summary>Creates a new EmailAddressEntity.Rowguid field instance</summary>
+		public static EntityField2 Rowguid
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(EmailAddressFieldIndex.Rowguid);}
+		}
+	}
+
+	/// <summary>Field Creation Class for entity PasswordEntity</summary>
+	public partial class PasswordFields
+	{
+		/// <summary>Creates a new PasswordEntity.BusinessEntityId field instance</summary>
+		public static EntityField2 BusinessEntityId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PasswordFieldIndex.BusinessEntityId);}
+		}
+		/// <summary>Creates a new PasswordEntity.ModifiedDate field instance</summary>
+		public static EntityField2 ModifiedDate
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PasswordFieldIndex.ModifiedDate);}
+		}
+		/// <summary>Creates a new PasswordEntity.PasswordHash field instance</summary>
+		public static EntityField2 PasswordHash
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PasswordFieldIndex.PasswordHash);}
+		}
+		/// <summary>Creates a new PasswordEntity.PasswordSalt field instance</summary>
+		public static EntityField2 PasswordSalt
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PasswordFieldIndex.PasswordSalt);}
+		}
+		/// <summary>Creates a new PasswordEntity.Rowguid field instance</summary>
+		public static EntityField2 Rowguid
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PasswordFieldIndex.Rowguid);}
+		}
+	}
+
+	/// <summary>Field Creation Class for entity PersonEntity</summary>
+	public partial class PersonFields
+	{
+		/// <summary>Creates a new PersonEntity.AdditionalContactInfo field instance</summary>
+		public static EntityField2 AdditionalContactInfo
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonFieldIndex.AdditionalContactInfo);}
+		}
+		/// <summary>Creates a new PersonEntity.BusinessEntityId field instance</summary>
+		public static EntityField2 BusinessEntityId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonFieldIndex.BusinessEntityId);}
+		}
+		/// <summary>Creates a new PersonEntity.Demographics field instance</summary>
+		public static EntityField2 Demographics
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonFieldIndex.Demographics);}
+		}
+		/// <summary>Creates a new PersonEntity.EmailPromotion field instance</summary>
+		public static EntityField2 EmailPromotion
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonFieldIndex.EmailPromotion);}
+		}
+		/// <summary>Creates a new PersonEntity.FirstName field instance</summary>
+		public static EntityField2 FirstName
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonFieldIndex.FirstName);}
+		}
+		/// <summary>Creates a new PersonEntity.LastName field instance</summary>
+		public static EntityField2 LastName
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonFieldIndex.LastName);}
+		}
+		/// <summary>Creates a new PersonEntity.MiddleName field instance</summary>
+		public static EntityField2 MiddleName
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonFieldIndex.MiddleName);}
+		}
+		/// <summary>Creates a new PersonEntity.ModifiedDate field instance</summary>
+		public static EntityField2 ModifiedDate
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonFieldIndex.ModifiedDate);}
+		}
+		/// <summary>Creates a new PersonEntity.NameStyle field instance</summary>
+		public static EntityField2 NameStyle
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonFieldIndex.NameStyle);}
+		}
+		/// <summary>Creates a new PersonEntity.PersonType field instance</summary>
+		public static EntityField2 PersonType
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonFieldIndex.PersonType);}
+		}
+		/// <summary>Creates a new PersonEntity.Rowguid field instance</summary>
+		public static EntityField2 Rowguid
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonFieldIndex.Rowguid);}
+		}
+		/// <summary>Creates a new PersonEntity.Suffix field instance</summary>
+		public static EntityField2 Suffix
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonFieldIndex.Suffix);}
+		}
+		/// <summary>Creates a new PersonEntity.Title field instance</summary>
+		public static EntityField2 Title
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonFieldIndex.Title);}
+		}
+	}
+
+	/// <summary>Field Creation Class for entity PersonPhoneEntity</summary>
+	public partial class PersonPhoneFields
+	{
+		/// <summary>Creates a new PersonPhoneEntity.BusinessEntityId field instance</summary>
+		public static EntityField2 BusinessEntityId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonPhoneFieldIndex.BusinessEntityId);}
+		}
+		/// <summary>Creates a new PersonPhoneEntity.ModifiedDate field instance</summary>
+		public static EntityField2 ModifiedDate
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonPhoneFieldIndex.ModifiedDate);}
+		}
+		/// <summary>Creates a new PersonPhoneEntity.PhoneNumber field instance</summary>
+		public static EntityField2 PhoneNumber
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonPhoneFieldIndex.PhoneNumber);}
+		}
+		/// <summary>Creates a new PersonPhoneEntity.PhoneNumberTypeId field instance</summary>
+		public static EntityField2 PhoneNumberTypeId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonPhoneFieldIndex.PhoneNumberTypeId);}
+		}
+	}
+
+	/// <summary>Field Creation Class for entity PhoneNumberTypeEntity</summary>
+	public partial class PhoneNumberTypeFields
+	{
+		/// <summary>Creates a new PhoneNumberTypeEntity.ModifiedDate field instance</summary>
+		public static EntityField2 ModifiedDate
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PhoneNumberTypeFieldIndex.ModifiedDate);}
+		}
+		/// <summary>Creates a new PhoneNumberTypeEntity.Name field instance</summary>
+		public static EntityField2 Name
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PhoneNumberTypeFieldIndex.Name);}
+		}
+		/// <summary>Creates a new PhoneNumberTypeEntity.PhoneNumberTypeId field instance</summary>
+		public static EntityField2 PhoneNumberTypeId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PhoneNumberTypeFieldIndex.PhoneNumberTypeId);}
 		}
 	}
 
@@ -1796,6 +2051,26 @@ namespace AdventureWorks.Dal.HelperClasses
 		public static EntityField2 TerritoryId
 		{
 			get { return (EntityField2)EntityFieldFactory.Create(CustomerFieldIndex.TerritoryId);}
+		}
+	}
+
+	/// <summary>Field Creation Class for entity PersonCreditCardEntity</summary>
+	public partial class PersonCreditCardFields
+	{
+		/// <summary>Creates a new PersonCreditCardEntity.BusinessEntityId field instance</summary>
+		public static EntityField2 BusinessEntityId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonCreditCardFieldIndex.BusinessEntityId);}
+		}
+		/// <summary>Creates a new PersonCreditCardEntity.CreditCardId field instance</summary>
+		public static EntityField2 CreditCardId
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonCreditCardFieldIndex.CreditCardId);}
+		}
+		/// <summary>Creates a new PersonCreditCardEntity.ModifiedDate field instance</summary>
+		public static EntityField2 ModifiedDate
+		{
+			get { return (EntityField2)EntityFieldFactory.Create(PersonCreditCardFieldIndex.ModifiedDate);}
 		}
 	}
 

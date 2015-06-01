@@ -65,7 +65,7 @@ namespace AdventureWorks.Dal.DatabaseSpecific
 		/// <returns>Ready to use StoredProcedureCall object</returns>
 		private static StoredProcedureCall CreateGetBillOfMaterialsCall(IDataAccessCore dataAccessProvider, System.Int32 startProductId, System.DateTime checkDate)
 		{
-			return new StoredProcedureCall(dataAccessProvider, @"[AdventureWorks2014].[dbo].[uspGetBillOfMaterials]", "GetBillOfMaterials")
+			return new StoredProcedureCall(dataAccessProvider, @"[AdventureWorks2012].[dbo].[uspGetBillOfMaterials]", "GetBillOfMaterials")
 							.AddParameter("@StartProductID", "Int", 0, ParameterDirection.Input, true, 10, 0, startProductId)
 							.AddParameter("@CheckDate", "DateTime", 0, ParameterDirection.Input, true, 0, 0, checkDate);
 		}

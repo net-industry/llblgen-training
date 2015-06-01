@@ -32,6 +32,7 @@ namespace AdventureWorks.Dal.RelationClasses
 			List<IEntityRelation> toReturn = new List<IEntityRelation>();
 			toReturn.Add(this.ProductVendorEntityUsingBusinessEntityId);
 			toReturn.Add(this.PurchaseOrderHeaderEntityUsingVendorId);
+			toReturn.Add(this.BusinessEntityEntityUsingBusinessEntityId);
 			return toReturn;
 		}
 
@@ -67,6 +68,24 @@ namespace AdventureWorks.Dal.RelationClasses
 			}
 		}
 
+		/// <summary>Returns a new IEntityRelation object, between VendorEntity and BusinessEntityEntity over the 1:1 relation they have, using the relation between the fields:
+		/// Vendor.BusinessEntityId - BusinessEntity.BusinessEntityId
+		/// </summary>
+		public virtual IEntityRelation BusinessEntityEntityUsingBusinessEntityId
+		{
+			get
+			{
+				IEntityRelation relation = new EntityRelation(SD.LLBLGen.Pro.ORMSupportClasses.RelationType.OneToOne, "BusinessEntity", false);
+
+
+
+				relation.AddEntityFieldPair(BusinessEntityFields.BusinessEntityId, VendorFields.BusinessEntityId);
+
+				relation.InheritanceInfoPkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("BusinessEntityEntity", false);
+				relation.InheritanceInfoFkSideEntity = InheritanceInfoProviderSingleton.GetInstance().GetInheritanceInfo("VendorEntity", true);
+				return relation;
+			}
+		}
 
 		/// <summary>stub, not used in this entity, only for TargetPerEntity entities.</summary>
 		public virtual IEntityRelation GetSubTypeRelation(string subTypeEntityName) { return null; }
@@ -84,6 +103,7 @@ namespace AdventureWorks.Dal.RelationClasses
 	{
 		internal static readonly IEntityRelation ProductVendorEntityUsingBusinessEntityIdStatic = new VendorRelations().ProductVendorEntityUsingBusinessEntityId;
 		internal static readonly IEntityRelation PurchaseOrderHeaderEntityUsingVendorIdStatic = new VendorRelations().PurchaseOrderHeaderEntityUsingVendorId;
+		internal static readonly IEntityRelation BusinessEntityEntityUsingBusinessEntityIdStatic = new VendorRelations().BusinessEntityEntityUsingBusinessEntityId;
 
 		/// <summary>CTor</summary>
 		static StaticVendorRelations()

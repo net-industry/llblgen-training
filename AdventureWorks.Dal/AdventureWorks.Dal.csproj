@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AdventureWorks.Dal</RootNamespace>
     <AssemblyName>AdventureWorks.Dal</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
@@ -61,137 +64,399 @@
       <GeneratedBy>LLBLGen Pro</GeneratedBy>
     </Compile>
     <AppDesigner Include="Properties\" />
-    <Compile Include="DatabaseGeneric\EntityClasses\AddressEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\AddressTypeEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\BillOfMaterialEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\CommonEntityBase.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ContactTypeEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\CountryRegionCurrencyEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\CountryRegionEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\CreditCardEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\CultureEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\CurrencyEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\CurrencyRateEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\CustomerEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\DepartmentEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\DocumentEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\EmployeeDepartmentHistoryEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\EmployeeEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\EmployeePayHistoryEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\IllustrationEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\JobCandidateEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\LocationEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductCategoryEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductCostHistoryEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductDescriptionEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductDocumentEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductInventoryEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductListPriceHistoryEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductModelEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductModelIllustrationEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductModelProductDescriptionCultureEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductPhotoEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductProductPhotoEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductReviewEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductSubcategoryEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ProductVendorEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\PurchaseOrderDetailEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\PurchaseOrderHeaderEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\SalesOrderDetailEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\SalesOrderHeaderEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\SalesOrderHeaderSalesReasonEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\SalesPersonEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\SalesPersonQuotaHistoryEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\SalesReasonEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\SalesTaxRateEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\SalesTerritoryEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\SalesTerritoryHistoryEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ScrapReasonEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ShiftEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ShipMethodEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\ShoppingCartItemEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\SpecialOfferEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\SpecialOfferProductEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\StateProvinceEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\StoreEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\TransactionHistoryArchiveEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\TransactionHistoryEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\UnitMeasureEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\VendorEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\WorkOrderEntity.cs" />
-    <Compile Include="DatabaseGeneric\EntityClasses\WorkOrderRoutingEntity.cs" />
-    <Compile Include="DatabaseGeneric\FactoryClasses\EntityFactories.cs" />
-    <Compile Include="DatabaseGeneric\FactoryClasses\EntityFieldFactory.cs" />
-    <Compile Include="DatabaseGeneric\FactoryClasses\EntityFieldsFactory.cs" />
-    <Compile Include="DatabaseGeneric\FactoryClasses\QueryFactory.cs" />
-    <Compile Include="DatabaseGeneric\HelperClasses\EntityCollection.cs" />
-    <Compile Include="DatabaseGeneric\HelperClasses\FieldCreationClasses.cs" />
-    <Compile Include="DatabaseGeneric\HelperClasses\FieldInfoProvider.cs" />
-    <Compile Include="DatabaseGeneric\HelperClasses\InheritanceInfoProvider.cs" />
-    <Compile Include="DatabaseGeneric\HelperClasses\ResultsetFields.cs" />
-    <Compile Include="DatabaseGeneric\HelperClasses\TypeDefaultValue.cs" />
-    <Compile Include="DatabaseGeneric\Linq\LinqMetaData.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\AddressRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\AddressTypeRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\BillOfMaterialRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ContactTypeRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\CountryRegionCurrencyRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\CountryRegionRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\CreditCardRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\CultureRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\CurrencyRateRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\CurrencyRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\CustomerRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\DepartmentRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\DocumentRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\DynamicRelation.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\EmployeeDepartmentHistoryRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\EmployeePayHistoryRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\EmployeeRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\IllustrationRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\JobCandidateRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\LocationRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductCategoryRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductCostHistoryRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductDescriptionRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductDocumentRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductInventoryRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductListPriceHistoryRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductModelIllustrationRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductModelProductDescriptionCultureRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductModelRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductPhotoRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductProductPhotoRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductReviewRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductSubcategoryRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ProductVendorRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\PurchaseOrderDetailRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\PurchaseOrderHeaderRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\SalesOrderDetailRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\SalesOrderHeaderRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\SalesOrderHeaderSalesReasonRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\SalesPersonQuotaHistoryRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\SalesPersonRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\SalesReasonRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\SalesTaxRateRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\SalesTerritoryHistoryRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\SalesTerritoryRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ScrapReasonRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ShiftRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ShipMethodRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\ShoppingCartItemRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\SpecialOfferProductRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\SpecialOfferRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\StateProvinceRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\StoreRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\TransactionHistoryArchiveRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\TransactionHistoryRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\UnitMeasureRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\VendorRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\WorkOrderRelations.cs" />
-    <Compile Include="DatabaseGeneric\RelationClasses\WorkOrderRoutingRelations.cs" />
+    <Compile Include="DatabaseGeneric\EntityClasses\AddressEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\AddressTypeEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\BillOfMaterialEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\CommonEntityBase.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ContactTypeEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\CountryRegionCurrencyEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\CountryRegionEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\CreditCardEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\CultureEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\CurrencyEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\CurrencyRateEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\CustomerEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\DepartmentEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\DocumentEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\EmployeeDepartmentHistoryEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\EmployeeEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\EmployeePayHistoryEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\IllustrationEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\JobCandidateEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\LocationEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductCategoryEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductCostHistoryEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductDescriptionEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductDocumentEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductInventoryEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductListPriceHistoryEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductModelEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductModelIllustrationEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductModelProductDescriptionCultureEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductPhotoEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductProductPhotoEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductReviewEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductSubcategoryEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ProductVendorEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\PurchaseOrderDetailEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\PurchaseOrderHeaderEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\SalesOrderDetailEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\SalesOrderHeaderEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\SalesOrderHeaderSalesReasonEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\SalesPersonEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\SalesPersonQuotaHistoryEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\SalesReasonEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\SalesTaxRateEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\SalesTerritoryEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\SalesTerritoryHistoryEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ScrapReasonEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ShiftEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ShipMethodEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\ShoppingCartItemEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\SpecialOfferEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\SpecialOfferProductEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\StateProvinceEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\StoreEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\TransactionHistoryArchiveEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\TransactionHistoryEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\UnitMeasureEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\VendorEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\WorkOrderEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\WorkOrderRoutingEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\FactoryClasses\EntityFactories.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\FactoryClasses\EntityFieldFactory.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\FactoryClasses\EntityFieldsFactory.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\FactoryClasses\QueryFactory.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\HelperClasses\EntityCollection.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\HelperClasses\FieldCreationClasses.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\HelperClasses\FieldInfoProvider.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\HelperClasses\InheritanceInfoProvider.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\HelperClasses\ResultsetFields.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\HelperClasses\TypeDefaultValue.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\Linq\LinqMetaData.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\AddressRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\AddressTypeRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\BillOfMaterialRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ContactTypeRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\CountryRegionCurrencyRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\CountryRegionRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\CreditCardRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\CultureRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\CurrencyRateRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\CurrencyRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\CustomerRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\DepartmentRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\DocumentRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\DynamicRelation.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\EmployeeDepartmentHistoryRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\EmployeePayHistoryRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\EmployeeRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\IllustrationRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\JobCandidateRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\LocationRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductCategoryRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductCostHistoryRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductDescriptionRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductDocumentRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductInventoryRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductListPriceHistoryRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductModelIllustrationRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductModelProductDescriptionCultureRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductModelRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductPhotoRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductProductPhotoRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductReviewRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductSubcategoryRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ProductVendorRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\PurchaseOrderDetailRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\PurchaseOrderHeaderRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\SalesOrderDetailRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\SalesOrderHeaderRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\SalesOrderHeaderSalesReasonRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\SalesPersonQuotaHistoryRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\SalesPersonRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\SalesReasonRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\SalesTaxRateRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\SalesTerritoryHistoryRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\SalesTerritoryRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ScrapReasonRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ShiftRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ShipMethodRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\ShoppingCartItemRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\SpecialOfferProductRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\SpecialOfferRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\StateProvinceRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\StoreRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\TransactionHistoryArchiveRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\TransactionHistoryRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\UnitMeasureRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\VendorRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\WorkOrderRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\WorkOrderRoutingRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
     <Compile Include="DatabaseSpecific\ActionProcedures.cs" />
     <Compile Include="DatabaseSpecific\DataAccessAdapter.user.cs" />
     <Compile Include="DatabaseSpecific\DataAccessAdapter.cs" />
@@ -199,6 +464,60 @@
     <Compile Include="DatabaseSpecific\RetrievalProcedures.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="VendorCreditRating.cs" />
+    <Compile Include="DatabaseGeneric\EntityClasses\BusinessEntityAddressEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\BusinessEntityContactEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\BusinessEntityEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\EmailAddressEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\PasswordEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\PersonCreditCardEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\PersonEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\PersonPhoneEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\EntityClasses\PhoneNumberTypeEntity.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\BusinessEntityAddressRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\BusinessEntityContactRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\BusinessEntityRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\EmailAddressRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\PasswordRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\PersonCreditCardRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\PersonPhoneRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\PersonRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
+    <Compile Include="DatabaseGeneric\RelationClasses\PhoneNumberTypeRelations.cs">
+      <GeneratedBy>LLBLGen Pro</GeneratedBy>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

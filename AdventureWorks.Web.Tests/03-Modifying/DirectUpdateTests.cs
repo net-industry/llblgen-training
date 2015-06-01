@@ -14,7 +14,7 @@ namespace AdventureWorks.Web.Tests._01_Predicates
         {
             int[] ids = new int[] { 1, 2, 3 };
 
-            adapter.DeleteEntitiesDirectly(typeof(EmployeeEntity), new RelationPredicateBucket(EmployeeFields.EmployeeId == ids));
+            adapter.DeleteEntitiesDirectly(typeof(EmployeeEntity), new RelationPredicateBucket(EmployeeFields.BusinessEntityId == ids));
         } 
 	}
 }

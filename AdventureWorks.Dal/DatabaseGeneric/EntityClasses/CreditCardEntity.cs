@@ -25,18 +25,18 @@ namespace AdventureWorks.Dal.EntityClasses
 {
 	// __LLBLGENPRO_USER_CODE_REGION_START AdditionalNamespaces
 	// __LLBLGENPRO_USER_CODE_REGION_END
-	
 	/// <summary>Entity class which represents the entity 'CreditCard'.<br/><br/></summary>
 	[Serializable]
 	public partial class CreditCardEntity : CommonEntityBase
 		// __LLBLGENPRO_USER_CODE_REGION_START AdditionalInterfaces
-		// __LLBLGENPRO_USER_CODE_REGION_END
-			
+		// __LLBLGENPRO_USER_CODE_REGION_END	
 	{
 		#region Class Member Declarations
+		private EntityCollection<PersonCreditCardEntity> _personCreditCards;
 		private EntityCollection<SalesOrderHeaderEntity> _salesOrderHeaders;
 		private EntityCollection<AddressEntity> _addressCollectionViaSalesOrderHeader;
 		private EntityCollection<AddressEntity> _addressCollectionViaSalesOrderHeader1;
+		private EntityCollection<PersonEntity> _personCollectionViaPersonCreditCard;
 		private EntityCollection<ShipMethodEntity> _shipMethodCollectionViaSalesOrderHeader;
 		private EntityCollection<CurrencyRateEntity> _currencyRateCollectionViaSalesOrderHeader;
 		private EntityCollection<CustomerEntity> _customerCollectionViaSalesOrderHeader;
@@ -45,7 +45,6 @@ namespace AdventureWorks.Dal.EntityClasses
 
 		// __LLBLGENPRO_USER_CODE_REGION_START PrivateMembers
 		// __LLBLGENPRO_USER_CODE_REGION_END
-		
 		#endregion
 
 		#region Statics
@@ -55,12 +54,16 @@ namespace AdventureWorks.Dal.EntityClasses
 		/// <summary>All names of fields mapped onto a relation. Usable for in-memory filtering</summary>
 		public static partial class MemberNames
 		{
+			/// <summary>Member name PersonCreditCards</summary>
+			public static readonly string PersonCreditCards = "PersonCreditCards";
 			/// <summary>Member name SalesOrderHeaders</summary>
 			public static readonly string SalesOrderHeaders = "SalesOrderHeaders";
 			/// <summary>Member name AddressCollectionViaSalesOrderHeader</summary>
 			public static readonly string AddressCollectionViaSalesOrderHeader = "AddressCollectionViaSalesOrderHeader";
 			/// <summary>Member name AddressCollectionViaSalesOrderHeader1</summary>
 			public static readonly string AddressCollectionViaSalesOrderHeader1 = "AddressCollectionViaSalesOrderHeader1";
+			/// <summary>Member name PersonCollectionViaPersonCreditCard</summary>
+			public static readonly string PersonCollectionViaPersonCreditCard = "PersonCollectionViaPersonCreditCard";
 			/// <summary>Member name ShipMethodCollectionViaSalesOrderHeader</summary>
 			public static readonly string ShipMethodCollectionViaSalesOrderHeader = "ShipMethodCollectionViaSalesOrderHeader";
 			/// <summary>Member name CurrencyRateCollectionViaSalesOrderHeader</summary>
@@ -128,9 +131,11 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			if(SerializationHelper.Optimization != SerializationOptimization.Fast) 
 			{
+				_personCreditCards = (EntityCollection<PersonCreditCardEntity>)info.GetValue("_personCreditCards", typeof(EntityCollection<PersonCreditCardEntity>));
 				_salesOrderHeaders = (EntityCollection<SalesOrderHeaderEntity>)info.GetValue("_salesOrderHeaders", typeof(EntityCollection<SalesOrderHeaderEntity>));
 				_addressCollectionViaSalesOrderHeader = (EntityCollection<AddressEntity>)info.GetValue("_addressCollectionViaSalesOrderHeader", typeof(EntityCollection<AddressEntity>));
 				_addressCollectionViaSalesOrderHeader1 = (EntityCollection<AddressEntity>)info.GetValue("_addressCollectionViaSalesOrderHeader1", typeof(EntityCollection<AddressEntity>));
+				_personCollectionViaPersonCreditCard = (EntityCollection<PersonEntity>)info.GetValue("_personCollectionViaPersonCreditCard", typeof(EntityCollection<PersonEntity>));
 				_shipMethodCollectionViaSalesOrderHeader = (EntityCollection<ShipMethodEntity>)info.GetValue("_shipMethodCollectionViaSalesOrderHeader", typeof(EntityCollection<ShipMethodEntity>));
 				_currencyRateCollectionViaSalesOrderHeader = (EntityCollection<CurrencyRateEntity>)info.GetValue("_currencyRateCollectionViaSalesOrderHeader", typeof(EntityCollection<CurrencyRateEntity>));
 				_customerCollectionViaSalesOrderHeader = (EntityCollection<CustomerEntity>)info.GetValue("_customerCollectionViaSalesOrderHeader", typeof(EntityCollection<CustomerEntity>));
@@ -140,7 +145,6 @@ namespace AdventureWorks.Dal.EntityClasses
 			}
 			// __LLBLGENPRO_USER_CODE_REGION_START DeserializationConstructor
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 		}
 
 
@@ -152,6 +156,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			switch(propertyName)
 			{
+				case "PersonCreditCards":
+					this.PersonCreditCards.Add((PersonCreditCardEntity)entity);
+					break;
 				case "SalesOrderHeaders":
 					this.SalesOrderHeaders.Add((SalesOrderHeaderEntity)entity);
 					break;
@@ -164,6 +171,11 @@ namespace AdventureWorks.Dal.EntityClasses
 					this.AddressCollectionViaSalesOrderHeader1.IsReadOnly = false;
 					this.AddressCollectionViaSalesOrderHeader1.Add((AddressEntity)entity);
 					this.AddressCollectionViaSalesOrderHeader1.IsReadOnly = true;
+					break;
+				case "PersonCollectionViaPersonCreditCard":
+					this.PersonCollectionViaPersonCreditCard.IsReadOnly = false;
+					this.PersonCollectionViaPersonCreditCard.Add((PersonEntity)entity);
+					this.PersonCollectionViaPersonCreditCard.IsReadOnly = true;
 					break;
 				case "ShipMethodCollectionViaSalesOrderHeader":
 					this.ShipMethodCollectionViaSalesOrderHeader.IsReadOnly = false;
@@ -212,6 +224,9 @@ namespace AdventureWorks.Dal.EntityClasses
 			RelationCollection toReturn = new RelationCollection();
 			switch(fieldName)
 			{
+				case "PersonCreditCards":
+					toReturn.Add(Relations.PersonCreditCardEntityUsingCreditCardId);
+					break;
 				case "SalesOrderHeaders":
 					toReturn.Add(Relations.SalesOrderHeaderEntityUsingCreditCardId);
 					break;
@@ -222,6 +237,10 @@ namespace AdventureWorks.Dal.EntityClasses
 				case "AddressCollectionViaSalesOrderHeader1":
 					toReturn.Add(Relations.SalesOrderHeaderEntityUsingCreditCardId, "CreditCardEntity__", "SalesOrderHeader_", JoinHint.None);
 					toReturn.Add(SalesOrderHeaderEntity.Relations.AddressEntityUsingShipToAddressId, "SalesOrderHeader_", string.Empty, JoinHint.None);
+					break;
+				case "PersonCollectionViaPersonCreditCard":
+					toReturn.Add(Relations.PersonCreditCardEntityUsingCreditCardId, "CreditCardEntity__", "PersonCreditCard_", JoinHint.None);
+					toReturn.Add(PersonCreditCardEntity.Relations.PersonEntityUsingBusinessEntityId, "PersonCreditCard_", string.Empty, JoinHint.None);
 					break;
 				case "ShipMethodCollectionViaSalesOrderHeader":
 					toReturn.Add(Relations.SalesOrderHeaderEntityUsingCreditCardId, "CreditCardEntity__", "SalesOrderHeader_", JoinHint.None);
@@ -271,6 +290,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			switch(fieldName)
 			{
+				case "PersonCreditCards":
+					this.PersonCreditCards.Add((PersonCreditCardEntity)relatedEntity);
+					break;
 				case "SalesOrderHeaders":
 					this.SalesOrderHeaders.Add((SalesOrderHeaderEntity)relatedEntity);
 					break;
@@ -287,6 +309,9 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			switch(fieldName)
 			{
+				case "PersonCreditCards":
+					this.PerformRelatedEntityRemoval(this.PersonCreditCards, relatedEntity, signalRelatedEntityManyToOne);
+					break;
 				case "SalesOrderHeaders":
 					this.PerformRelatedEntityRemoval(this.SalesOrderHeaders, relatedEntity, signalRelatedEntityManyToOne);
 					break;
@@ -317,6 +342,7 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override List<IEntityCollection2> GetMemberEntityCollections()
 		{
 			List<IEntityCollection2> toReturn = new List<IEntityCollection2>();
+			toReturn.Add(this.PersonCreditCards);
 			toReturn.Add(this.SalesOrderHeaders);
 			return toReturn;
 		}
@@ -329,9 +355,11 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			if (SerializationHelper.Optimization != SerializationOptimization.Fast) 
 			{
+				info.AddValue("_personCreditCards", ((_personCreditCards!=null) && (_personCreditCards.Count>0) && !this.MarkedForDeletion)?_personCreditCards:null);
 				info.AddValue("_salesOrderHeaders", ((_salesOrderHeaders!=null) && (_salesOrderHeaders.Count>0) && !this.MarkedForDeletion)?_salesOrderHeaders:null);
 				info.AddValue("_addressCollectionViaSalesOrderHeader", ((_addressCollectionViaSalesOrderHeader!=null) && (_addressCollectionViaSalesOrderHeader.Count>0) && !this.MarkedForDeletion)?_addressCollectionViaSalesOrderHeader:null);
 				info.AddValue("_addressCollectionViaSalesOrderHeader1", ((_addressCollectionViaSalesOrderHeader1!=null) && (_addressCollectionViaSalesOrderHeader1.Count>0) && !this.MarkedForDeletion)?_addressCollectionViaSalesOrderHeader1:null);
+				info.AddValue("_personCollectionViaPersonCreditCard", ((_personCollectionViaPersonCreditCard!=null) && (_personCollectionViaPersonCreditCard.Count>0) && !this.MarkedForDeletion)?_personCollectionViaPersonCreditCard:null);
 				info.AddValue("_shipMethodCollectionViaSalesOrderHeader", ((_shipMethodCollectionViaSalesOrderHeader!=null) && (_shipMethodCollectionViaSalesOrderHeader.Count>0) && !this.MarkedForDeletion)?_shipMethodCollectionViaSalesOrderHeader:null);
 				info.AddValue("_currencyRateCollectionViaSalesOrderHeader", ((_currencyRateCollectionViaSalesOrderHeader!=null) && (_currencyRateCollectionViaSalesOrderHeader.Count>0) && !this.MarkedForDeletion)?_currencyRateCollectionViaSalesOrderHeader:null);
 				info.AddValue("_customerCollectionViaSalesOrderHeader", ((_customerCollectionViaSalesOrderHeader!=null) && (_customerCollectionViaSalesOrderHeader.Count>0) && !this.MarkedForDeletion)?_customerCollectionViaSalesOrderHeader:null);
@@ -340,7 +368,6 @@ namespace AdventureWorks.Dal.EntityClasses
 			}
 			// __LLBLGENPRO_USER_CODE_REGION_START GetObjectInfo
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 			base.GetObjectData(info, context);
 		}
 
@@ -351,6 +378,15 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override List<IEntityRelation> GetAllRelations()
 		{
 			return new CreditCardRelations().GetAllRelations();
+		}
+
+		/// <summary> Creates a new IRelationPredicateBucket object which contains the predicate expression and relation collection to fetch the related entities of type 'PersonCreditCard' to this entity.</summary>
+		/// <returns></returns>
+		public virtual IRelationPredicateBucket GetRelationInfoPersonCreditCards()
+		{
+			IRelationPredicateBucket bucket = new RelationPredicateBucket();
+			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(PersonCreditCardFields.CreditCardId, null, ComparisonOperator.Equal, this.CreditCardId));
+			return bucket;
 		}
 
 		/// <summary> Creates a new IRelationPredicateBucket object which contains the predicate expression and relation collection to fetch the related entities of type 'SalesOrderHeader' to this entity.</summary>
@@ -378,6 +414,16 @@ namespace AdventureWorks.Dal.EntityClasses
 		{
 			IRelationPredicateBucket bucket = new RelationPredicateBucket();
 			bucket.Relations.AddRange(GetRelationsForFieldOfType("AddressCollectionViaSalesOrderHeader1"));
+			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(CreditCardFields.CreditCardId, null, ComparisonOperator.Equal, this.CreditCardId, "CreditCardEntity__"));
+			return bucket;
+		}
+
+		/// <summary> Creates a new IRelationPredicateBucket object which contains the predicate expression and relation collection to fetch the related entities of type 'Person' to this entity.</summary>
+		/// <returns></returns>
+		public virtual IRelationPredicateBucket GetRelationInfoPersonCollectionViaPersonCreditCard()
+		{
+			IRelationPredicateBucket bucket = new RelationPredicateBucket();
+			bucket.Relations.AddRange(GetRelationsForFieldOfType("PersonCollectionViaPersonCreditCard"));
 			bucket.PredicateExpression.Add(new FieldCompareValuePredicate(CreditCardFields.CreditCardId, null, ComparisonOperator.Equal, this.CreditCardId, "CreditCardEntity__"));
 			return bucket;
 		}
@@ -444,9 +490,11 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override void AddToMemberEntityCollectionsQueue(Queue<IEntityCollection2> collectionsQueue) 
 		{
 			base.AddToMemberEntityCollectionsQueue(collectionsQueue);
+			collectionsQueue.Enqueue(this._personCreditCards);
 			collectionsQueue.Enqueue(this._salesOrderHeaders);
 			collectionsQueue.Enqueue(this._addressCollectionViaSalesOrderHeader);
 			collectionsQueue.Enqueue(this._addressCollectionViaSalesOrderHeader1);
+			collectionsQueue.Enqueue(this._personCollectionViaPersonCreditCard);
 			collectionsQueue.Enqueue(this._shipMethodCollectionViaSalesOrderHeader);
 			collectionsQueue.Enqueue(this._currencyRateCollectionViaSalesOrderHeader);
 			collectionsQueue.Enqueue(this._customerCollectionViaSalesOrderHeader);
@@ -459,9 +507,11 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override void GetFromMemberEntityCollectionsQueue(Queue<IEntityCollection2> collectionsQueue)
 		{
 			base.GetFromMemberEntityCollectionsQueue(collectionsQueue);
+			this._personCreditCards = (EntityCollection<PersonCreditCardEntity>) collectionsQueue.Dequeue();
 			this._salesOrderHeaders = (EntityCollection<SalesOrderHeaderEntity>) collectionsQueue.Dequeue();
 			this._addressCollectionViaSalesOrderHeader = (EntityCollection<AddressEntity>) collectionsQueue.Dequeue();
 			this._addressCollectionViaSalesOrderHeader1 = (EntityCollection<AddressEntity>) collectionsQueue.Dequeue();
+			this._personCollectionViaPersonCreditCard = (EntityCollection<PersonEntity>) collectionsQueue.Dequeue();
 			this._shipMethodCollectionViaSalesOrderHeader = (EntityCollection<ShipMethodEntity>) collectionsQueue.Dequeue();
 			this._currencyRateCollectionViaSalesOrderHeader = (EntityCollection<CurrencyRateEntity>) collectionsQueue.Dequeue();
 			this._customerCollectionViaSalesOrderHeader = (EntityCollection<CustomerEntity>) collectionsQueue.Dequeue();
@@ -475,9 +525,11 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override bool HasPopulatedMemberEntityCollections()
 		{
 			bool toReturn = false;
+			toReturn |=(this._personCreditCards != null);
 			toReturn |=(this._salesOrderHeaders != null);
 			toReturn |= (this._addressCollectionViaSalesOrderHeader != null);
 			toReturn |= (this._addressCollectionViaSalesOrderHeader1 != null);
+			toReturn |= (this._personCollectionViaPersonCreditCard != null);
 			toReturn |= (this._shipMethodCollectionViaSalesOrderHeader != null);
 			toReturn |= (this._currencyRateCollectionViaSalesOrderHeader != null);
 			toReturn |= (this._customerCollectionViaSalesOrderHeader != null);
@@ -492,9 +544,11 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override void CreateMemberEntityCollectionsQueue(Queue<IEntityCollection2> collectionsQueue, Queue<bool> requiredQueue) 
 		{
 			base.CreateMemberEntityCollectionsQueue(collectionsQueue, requiredQueue);
+			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<PersonCreditCardEntity>(EntityFactoryCache2.GetEntityFactory(typeof(PersonCreditCardEntityFactory))) : null);
 			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<SalesOrderHeaderEntity>(EntityFactoryCache2.GetEntityFactory(typeof(SalesOrderHeaderEntityFactory))) : null);
 			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<AddressEntity>(EntityFactoryCache2.GetEntityFactory(typeof(AddressEntityFactory))) : null);
 			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<AddressEntity>(EntityFactoryCache2.GetEntityFactory(typeof(AddressEntityFactory))) : null);
+			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<PersonEntity>(EntityFactoryCache2.GetEntityFactory(typeof(PersonEntityFactory))) : null);
 			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<ShipMethodEntity>(EntityFactoryCache2.GetEntityFactory(typeof(ShipMethodEntityFactory))) : null);
 			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<CurrencyRateEntity>(EntityFactoryCache2.GetEntityFactory(typeof(CurrencyRateEntityFactory))) : null);
 			collectionsQueue.Enqueue(requiredQueue.Dequeue() ? new EntityCollection<CustomerEntity>(EntityFactoryCache2.GetEntityFactory(typeof(CustomerEntityFactory))) : null);
@@ -507,9 +561,11 @@ namespace AdventureWorks.Dal.EntityClasses
 		protected override Dictionary<string, object> GetRelatedData()
 		{
 			Dictionary<string, object> toReturn = new Dictionary<string, object>();
+			toReturn.Add("PersonCreditCards", _personCreditCards);
 			toReturn.Add("SalesOrderHeaders", _salesOrderHeaders);
 			toReturn.Add("AddressCollectionViaSalesOrderHeader", _addressCollectionViaSalesOrderHeader);
 			toReturn.Add("AddressCollectionViaSalesOrderHeader1", _addressCollectionViaSalesOrderHeader1);
+			toReturn.Add("PersonCollectionViaPersonCreditCard", _personCollectionViaPersonCreditCard);
 			toReturn.Add("ShipMethodCollectionViaSalesOrderHeader", _shipMethodCollectionViaSalesOrderHeader);
 			toReturn.Add("CurrencyRateCollectionViaSalesOrderHeader", _currencyRateCollectionViaSalesOrderHeader);
 			toReturn.Add("CustomerCollectionViaSalesOrderHeader", _customerCollectionViaSalesOrderHeader);
@@ -525,7 +581,6 @@ namespace AdventureWorks.Dal.EntityClasses
 			
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassMembers
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 			OnInitClassMembersComplete();
 		}
 
@@ -564,7 +619,6 @@ namespace AdventureWorks.Dal.EntityClasses
 
 			// __LLBLGENPRO_USER_CODE_REGION_START InitClassEmpty
 			// __LLBLGENPRO_USER_CODE_REGION_END
-			
 
 			OnInitialized();
 
@@ -582,6 +636,13 @@ namespace AdventureWorks.Dal.EntityClasses
 		public  static Dictionary<string, string> CustomProperties
 		{
 			get { return _customProperties;}
+		}
+
+		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'PersonCreditCard' for this entity.</summary>
+		/// <returns>Ready to use IPrefetchPathElement2 implementation.</returns>
+		public static IPrefetchPathElement2 PrefetchPathPersonCreditCards
+		{
+			get	{ return new PrefetchPathElement2( new EntityCollection<PersonCreditCardEntity>(EntityFactoryCache2.GetEntityFactory(typeof(PersonCreditCardEntityFactory))), (IEntityRelation)GetRelationsForField("PersonCreditCards")[0], (int)AdventureWorks.Dal.EntityType.CreditCardEntity, (int)AdventureWorks.Dal.EntityType.PersonCreditCardEntity, 0, null, null, null, null, "PersonCreditCards", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.OneToMany);	}
 		}
 
 		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'SalesOrderHeader' for this entity.</summary>
@@ -614,6 +675,19 @@ namespace AdventureWorks.Dal.EntityClasses
 				intermediateRelation.SetAliases(string.Empty, "SalesOrderHeader_");
 				return new PrefetchPathElement2(new EntityCollection<AddressEntity>(EntityFactoryCache2.GetEntityFactory(typeof(AddressEntityFactory))), intermediateRelation,
 					(int)AdventureWorks.Dal.EntityType.CreditCardEntity, (int)AdventureWorks.Dal.EntityType.AddressEntity, 0, null, null, GetRelationsForField("AddressCollectionViaSalesOrderHeader1"), null, "AddressCollectionViaSalesOrderHeader1", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.ManyToMany);
+			}
+		}
+
+		/// <summary> Creates a new PrefetchPathElement2 object which contains all the information to prefetch the related entities of type 'Person' for this entity.</summary>
+		/// <returns>Ready to use IPrefetchPathElement2 implementation.</returns>
+		public static IPrefetchPathElement2 PrefetchPathPersonCollectionViaPersonCreditCard
+		{
+			get
+			{
+				IEntityRelation intermediateRelation = Relations.PersonCreditCardEntityUsingCreditCardId;
+				intermediateRelation.SetAliases(string.Empty, "PersonCreditCard_");
+				return new PrefetchPathElement2(new EntityCollection<PersonEntity>(EntityFactoryCache2.GetEntityFactory(typeof(PersonEntityFactory))), intermediateRelation,
+					(int)AdventureWorks.Dal.EntityType.CreditCardEntity, (int)AdventureWorks.Dal.EntityType.PersonEntity, 0, null, null, GetRelationsForField("PersonCollectionViaPersonCreditCard"), null, "PersonCollectionViaPersonCreditCard", SD.LLBLGen.Pro.ORMSupportClasses.RelationType.ManyToMany);
 			}
 		}
 
@@ -766,6 +840,13 @@ namespace AdventureWorks.Dal.EntityClasses
 			set	{ SetValue((int)CreditCardFieldIndex.ModifiedDate, value); }
 		}
 
+		/// <summary> Gets the EntityCollection with the related entities of type 'PersonCreditCardEntity' which are related to this entity via a relation of type '1:n'. If the EntityCollection hasn't been fetched yet, the collection returned will be empty.<br/><br/></summary>
+		[TypeContainedAttribute(typeof(PersonCreditCardEntity))]
+		public virtual EntityCollection<PersonCreditCardEntity> PersonCreditCards
+		{
+			get { return GetOrCreateEntityCollection<PersonCreditCardEntity, PersonCreditCardEntityFactory>("CreditCard", true, false, ref _personCreditCards);	}
+		}
+
 		/// <summary> Gets the EntityCollection with the related entities of type 'SalesOrderHeaderEntity' which are related to this entity via a relation of type '1:n'. If the EntityCollection hasn't been fetched yet, the collection returned will be empty.<br/><br/></summary>
 		[TypeContainedAttribute(typeof(SalesOrderHeaderEntity))]
 		public virtual EntityCollection<SalesOrderHeaderEntity> SalesOrderHeaders
@@ -785,6 +866,13 @@ namespace AdventureWorks.Dal.EntityClasses
 		public virtual EntityCollection<AddressEntity> AddressCollectionViaSalesOrderHeader1
 		{
 			get { return GetOrCreateEntityCollection<AddressEntity, AddressEntityFactory>("CreditCardCollectionViaSalesOrderHeader1", false, true, ref _addressCollectionViaSalesOrderHeader1);	}
+		}
+
+		/// <summary> Gets the EntityCollection with the related entities of type 'PersonEntity' which are related to this entity via a relation of type 'm:n'. If the EntityCollection hasn't been fetched yet, the collection returned will be empty.<br/><br/></summary>
+		[TypeContainedAttribute(typeof(PersonEntity))]
+		public virtual EntityCollection<PersonEntity> PersonCollectionViaPersonCreditCard
+		{
+			get { return GetOrCreateEntityCollection<PersonEntity, PersonEntityFactory>("CreditCardCollectionViaPersonCreditCard", false, true, ref _personCollectionViaPersonCreditCard);	}
 		}
 
 		/// <summary> Gets the EntityCollection with the related entities of type 'ShipMethodEntity' which are related to this entity via a relation of type 'm:n'. If the EntityCollection hasn't been fetched yet, the collection returned will be empty.<br/><br/></summary>
@@ -848,7 +936,6 @@ namespace AdventureWorks.Dal.EntityClasses
 		
 		// __LLBLGENPRO_USER_CODE_REGION_START CustomEntityCode
 		// __LLBLGENPRO_USER_CODE_REGION_END
-		
 		#endregion
 
 		#region Included code

@@ -1,4 +1,5 @@
 ﻿using System;
+using Net.System;
 using SD.LLBLGen.Pro.ORMSupportClasses;
 
 namespace NetIndustry.Library.LLBLGen
